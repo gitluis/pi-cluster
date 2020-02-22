@@ -7,7 +7,7 @@ A portable cluster of Raspberry Pi 4 Model B computers.
 
 ## General Usage
 
-A cluster is generally used for distributed computing and processing of large amounts of data in-parallel through the use of Hadoop and Spark, thus providing greater processing capabilities for Machine Learning models, parallel programming, among others.
+A cluster is generally a set of connected computers viewed as a single system used for distributed computing. Our main intention was to process large amounts of data in-parallel through the use of Hadoop and Spark, thus providing greater processing capabilities for Machine Learning models, parallel programming, among others.
 
 ## Documentation
 
