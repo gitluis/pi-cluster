@@ -3,7 +3,9 @@
 
 # Raspberry Pi Cluster
 
-A portable cluster of Raspberry Pi 4 Model B computers. Refer to our documentation [wiki](https://github.com/gitluis/rpi-cluster/wiki) page to build your own cluster.
+A portable cluster of Raspberry Pi 4 Model B computers. Refer to our full [**documentation**](https://github.com/gitluis/rpi-cluster/wiki) page to build your own cluster.
+
+* [Cluster Guide](https://github.com/gitluis/rpi-cluster/wiki/Cluster-Guide)
 
 ## General Usage
 
