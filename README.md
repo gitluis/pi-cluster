@@ -1,11 +1,20 @@
-<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/>
+<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/1281/1281822.svg" width="100px" height="100px"/>
 
 
 # Raspberry Pi Cluster
 
-Full guide [documentation](https://github.com/gitluis/rpi-cluster/wiki) on how to build a portable cluster of credit-card sized Raspberry Pi computer boards can be found in our [Wiki](https://github.com/gitluis/rpi-cluster/wiki).
+A portable cluster of Raspberry Pi 4 Model B computers. Refer to our documentation [wiki](https://github.com/gitluis/rpi-cluster/wiki) page to build your own cluster.
 
-| Latest Update | [**Feb 21 2020**](https://github.com/gitluis/rpi-cluster/wiki) |
-|:---:|:---:|
+## General Usage
 
-<img src="https://images.ctfassets.net/tvfg2m04ppj4/5LhT20PZvvANcXRAEvkd6v/cf8adcc5c652c0be55acbb7cabec806e/assembly_4.jpg?w=800" width="400px"/>
+A cluster is generally used for distributed computing and processing of large amounts of data in-parallel through the use of Hadoop and Spark, thus providing greater processing capabilities for Machine Learning models, parallel programming, among others.
+
+## Wiki
+
+You can find useful information about the Raspberry Pi and how to build a portable cluster of small computer boards in the [wiki](https://github.com/gitluis/rpi-cluster/wiki) page. If you believe there is missing information, feel free to add it to the wiki.
+
+You can clone our wiki page locally
+```cli
+cd
+git clone https://github.com/gitluis/rpi-cluster.wiki.git
+```
