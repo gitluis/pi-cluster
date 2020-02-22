@@ -15,6 +15,5 @@ Read our full [**documentation**](https://github.com/gitluis/rpi-cluster/wiki) p
 
 You can clone our wiki page locally
 ```cli
-cd
 git clone https://github.com/gitluis/rpi-cluster.wiki.git
 ```
