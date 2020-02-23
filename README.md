@@ -11,9 +11,9 @@ A cluster is generally a set of connected computers viewed as a single system us
 
 ## Documentation
 
-Read our full [**documentation**](https://github.com/gitluis/rpi-cluster/wiki) page to get you started with your very own cluster of small computers. Here you will find useful information about the Raspberry Pi and how to build a portable cluster of small computer boards. If you believe there is missing information, feel free to add it to the wiki.
+Read our full [**documentation**](https://github.com/gitluis/pi-cluster/wiki) page to get you started with your very own cluster of small computers. Here you will find useful information about the Raspberry Pi and how to build a portable cluster of small computer boards. If you believe there is missing information, feel free to add it to the wiki.
 
 You can clone our wiki page locally
 ```cli
-git clone https://github.com/gitluis/rpi-cluster.wiki.git
+git clone https://github.com/gitluis/pi-cluster.wiki.git
 ```
