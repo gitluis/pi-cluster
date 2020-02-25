@@ -1,19 +1,18 @@
-<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/1281/1281822.svg" width="100px" height="100px"/>
-
-
 # Raspberry Pi Cluster
 
 A portable cluster of Raspberry Pi 4 Model B computers.
 
-## General Usage
+Our main focus for this cluster was to process large amounts of data in-parallel through the use of Hadoop and Spark, thus providing distributd storage, greater processing and computing capabilities for Machine Learning models, parallel programming, among others.
 
-A cluster is generally a set of connected computers viewed as a single system used for distributed computing. Our main intention was to process large amounts of data in-parallel through the use of Hadoop and Spark, thus providing greater processing capabilities for Machine Learning models, parallel programming, among others.
+## Wiki
 
-## Documentation
+Read our [**wiki documentation page**](https://github.com/gitluis/pi-cluster/wiki) to get you started with how to build your very own cluster of small computers.
 
-Read our full [**documentation**](https://github.com/gitluis/pi-cluster/wiki) page to get you started with your very own cluster of small computers. Here you will find useful information about the Raspberry Pi and how to build a portable cluster of small computer boards. If you believe there is missing information, feel free to add it to the wiki.
-
-You can clone our wiki page locally
+You can also clone our wiki page locally
 ```cli
 git clone https://github.com/gitluis/pi-cluster.wiki.git
 ```
+
+## Acknowledgements
+
+Many thanks go to many of the tutorials I used to construct my own. For a list of references or resources that I used, please refer to our [References](https://github.com/gitluis/pi-cluster/wiki/References) page in our Wiki.
