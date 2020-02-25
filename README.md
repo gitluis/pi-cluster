@@ -2,7 +2,7 @@
 
 A portable cluster of Raspberry Pi 4 Model B computers.
 
-Our main focus for this cluster was to process large amounts of data in-parallel through the use of Hadoop and Spark, thus providing distributd storage, greater processing and computing capabilities for Machine Learning models, parallel programming, among others.
+Our main focus for this cluster was to process large amounts of data in-parallel through the use of Hadoop and Spark, thus providing distributed storage, greater processing and computing capabilities for Machine Learning models, parallel programming, among others.
 
 ## Wiki
 
