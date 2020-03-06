@@ -13,6 +13,8 @@ You can also clone our wiki page locally
 git clone https://github.com/gitluis/pi-cluster.wiki.git
 ```
 
+Please note wiki page is still under construction.
+
 # Acknowledgements
 
 Many thanks go to many of the tutorials I used to construct my own. For a list of references or resources that I used, please refer to our [References](https://github.com/gitluis/pi-cluster/wiki/References) page in our Wiki.
