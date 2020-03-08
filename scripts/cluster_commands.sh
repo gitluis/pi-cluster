@@ -2,9 +2,12 @@
 # Pi-Cluster Commands #
 # ------------------- #
 
+# define cluster user
+USER="pi"
+
 # return the user common across all nodes in the cluster
 function cluster-user {
-  whoami
+  echo $USER
 }
 
 # return the IP address and mapped hostname of each node in the cluster
@@ -22,7 +25,7 @@ function workers {
 function master-cmd {
   for worker in $(workers)
   do
-    ssh $whoami@$worker "$@"
+    ssh $USER@$worker "$@"
   done
 }
 
@@ -46,6 +49,6 @@ function cluster-shutdown {
 function cluster-scp {
   for worker in $(workers)
   do
-    cat $1 | ssh $whoami@$worker "sudo tee $1" > /dev/null 2>&1
+    cat $1 | ssh $USER@$worker "sudo tee $1" > /dev/null 2>&1
   done
 }
