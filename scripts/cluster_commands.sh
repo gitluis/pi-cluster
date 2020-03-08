@@ -49,6 +49,14 @@ function cluster-shutdown {
 function cluster-scp {
   for worker in $(workers)
   do
-    cat $1 | ssh $USER@$worker "sudo tee $1" > /dev/null 2>&1
+    scp $@ $USER@$worker:$@
+  done
+}
+
+# transfer directories from one node to all other nodes
+function cluster-scpr {
+  for worker in $(workers)
+  do
+    scp -r $@ $USER@$worker:$@
   done
 }
