@@ -37,12 +37,12 @@ function cluster-cmd {
 
 # reboot all nodes in the cluster at the same time
 function cluster-reboot {
-  cluster-cmd shutdown -r now
+  cluster-cmd sudo shutdown -r now
 }
 
 # shutdown all nodes in the cluster at the same time
 function cluster-shutdown {
-  cluster-cmd shutdown now
+  cluster-cmd sudo shutdown now
 }
 
 # transfer files from one node to all other nodes
