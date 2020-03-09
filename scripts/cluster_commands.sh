@@ -30,7 +30,7 @@ function workers {
 function workers-up {
   for worker in $(workers)
   do
-    ssh $USER@$worker hostname && echo "  is up and running..."
+    ping $worker -c 1
   done
 }
 
