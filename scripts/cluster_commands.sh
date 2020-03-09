@@ -49,7 +49,7 @@ function cluster-shutdown {
 function cluster-scp {
   for worker in $(workers)
   do
-    scp $@ $USER@$worker:$@
+    sudo scp $@ $USER@$worker:$@
   done
 }
 
@@ -57,6 +57,6 @@ function cluster-scp {
 function cluster-scpr {
   for worker in $(workers)
   do
-    scp -r $@ $USER@$worker:$@
+    sudo scp -r $@ $USER@$worker:$@
   done
 }
