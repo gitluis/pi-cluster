@@ -7,7 +7,7 @@
 USER="pi"
 
 
-# return the user common across all nodes in the cluster
+# return the common user across all nodes in the cluster
 function cluster-user {
   echo $USER
 }
@@ -20,18 +20,22 @@ function nodes {
 }
 
 
-# return only the hostname of each worker in the cluster
-function workers {
-  grep "worker" /etc/hosts | awk '{print $2}'
+# return which nodes are currently up and running
+function nodes-up {
+  echo "Pinging master..."
+  ping master -c 1 | grep "packet loss"
+
+  for worker in $(workers)
+  do
+    echo "Pinging $worker..."
+    ping $worker -c 1 | grep "packet loss"
+  done
 }
 
 
-# return which nodes are currently up and running
-function workers-up {
-  for worker in $(workers)
-  do
-    ping $worker -c 1
-  done
+# return only the hostname of each worker in the cluster
+function workers {
+  grep "worker" /etc/hosts | awk '{print $2}'
 }
 
 
@@ -39,7 +43,7 @@ function workers-up {
 function master-cmd {
   for worker in $(workers)
   do
-    echo "Running '$@' in $worker as $USER..."
+    echo "Executing '$@' in $worker as $USER..."
     ssh $USER@$worker "$@"
   done
 }
@@ -48,6 +52,7 @@ function master-cmd {
 # send a command to be executed by all nodes in the cluster
 function cluster-cmd {
   master-cmd $@
+  echo "Executing '$@' in master as $USER..."
   $@
 }
 
@@ -68,7 +73,8 @@ function cluster-shutdown {
 function cluster-scp {
   for worker in $(workers)
   do
-    sudo scp $@ $USER@$worker:$@
+    echo "Executing 'scp $1 $USER@$worker:$2' in $worker as $USER..."
+    scp $1 $USER@$worker:$2
   done
 }
 
@@ -77,6 +83,7 @@ function cluster-scp {
 function cluster-scpr {
   for worker in $(workers)
   do
-    sudo scp -r $@ $USER@$worker:$@
+    echo "Executing 'scp -r $1 $USER@$worker:$2' in $worker as $USER..."
+    scp -r $1 $USER@$worker:$2
   done
 }
