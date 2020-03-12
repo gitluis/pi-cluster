@@ -1,4 +1,4 @@
-[**Home**](README.md) / [**Getting Started**](pages/Getting-Started.md) / [**Cluster Guide**](pages/Cluster-Guide.md)
+[**Home**](README.md) / [**Getting Started**](Getting-Started.md) / [**Cluster Guide**](Cluster-Guide.md)
 
 ---
 
@@ -7,8 +7,8 @@
 
 # Raspberry Pi Cluster
 
-* [Background](pages/Background.md)
-* [Purpose](pages/Purpose.md)
+* [Background](Background.md)
+* [Purpose](Purpose.md)
 
 
 ## What is this?
