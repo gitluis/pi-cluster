@@ -1,11 +1,4 @@
-[**Home**](https://github.com/gitluis/pi-cluster/wiki) / [**Getting Started**](https://github.com/gitluis/pi-cluster/wiki/Getting-Started) / [**Cluster Guide**](https://github.com/gitluis/pi-cluster/wiki/Cluster-Guide)
-
----
-
-## [Home](Home)
-
-* [Background](pages/Background.md)
-* [Purpose](Purpose)
+[**Home**](README.md) / [**Getting Started**](pages/Getting-Started.md) / [**Cluster Guide**](pages/Cluster-Guide.md)
 
 ---
 
@@ -13,6 +6,12 @@
 
 
 # Raspberry Pi Cluster
+
+* [Background](pages/Background.md)
+* [Purpose](pages/Purpose.md)
+
+
+## What is this?
 
 A [full guide](Cluster-Guide) on how to build a portable cluster of credit-card sized Raspberry Pi computer boards.
 
