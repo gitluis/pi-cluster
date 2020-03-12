@@ -1,23 +1,39 @@
-[**Home**](https://github.com/gitluis/pi-cluster/wiki) | [**Getting Started**](https://github.com/gitluis/pi-cluster/wiki/Getting-Started) | [**Cluster Guide**](https://github.com/gitluis/pi-cluster/wiki/Cluster-Guide)
+[**Home**](https://github.com/gitluis/pi-cluster/wiki) / [**Getting Started**](https://github.com/gitluis/pi-cluster/wiki/Getting-Started) / [**Cluster Guide**](https://github.com/gitluis/pi-cluster/wiki/Cluster-Guide)
 
 ---
 
+<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/>
+<img src="https://image.flaticon.com/icons/svg/1281/1281822.svg" width="100px" height="100px"/>
+
+
 # Raspberry Pi Cluster
 
-A portable cluster of Raspberry Pi 4 Model B computers.
+A [full guide](Cluster-Guide) on how to build a portable cluster of credit-card sized Raspberry Pi computer boards.
 
-Our main focus for this cluster was to process large amounts of data in-parallel through the use of Hadoop and Spark, thus providing distributed storage, greater processing and computing capabilities for Machine Learning models, parallel programming, among others.
+<img src="https://images.ctfassets.net/tvfg2m04ppj4/5LhT20PZvvANcXRAEvkd6v/cf8adcc5c652c0be55acbb7cabec806e/assembly_4.jpg?w=800" width="400px"/>
 
-# Wiki
 
-Read our [**wiki documentation page**](https://github.com/gitluis/pi-cluster/wiki) to get you started with how to build your very own cluster of small computers.
+## What is a Raspberry Pi?
 
-You can also clone our wiki page locally
-```cli
-git clone https://github.com/gitluis/pi-cluster.wiki.git
-```
+A Raspberry Pi a is credit-card sized, low-cost and high-performance computer board. This little device is capable of doing everything you would expect a desktop or full-sized computer to do; that is browsing the internet, playing video games, working on spreadsheets, word processing and playing high-definition video.
 
-Please note wiki page is still under construction.
+[<img src="https://www.raspberrypi.org/homepage-9df4b/static/f1682eef7da7e8d989662d147f48977c/7fd5d/f532739a-171e-4aa0-b9f3-d05e20710b69_raspberry-pi-4-model-b.jpg" width="400px"/>](https://www.raspberrypi.org/)
+
+
+## How is a Raspberry Pi different from a Computer?
+
+A Raspberry Pi is a small-sized computer compared to a full desktop computer. With the latest release of the Raspberry Pi 4 Model B which now offers the choice of bigger memory (RAM) sizes of 1GB, 2GB or 4GB than it's previous versions, we can barely tell the difference since you can do the same tasks you would do in a regular computer.
+
+Although that is the case, the one major difference is in their [**central processing unit (CPU)**](https://www.tutorialspoint.com/computer_fundamentals/computer_cpu.htm).
+
+Processors (CPUs) in full-desktop computers are based off an [x86 architecture](https://www.techopedia.com/definition/5334/x86-architecture) mainly built by [Intel](https://www.intel.com/) or [AMD](https://www.amd.com/) while processors in small circuit boards such as the Raspberry Pi are based off an [ARM architecture ](https://www.techopedia.com/definition/14875/arm-processor) design bought and built by other companies. 
+
+It is worth mentioning that operating system (OS) support is also different given each architecture has it's own instruction set architecture (ISA). That means an OS released to support a x86 architecture will not support ARM-based processors mainly because the ISA with which the OS is developed is different.
+
+You can still use a Raspberry Pi as your main computer and would still be able to accomplish almost the same as in a full-desktop PC if the desired operating system supports ARM processors. There is a whole open world when it comes to using a Raspberry Pi. I encourage you to check out some cool and fun projects at [https://projects.raspberrypi.org](https://projects.raspberrypi.org/en).
+
+<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/>
+<img src="https://cloud.githubusercontent.com/assets/10035308/22178091/cf7ebdf8-dfe2-11e6-9d19-f7bd06cc7751.png" width="100px" height="100px"/>
 
 # Acknowledgements
 
