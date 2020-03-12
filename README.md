@@ -2,8 +2,7 @@
 
 ---
 
-<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/>
-<img src="https://image.flaticon.com/icons/svg/1281/1281822.svg" width="100px" height="100px"/>
+<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/1281/1281822.svg" width="100px" height="100px"/>
 
 
 # Raspberry Pi Cluster
@@ -32,8 +31,7 @@ It is worth mentioning that operating system (OS) support is also different give
 
 You can still use a Raspberry Pi as your main computer and would still be able to accomplish almost the same as in a full-desktop PC if the desired operating system supports ARM processors. There is a whole open world when it comes to using a Raspberry Pi. I encourage you to check out some cool and fun projects at [https://projects.raspberrypi.org](https://projects.raspberrypi.org/en).
 
-<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/>
-<img src="https://cloud.githubusercontent.com/assets/10035308/22178091/cf7ebdf8-dfe2-11e6-9d19-f7bd06cc7751.png" width="100px" height="100px"/>
+<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://cloud.githubusercontent.com/assets/10035308/22178091/cf7ebdf8-dfe2-11e6-9d19-f7bd06cc7751.png" width="100px" height="100px"/>
 
 # Acknowledgements
 
