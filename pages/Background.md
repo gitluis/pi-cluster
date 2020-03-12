@@ -1,4 +1,4 @@
-[**Home**](https://github.com/gitluis/pi-cluster/wiki) / [**Getting Started**](https://github.com/gitluis/pi-cluster/wiki/Getting-Started) / [**Cluster Guide**](https://github.com/gitluis/pi-cluster/wiki/Cluster-Guide)
+[**Home**](README.md) / [**Getting Started**](pages/Getting-Started.md) / [**Cluster Guide**](pages/Cluster-Guide.md)
 
 ---
 
