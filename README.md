@@ -40,4 +40,4 @@ You can still use a Raspberry Pi as your main computer and would still be able t
 
 Many thanks go to many of the tutorials I used to construct my own. Therefore, I do not credit the entire guide to myself, this is a guide I built based on what worked for me following other(s) and adding to that.
 
-For a list of references or resources that I used, please refer to our [References](https://github.com/gitluis/pi-cluster/wiki/References) page in our Wiki.
+For a list of references or resources that I used, please refer to our [References](References.md) page in our Wiki.
