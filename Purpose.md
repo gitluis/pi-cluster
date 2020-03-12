@@ -1,5 +1,8 @@
 [**Home**](README.md) / [**Getting Started**](Getting-Started.md) / [**Cluster Guide**](Cluster-Guide.md)
 
+* [Background](Background.md)
+* [Purpose](Purpose.md)
+
 ---
 
 <img src="https://image.flaticon.com/icons/svg/2103/2103658.svg" width="100px" height="100px"/>
