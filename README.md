@@ -4,8 +4,8 @@
 
 ## [Home](Home)
 
-* [Background](Background)
-* [Purpose](Purpose)
+* [Background](Background.md)
+* [Purpose](Purpose.md)
 
 ---
 
