@@ -4,7 +4,7 @@
 
 ## [Home](Home)
 
-* [Background](Background.md)
+* [Background](pages/Background.md)
 * [Purpose](Purpose)
 
 ---
