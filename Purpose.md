@@ -1,4 +1,4 @@
-[**Home**](README.md) / [**Getting Started**](Getting-Started.md) / [**Cluster Guide**](Cluster-Guide.md)
+[**Home**](README.md) / [**Getting Started**](GettingStarted.md) / [**Cluster Guide**](ClusterGuide.md)
 
 * [Background](Background.md)
 * [Purpose](Purpose.md)
