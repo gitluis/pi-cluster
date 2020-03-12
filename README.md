@@ -1,17 +1,14 @@
 [**Home**](README.md) / [**Getting Started**](Getting-Started.md) / [**Cluster Guide**](Cluster-Guide.md)
 
+* [Background](Background.md)
+* [Purpose](Purpose.md)
+
 ---
 
 <img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/1281/1281822.svg" width="100px" height="100px"/>
 
 
 # Raspberry Pi Cluster
-
-* [Background](Background.md)
-* [Purpose](Purpose.md)
-
-
-## What is this?
 
 A [full guide](Cluster-Guide) on how to build a portable cluster of credit-card sized Raspberry Pi computer boards.
 
