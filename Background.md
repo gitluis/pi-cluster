@@ -9,7 +9,7 @@
 
 We live in a digital world full of data. Whether that is un-, semi- or structured data, there is a lot of things we can do with it if we make use of Machine Learning (ML). More specifically, supervised, unsupervised or reinforcement learning algorithms are used to build models that learn (train) and discover patterns from historical data to predict an outcome. There are numerous applications of ML such as weather forecast (prediction), storm tracking models, among others.
 
-- <a href="https://hadoop.apache.org/" target="_blank">**Hadoop**</a> is a software framework for distributed storage and processing of large data sets across of clusters of computers using MapReduce.
+- [**Hadoop**](https://hadoop.apache.org) is a software framework for distributed storage and processing of large data sets across of clusters of computers using MapReduce.
 - [**MapReduce**](https://www.tutorialspoint.com/hadoop/hadoop_mapreduce.htm) is a programming technique for distributed computing that process vast amounts of data (multi-terabyte data sets) in-parallel on large clusters in a reliable, fault-tolerant manner. [MapReduce explained](https://www.youtube.com/watch?v=lgWy7BwIKKQ).
 - [**Spark**](https://spark.apache.org/) is a a unified analytics engine for large-scale data processing.
 
