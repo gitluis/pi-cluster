@@ -38,21 +38,27 @@ It is worth mentioning that sometimes images can come in zip format. The reason 
 3. Install Raspberry Pi Imager in your computer
 4. Open Raspberry Pi Imager
 5. Click on `Choose OS`
+
 <img src="https://i.ibb.co/YX9fHVk/format-sd-card-1.png" width="600px" height="400px"/>
 
 6. Select `Use custom`
+
 <img src="https://i.ibb.co/dLsRmsB/format-sd-card-2.png" width="600px" height="400px"/>
 
-7. Navigate to your `image.img` file and open it (images supported: *.img *.zip *.gz *.xz)
+7. Navigate to your `image.img` file and open it (images supported: *.img, *.zip, *.gz, *.xz)
+
 <img src="https://i.ibb.co/qDTKwjm/format-sd-card-3.png" width="600px" height="400px"/>
 
 8. Click on `Choose SD Card`
+
 <img src="https://i.ibb.co/g7LRvG2/format-sd-card-4.png" width="600px" height="400px"/>
 
 9. Select your micro SD card
+
 <img src="https://i.ibb.co/KFdTMV4/format-sd-card-5.png" width="600px" height="400px"/>
 
 10. Click on `Write`
+
 <img src="https://i.ibb.co/1K0m4Sc/format-sd-card-6.png" width="600px" height="400px"/>
 
 10. The image will start being written to the micro SD card and verify its contents
