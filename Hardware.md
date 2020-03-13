@@ -1,7 +1,6 @@
-[**Background**](Background.md) / [**Purpose**](Purpose.md) / [**Getting Started**](Getting_Started.md) / [**Cluster Guide**](Cluster_Guide.md)
+[Background](Background.md) / [Purpose](Purpose.md) / [**Getting Started**](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
-
-1. [Hardware](Hardware.md) - General Pi hardware information, specifications, costs and overclocking
+1. [**Hardware**](Hardware.md) - General Pi hardware information, specifications, costs and overclocking
 2. [Software](Software.md) - High-level operating system and software information
 3. [Formatting SD Cards](Formatting_SD_Cards.md) - A quick-guide on how to format SD cards
 4. [Read & Write Images](Read_Write_OS_Images.md) - A quick-guide on how to flash, write, and read operating system images
@@ -11,6 +10,7 @@
 8. [Software Updates](Software_Updates.md) - How to update and upgrade operating system, software and hardware
 9. [Miscellaneous](Miscellaneous.md) - Other "good-to-know" information
 
+#  
 
 <img src="https://image.flaticon.com/icons/svg/2422/2422428.svg" width="100px" height="100px"/>
 
