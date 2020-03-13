@@ -1,4 +1,4 @@
-[**Background**](Background.md) / [**Purpose**](Purpose.md) / [**Getting Started**](Getting_Started.md) / [**Cluster Guide**](ClusterGuide.md)
+[**Background**](Background.md) / [**Purpose**](Purpose.md) / [**Getting Started**](Getting_Started.md) / [**Cluster Guide**](Cluster_Guide.md)
 
 ---
 
@@ -7,7 +7,7 @@
 
 # Raspberry Pi Cluster
 
-A [full guide](ClusterGuide.md) on how to build a portable cluster of credit-card sized Raspberry Pi computer boards.
+A [full guide](Cluster_Guide.md) on how to build a portable cluster of credit-card sized Raspberry Pi computer boards.
 
 <img src="https://images.ctfassets.net/tvfg2m04ppj4/5LhT20PZvvANcXRAEvkd6v/cf8adcc5c652c0be55acbb7cabec806e/assembly_4.jpg?w=800" width="400px"/>
 
