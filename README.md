@@ -1,6 +1,5 @@
 [**Background**](Background.md) / [**Purpose**](Purpose.md) / [**Getting Started**](Getting_Started.md) / [**Cluster Guide**](Cluster_Guide.md)
 
----
 
 <img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/1281/1281822.svg" width="100px" height="100px"/>
 
@@ -25,7 +24,7 @@ A Raspberry Pi is a small-sized computer compared to a full desktop computer. Wi
 
 Although that is the case, the one major difference is in their [**central processing unit (CPU)**](https://www.tutorialspoint.com/computer_fundamentals/computer_cpu.htm).
 
-Processors (CPUs) in full-desktop computers are based off an [x86 architecture](https://www.techopedia.com/definition/5334/x86-architecture) mainly built by [Intel](https://www.intel.com/) or [AMD](https://www.amd.com/) while processors in small circuit boards such as the Raspberry Pi are based off an [ARM architecture ](https://www.techopedia.com/definition/14875/arm-processor) design bought and built by other companies. 
+Processors (CPUs) in full-desktop computers are based off an [x86 architecture](https://www.techopedia.com/definition/5334/x86-architecture) mainly built by [Intel](https://www.intel.com/) or [AMD](https://www.amd.com/) while processors in small circuit boards such as the Raspberry Pi are based off an [ARM architecture ](https://www.techopedia.com/definition/14875/arm-processor) design bought and built by other companies.
 
 It is worth mentioning that operating system (OS) support is also different given each architecture has it's own instruction set architecture (ISA). That means an OS released to support a x86 architecture will not support ARM-based processors mainly because the ISA with which the OS is developed is different.
 

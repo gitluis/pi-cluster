@@ -1,6 +1,5 @@
 [**Background**](Background.md) / [**Purpose**](Purpose.md) / [**Getting Started**](Getting_Started.md) / [**Cluster Guide**](Cluster_Guide.md)
 
----
 
 <img src="https://content.linkedin.com/content/dam/engineering/site-assets/images/blog/posts/2019/02/hadoopmeetup2.png" width="15%"/> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Apache_Spark_logo.svg/388px-Apache_Spark_logo.svg.png" width="20%"/>
 
