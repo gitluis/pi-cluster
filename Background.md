@@ -1,4 +1,4 @@
-[**Background**](Background.md) / [**Purpose**](Purpose.md) / [**Getting Started**](GettingStarted.md) / [**Cluster Guide**](ClusterGuide.md)
+[**Background**](Background.md) / [**Purpose**](Purpose.md) / [**Getting Started**](Getting_Started.md) / [**Cluster Guide**](Cluster_Guide.md)
 
 ---
 
