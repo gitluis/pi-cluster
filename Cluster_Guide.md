@@ -8,10 +8,10 @@
 
 The following set of sections cover all required information to build a cluster of Raspberry Pi's from hardware to software, installation, configuration and test of applications.
 
-1. [Hardware List](Hardware-List) - List of hardware required for the cluster
-2. [Install OS](Install-OS) - Information on operating system installation across all computers
-3. [The Pi Network](The-Pi-Network) - Information on how to connect computers together
-4. [Cluster Commands](Cluster-Commands) - Create functions for cluster command execution
-5. [Cluster Security](Cluster-Security) - A guide on how to secure your cluster
-6. [Single Node Setup](Single-Node-Setup) - A guide on how to set up a single Node in the cluster
-7. [Cluster Setup](Cluster-Setup) - A guide on how to set up all Nodes in the cluster
+1. [Hardware List](Hardware_List.md) - List of hardware required for the cluster
+2. [Install OS](Install_OS.md) - Information on operating system installation across all computers
+3. [The Pi Network](The_Pi_Network.md) - Information on how to connect computers together
+4. [Cluster Commands](Cluster_Commands.md) - Create functions for cluster command execution
+5. [Cluster Security](Cluster_Security.md) - A guide on how to secure your cluster
+6. [Single Node Setup](Single_Node_Setup.md) - A guide on how to set up a single Node in the cluster
+7. [Cluster Setup](Cluster_Setup.md) - A guide on how to set up all Nodes in the cluster
