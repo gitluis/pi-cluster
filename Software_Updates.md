@@ -1,8 +1,7 @@
 [Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
 
-<img src="https://image.flaticon.com/icons/svg/1857/1857091.svg" width="100px" height="100px"/>
-<img src="https://image.flaticon.com/icons/svg/2562/2562026.svg" width="100px" height="100px"/>
+<img src="https://image.flaticon.com/icons/svg/1857/1857091.svg" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/2562/2562026.svg" width="100px" height="100px"/>
 
 
 # Software Updates

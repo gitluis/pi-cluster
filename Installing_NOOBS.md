@@ -11,7 +11,7 @@ This section provides a quick step-by-step procedure on how to install NOOBS Ras
 
 ## How-to Install NOOBS
 
-1. Format your micro SD card ([how-to](Formatting-SD-Cards))
+1. Format your micro SD card ([how-to](Formatting_SD_Cards.md))
 1. Download [NOOBS](https://www.raspberrypi.org/downloads/noobs/)
 1. Extract the contents of `NOOBS.zip` file
 1. Copy extracted files onto the SD card that you just formatted
@@ -24,4 +24,4 @@ This section provides a quick step-by-step procedure on how to install NOOBS Ras
 
 ## Software Updates
 
-Refer to the [Software Updates](Software-Updates) wiki page.
+Refer to the [Software Updates](Software_Updates.md) wiki page.

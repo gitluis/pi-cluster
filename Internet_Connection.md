@@ -12,7 +12,7 @@ This section covers different methods on how-to set up and connect to the intern
 
 * [Ethernet Connection](#ethernet-connection)
 * [WiFi Connection](#wifi-connection)
-* [Setting WiFi Network via CLI](#setting-wifi-network-via-the-cli)
+* [Setting WiFi Network via CLI](#setting-wifi-network-via-cli)
     * [Using raspi-config](#using-raspi-config)
     * [Getting WiFi network details](#getting-wifi-network-details)
     * [Adding network details to Raspberry Pi](#adding-network-details-to-raspberry-pi)
@@ -27,7 +27,7 @@ Requirements:
 Steps to connect:
 1. Make sure that your router is connected to the internet.
 2. Connect one (1) Ethernet cable end to your Raspberry Pi and the other end to your router.
-3. Access [https://github.com/gitluis/rpi-cluster](https://github.com/gitluis/rpi-cluster) through the web browser.
+3. Access https://google.com through the web browser.
 4. If page shows up, you have successfully connected your board to the internet.
 6. Done!
 
@@ -75,7 +75,7 @@ Retrieve the following information from your WiFi Network:
 * `'IE:IEEE 802.11i/WPA2 Version 1'` which is the authentication method that such network uses
 * The password for the wireless network (commonly found in the back of the router)
 
-Try [using raspi-config](#Using-raspi-config) after writing down the network details. If `raspi-config` fails to connect the Pi to the desired network, the next section covers how to manually add such network to the Pi and connect to it.
+Try [using raspi-config](#using-raspi-config) after writing down the network details. If `raspi-config` fails to connect the Pi to the desired network, the next section covers how to manually add such network to the Pi and connect to it.
 
 
 ## Adding network details to Raspberry Pi
