@@ -1,16 +1,5 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [**Getting Started**](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
-1. [Hardware](Hardware.md) - General Pi hardware information, specifications, costs and overclocking
-2. [**Software**](Software.md) - High-level operating system and software information
-3. [Formatting SD Cards](Formatting_SD_Cards.md) - A quick-guide on how to format SD cards
-4. [Read & Write Images](Read_Write_OS_Images.md) - A quick-guide on how to flash, write, and read operating system images
-5. [Installing NOOBS](Installing_NOOBS.md) - A guide on how to install the NOOBS operating system installer
-6. [Installing Raspbian](Installing_Raspbian.md) - A guide on how to install Raspbian into your Pi
-7. [Internet Connection](Internet_Connection.md) - Information on how to connect your Pi to the internet
-8. [Software Updates](Software_Updates.md) - How to update and upgrade operating system, software and hardware
-9. [Miscellaneous](Miscellaneous.md) - Other "good-to-know" information
-
-#  
 
 <img src="https://cloud.githubusercontent.com/assets/10035308/22178091/cf7ebdf8-dfe2-11e6-9d19-f7bd06cc7751.png" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/226/226772.svg" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/888/888882.svg" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/2/2235.svg" width="100px" height="100px"/>
 

@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [**Cluster Guide**](Cluster_Guide.md)
+[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
 
 <img src="https://image.flaticon.com/icons/svg/1281/1281822.svg" width="100px" height="100px"/>
