@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Background](docs/Background.md) / [Purpose](docs/Purpose.md) / [Getting Started](docs/Getting_Started.md) / [Cluster Guide](docs/Cluster_Guide.md)
 
 
 <img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/1281/1281822.svg" width="100px" height="100px"/>
@@ -6,7 +6,7 @@
 
 # Raspberry Pi Cluster
 
-A [full guide](Cluster_Guide.md) on how to build a portable cluster of credit-card sized Raspberry Pi computer boards.
+A [full guide](docs/Cluster_Guide.md) on how to build a portable cluster of credit-card sized Raspberry Pi computer boards.
 
 <img src="https://images.ctfassets.net/tvfg2m04ppj4/5LhT20PZvvANcXRAEvkd6v/cf8adcc5c652c0be55acbb7cabec806e/assembly_4.jpg?w=800" width="400px"/>
 
@@ -36,4 +36,4 @@ You can still use a Raspberry Pi as your main computer and would still be able t
 
 Many thanks go to many of the tutorials I used to construct my own. Therefore, I do not credit the entire guide to myself, this is a guide I built based on what worked for me following other(s) and adding to that.
 
-For a list of references or resources that I used, please refer to our [References](References.md) page in our Wiki.
+For a list of references or resources that I used, please refer to our [References](docs/References.md) page in our Wiki.
