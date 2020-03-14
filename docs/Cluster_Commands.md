@@ -73,6 +73,8 @@ Copy over the `~/.bashrc` file to all workers
 cluster-scp ~/.bashrc
 ```
 
+**Note:** For these commands to work, you must have had mapped each Raspberry Pi's IP address to its hostname as specified in [The Pi Network](The_Pi_Network.html#mapping-the-hostname).
+
 
 # All commands
 
