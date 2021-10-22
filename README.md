@@ -1,7 +1,7 @@
 [Background](docs/Background.md) / [Purpose](docs/Purpose.md) / [Getting Started](docs/Getting_Started.md) / [Cluster Guide](docs/Cluster_Guide.md)
 
 
-<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/1281/1281822.svg" width="100px" height="100px"/>
+<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/>
 
 
 # Raspberry Pi Cluster
@@ -14,8 +14,6 @@ A [full guide](docs/Cluster_Guide.md) on how to build a portable cluster of cred
 ## What is a Raspberry Pi?
 
 A Raspberry Pi a is credit-card sized, low-cost and high-performance computer board. This little device is capable of doing everything you would expect a desktop or full-sized computer to do; that is browsing the internet, playing video games, working on spreadsheets, word processing and playing high-definition video.
-
-[<img src="https://www.raspberrypi.org/homepage-9df4b/static/f1682eef7da7e8d989662d147f48977c/7fd5d/f532739a-171e-4aa0-b9f3-d05e20710b69_raspberry-pi-4-model-b.jpg" width="400px"/>](https://www.raspberrypi.org/)
 
 
 ## How is a Raspberry Pi different from a Computer?
