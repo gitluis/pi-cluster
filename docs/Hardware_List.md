@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/hardware-list.svg" width="96" height="96" alt=""/>
@@ -72,3 +72,7 @@ microSD cards are slow at random writes and wear out with heavy writing. HDFS wr
 ## Raspberry Pi 5 instead?
 
 A Raspberry Pi 5 is about two to three times faster than a Pi 4 and works with this guide. It needs a 5 V 5 A supply (the official 27 W one) and an active cooler, so budget for both. See [Hardware](Hardware.md) for a model comparison.
+
+---
+
+**Step 1 of 9** · Step 2: [Install OS](Install_OS.md) →

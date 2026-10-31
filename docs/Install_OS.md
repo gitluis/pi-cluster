@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/install-many.svg" width="96" height="96" alt=""/>
@@ -97,3 +97,7 @@ To reuse a card for something else, or to start over, erase it with Imager:
 You don't need to erase a card before flashing it: writing an OS replaces everything on the card.
 
 Cards larger than 32 GB come formatted as exFAT. Erasing them with Imager reformats them as FAT32, which every device can read. To back up a card or copy one card to others, see [Back Up and Restore Cards](Read_Write_OS_Images.md).
+
+---
+
+**Step 2 of 9** · ← Step 1: [Hardware List](Hardware_List.md) · Step 3: [The Pi Network](The_Pi_Network.md) →

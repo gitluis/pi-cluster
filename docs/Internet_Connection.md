@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/internet.svg" width="96" height="96" alt=""/>
@@ -60,3 +60,7 @@ ping -c 3 raspberrypi.com
 ```
 
 The first command should show an `inet` line with an address such as `192.168.0.101/24`. The second should show three replies. If there's an address but no replies, the problem is between your router and the internet; if there's no address, check the cable, the switch lights and the router.
+
+---
+
+Back to the [Cluster Guide](Cluster_Guide.md)

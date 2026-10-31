@@ -1,0 +1,7 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# OS clutter
+.DS_Store
+Thumbs.db

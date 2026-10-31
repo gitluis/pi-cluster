@@ -1,15 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Copy">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Tag">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0EA5E9"/><stop offset="1" stop-color="#0369A1"/>
+      <stop offset="0" stop-color="#64748B"/><stop offset="1" stop-color="#334155"/>
     </linearGradient>
   </defs>
   <rect width="120" height="120" rx="28" fill="url(#g)"/>
   <rect x="1.5" y="1.5" width="117" height="117" rx="26.5" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="3"/>
   <g transform="translate(24 24) scale(1.5)" fill="none" stroke="#fff" stroke-width="3"
      stroke-linecap="round" stroke-linejoin="round">
-        <rect x='16' y='16' width='26' height='26' rx='3'/>
-        <path d='M32 16v-7a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v21a2 2 0 0 0 2 2h7'/>
-        <path d='M29 23v12M23 29h12'/>
+        <path d='M6 8v14l20 20 16-16L22 6H8a2 2 0 0 0-2 2z' stroke-linejoin='round'/>
+        <circle cx='15' cy='15' r='3'/>
   </g>
 </svg>

@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/software.svg" width="96" height="96" alt=""/>
@@ -30,3 +30,7 @@ Other operating systems, such as Ubuntu Server, also run on the Pi and can be pi
 Use **Raspberry Pi Imager**, the official tool for writing an OS to a card. It downloads the OS, writes it, and lets you set each node's hostname, user and SSH access before the first boot. [Install OS](Install_OS.md) walks through it.
 
 NOOBS, the older installer that earlier versions of this guide recommended, is no longer maintained. Imager replaces it.
+
+---
+
+Back to the [Cluster Guide](Cluster_Guide.md)

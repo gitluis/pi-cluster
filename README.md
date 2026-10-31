@@ -1,4 +1,4 @@
-[Background](docs/Background.md) / [Purpose](docs/Purpose.md) / [Getting Started](docs/Getting_Started.md) / [Cluster Guide](docs/Cluster_Guide.md)
+[Cluster Guide](docs/Cluster_Guide.md) · [Getting Started](docs/Getting_Started.md) · [Troubleshooting](docs/Troubleshooting.md)
 
 
 <img src="docs/img/icons/cluster.svg" width="96" height="96" alt=""/>
@@ -6,32 +6,63 @@
 
 # Raspberry Pi Cluster
 
-A [full guide](docs/Cluster_Guide.md) on how to build a portable cluster of credit-card sized Raspberry Pi computer boards.
+A step-by-step guide to building a portable cluster of five Raspberry Pi 4 boards that stores data with Hadoop (HDFS) and trains machine learning models in parallel with Spark.
 
 <img src="docs/img/diagrams/cluster-overview.svg" width="100%" alt="Illustration of the cluster: five Raspberry Pi 4 boards stacked in a case, master on top and four workers below, each wired to a network switch that connects to the router and the internet."/>
+
+**Status:** every step is written, from buying the hardware to training 300 XGBoost models. The training job has been tested on a Spark 4.2 cluster on a regular computer. The full build with these versions (Hadoop 3.5, Spark 4.2, Raspberry Pi OS based on Debian 13) has not yet been run end to end on Raspberry Pi hardware, so please [open an issue](https://github.com/gitluis/pi-cluster/issues) if a step doesn't work for you.
+
+
+## The guide
+
+| Step | Page | At the end you have |
+| :-: | --- | --- |
+| 1 | [Hardware List](docs/Hardware_List.md) | Everything bought and assembled, with enough power and cooling |
+| 2 | [Install OS](docs/Install_OS.md) | Five cards flashed, each node reachable over SSH |
+| 3 | [The Pi Network](docs/The_Pi_Network.md) | Fixed addresses, nodes reachable by name, SSH keys |
+| 4 | [Cluster Commands](docs/Cluster_Commands.md) | One command to run anything on every node |
+| 5 | [Cluster Security](docs/Cluster_Security.md) | Key-only logins, fail2ban and a firewall |
+| 6 | [Single Node Setup](docs/Single_Node_Setup.md) | Java everywhere; HDFS on `master` alone |
+| 7 | [Cluster Setup](docs/Cluster_Setup.md) | HDFS across four workers |
+| 8 | [Spark](docs/Spark.md) | Spark with one executor per worker |
+| 9 | [Workload](docs/Workload.md) | 300 models trained, one per worker at a time, and a benchmark |
+
+New here? Read [Getting Started](docs/Getting_Started.md) first. [Background](docs/Background.md) explains Hadoop and Spark; [Purpose](docs/Purpose.md) explains why this cluster exists.
+
+
+## What you need
+
+- Five Raspberry Pi 4 boards (4 GB recommended), one 3 A power supply each, cooling, microSD cards, an 8-port switch and cables. See [Hardware List](docs/Hardware_List.md).
+- A Windows, macOS or Linux computer with a card reader.
+- Comfort typing commands in a terminal. No Hadoop or Spark experience needed.
+
+The guide uses Raspberry Pi OS Lite (64-bit), Java 17, Hadoop 3.5.0 and Spark 4.2.1. [Versions](docs/Versions.md) explains why these.
+
+
+## What's in this repository
+
+| Folder | Contents |
+| --- | --- |
+| [`docs/`](docs/) | The guide's pages, with original images in [`docs/img/`](docs/img/) |
+| [`scripts/`](scripts/) | `cluster_commands.sh` (run commands on every node), `setup_hosts.sh` (hostname map), `generate_images.py` (rebuilds the icons and step diagrams) |
+| [`workload/`](workload/) | The training job, a sample data generator, and the Python package list |
 
 
 ## What is a Raspberry Pi?
 
-A Raspberry Pi a is credit-card sized, low-cost and high-performance computer board. This little device is capable of doing everything you would expect a desktop or full-sized computer to do; that is browsing the internet, playing video games, working on spreadsheets, word processing and playing high-definition video.
+A Raspberry Pi is a credit-card-sized, low-cost computer board. It can do most of what a desktop computer does: browse the internet, play video, edit documents and spreadsheets, or run a server.
 
+The current Raspberry Pi 4 Model B comes with 1, 2, 4 or 8 GB of memory (RAM), and the newer Raspberry Pi 5 with up to 16 GB, so for many tasks it's hard to tell apart from a regular computer.
 
-## How is a Raspberry Pi different from a Computer?
+The main difference is the [**central processing unit (CPU)**](https://www.tutorialspoint.com/computer_fundamentals/computer_cpu.htm). Desktop and laptop processors mostly use the [x86 architecture](https://www.techopedia.com/definition/5334/x86-architecture), made by [Intel](https://www.intel.com/) and [AMD](https://www.amd.com/). The Raspberry Pi uses an [ARM processor](https://www.techopedia.com/definition/14875/arm-processor), the same family found in most phones.
 
-A Raspberry Pi is a small-sized computer compared to a full desktop computer. With the latest release of the Raspberry Pi 4 Model B which now offers the choice of bigger memory (RAM) sizes of 1GB, 2GB or 4GB than it's previous versions, we can barely tell the difference since you can do the same tasks you would do in a regular computer.
+Each architecture has its own instruction set, so software must be built for the one it runs on: a program built for x86 won't run on ARM. That's why the guide downloads ARM (`aarch64`) builds of Hadoop and uses Raspberry Pi OS, which is built for the Pi.
 
-Although that is the case, the one major difference is in their [**central processing unit (CPU)**](https://www.tutorialspoint.com/computer_fundamentals/computer_cpu.htm).
+For other things to do with a Raspberry Pi, see the Raspberry Pi Foundation's [projects site](https://projects.raspberrypi.org/en).
 
-Processors (CPUs) in full-desktop computers are based off an [x86 architecture](https://www.techopedia.com/definition/5334/x86-architecture) mainly built by [Intel](https://www.intel.com/) or [AMD](https://www.amd.com/) while processors in small circuit boards such as the Raspberry Pi are based off an [ARM architecture ](https://www.techopedia.com/definition/14875/arm-processor) design bought and built by other companies.
-
-It is worth mentioning that operating system (OS) support is also different given each architecture has it's own instruction set architecture (ISA). That means an OS released to support a x86 architecture will not support ARM-based processors mainly because the ISA with which the OS is developed is different.
-
-You can still use a Raspberry Pi as your main computer and would still be able to accomplish almost the same as in a full-desktop PC if the desired operating system supports ARM processors. There is a whole open world when it comes to using a Raspberry Pi. I encourage you to check out some cool and fun projects at [https://projects.raspberrypi.org](https://projects.raspberrypi.org/en).
-
-<img src="docs/img/icons/hardware.svg" width="64" height="64" alt=""/> <img src="docs/img/icons/software.svg" width="64" height="64" alt=""/>
 
 # Acknowledgements
 
-Many thanks go to many of the tutorials I used to construct my own. Therefore, I do not credit the entire guide to myself, this is a guide I built based on what worked for me following other(s) and adding to that.
+Many thanks to the tutorials this guide builds on. I don't claim the whole guide as my own: it's what worked for me after following others and adding to them.
 
-For a list of references or resources that I used, please refer to our [References](docs/References.md) page in our Wiki.
+See [References](docs/References.md) for the sources and resources I used.

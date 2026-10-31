@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/netplan.svg" width="96" height="96" alt=""/>
@@ -100,3 +100,7 @@ sudo netplan try
 ```
 
 **Check:** `ip -4 addr show eth0` shows the expected address, and `ping -c 3 ubuntu.com` gets replies.
+
+---
+
+Back to the [Cluster Guide](Cluster_Guide.md)

@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/spark.svg" width="96" height="96" alt=""/>
@@ -151,4 +151,6 @@ It prints `hello from the pi cluster`.
 
 To stop Spark: `$SPARK_HOME/sbin/stop-all.sh`. See [Start and stop the cluster](Cluster_Setup.md#start-and-stop-the-cluster) for the full order.
 
-Next: [Workload](Workload.md), training the models.
+---
+
+**Step 8 of 9** · ← Step 7: [Cluster Setup](Cluster_Setup.md) · Step 9: [Workload](Workload.md) →
