@@ -6,57 +6,32 @@
 
 # Netplan
 
-As of Ubuntu 18.04 LTS, ubuntu has switched to [Netplan](https://netplan.io/) for configuring network interfaces. Netplan is a [YAML](https://en.wikipedia.org/wiki/YAML)-based configuration system that makes the process of configuring a network simple and very straightforward.
+**Most readers can skip this page.** On Raspberry Pi OS, use [`nmcli`](The_Pi_Network.md#option-b-set-a-static-address-on-each-pi) instead. This page is for nodes running **Ubuntu Server**, where [Netplan](https://netplan.io/) is the standard way to set up the network.
 
-* [Install Netplan](#install-netplan)
-* [Getting network details](#getting-network-details)
-* [Set up network via DHCP](#set-up-network-via-dhcp)
-* [Set up a static network](#set-up-a-static-network)
-* [Set up an open wireless network (WiFi)](#set-up-an-open-wireless-network-wifi)
-* [Set up a WPA-based wireless network](#set-up-a-wpa-based-wireless-network-wifi)
-* [Network configuration](#network-configuration)
+Netplan describes network settings in YAML files under `/etc/netplan/` and hands them to a backend (`systemd-networkd` on Ubuntu Server, NetworkManager on desktops) that does the actual work.
 
-## Install Netplan
+**On Raspberry Pi OS, don't hand-edit `/etc/netplan/`.** Current Raspberry Pi OS also uses Netplan under the hood, but NetworkManager rewrites those files with its own settings, so manual edits can be lost ([Raspberry Pi: cloud-init on Raspberry Pi OS](https://www.raspberrypi.com/news/cloud-init-on-raspberry-pi-os/)).
 
-For those not using Ubuntu 18.04 LTS, you will have to manually install netplan
-```cli
-sudo apt update -y
-sudo apt install netplan
-```
-
-By default, it may be disabled, thus we have to enable it
-```cli
-echo "ENABLED=1" | sudo tee /etc/default/netplan
-```
-
-Reboot the system
-```cli
-sudo reboot
-```
+* [Find the interface name](#find-the-interface-name)
+* [DHCP address](#dhcp-address)
+* [Static address](#static-address)
+* [Wi-Fi with a password](#wi-fi-with-a-password)
+* [Apply the configuration](#apply-the-configuration)
 
 
-### How can I install Netplan without an internet connection?
+## Find the interface name
 
-Keep in mind that if you are not using Ubuntu 18.04 LTS which comes with Netplan installed by default then you will have to install Netplan first. However, if you are not or cannot connect to the internet via Ethernet, _how will you download and install Netplan?_
-
-For such specific cases I would recommend attempting to configure your network with the previous guides (above). If none of them worked out for you, I would suggest to stick to Raspbian with Desktop in which network can be set up easily or switch to Ubuntu 18.04 LTS or a newer version.
-
-
-## Getting network details
-
-List all network interfaces
-```cli
+```bash
 ip a
 ```
 
-You typically have two (2) or more network interfaces:
-* First one is always **lo** which stands for loopback interface. This is a network interface that identifies the device and points to the local IP address of your system, most well known as 127.0.0.0/8 and also called **localhost**.
-* The second is the network interface we're looking for to configure whose name may vary between _eth0_, _ens33_, among others depending on your operating system.
+`lo` is the loopback interface (the machine talking to itself, `127.0.0.1`). The wired interface is the other one, usually `eth0` on a Raspberry Pi.
 
 
-## Set up network via DHCP
+## DHCP address
 
-To set up a network interface named `eth0` via Ethernet to get an automatically IP address assigned via DHCP, create a `eth0-config.yaml` configuration file with the following:
+Save as `/etc/netplan/60-eth0.yaml`:
+
 ```yaml
 network:
   version: 2
@@ -66,85 +41,62 @@ network:
       dhcp4: true
 ```
 
-Now refer to [Network configuration](#network-configuration) to apply the new configuration.
 
+## Static address
 
-## Set up a static network
+Save as `/etc/netplan/60-eth0.yaml`, using the node's address from the [network lookup table](The_Pi_Network.md#network-lookup-table):
 
-To set up a network interface named `eth0` via Ethernet to have a static IP address assigned to it, create a `eth0-config.yaml` configuration file with the following:
 ```yaml
 network:
   version: 2
   renderer: networkd
   ethernets:
     eth0:
+      dhcp4: false
       addresses:
-        - 192.168.0.25/24
-      gateway4: 192.168.0.1
+        - 192.168.0.101/24
+      routes:
+        - to: default
+          via: 192.168.0.1
       nameservers:
-        addresses: [192.168.0.1, 8.8.8.8]
+        addresses: [192.168.0.1, 1.1.1.1]
 ```
 
-For your IP address mask value, e.g. your `Subnet Mask` is `255.255.255.0` then the IP address mask is `xxx.xxx.xxx.xxx/24` as specified above, refer to [this guide here](https://www.aelius.com/njh/subnet_sheet.html) for more details.
-
-Now refer to [Network configuration](#network-configuration) to apply the new configuration.
+`/24` matches the subnet mask `255.255.255.0`. Older examples use `gateway4:`, which Netplan has deprecated; `routes` with `to: default` replaces it.
 
 
-## Set up an open wireless network (WiFi)
+## Wi-Fi with a password
 
-To set up a network interface named `wlan0` and connect to a open wireless connection (public WiFi), create a `wlan0-config.yaml` configuration file with the following:
-```yaml
-network:
-  version: 2
-  wifis:
-    wlan0:
-      access-points:
-        opennetwork: {}
-      dhcp4: yes
-```
+Save as `/etc/netplan/60-wlan0.yaml`, replacing the network name and password:
 
-Now refer to [Network configuration](#network-configuration) to apply the new configuration.
-
-
-## Set up a WPA-based wireless network (WiFi)
-
-To set up a network interface named `wlan0` and connect to a private wireless connection (WPA/WPA2 WiFi), create a `wlan0-config.yaml` configuration file with the following:
 ```yaml
 network:
   version: 2
   renderer: networkd
   wifis:
     wlan0:
-      dhcp4: no
-      dhcp6: no
-      addresses: [192.168.0.25/24]
-      gateway4: 192.168.0.1
-      nameservers:
-        addresses: [192.168.0.1, 8.8.8.8]
+      dhcp4: true
+      regulatory-domain: "US"
       access-points:
-        "network_ssid_name":
-          password: "**********"
+        "Your Network":
+          password: "your-password"
 ```
 
-For your IP address mask value, e.g. your `Subnet Mask` is `255.255.255.0` then the IP address mask is `xxx.xxx.xxx.xxx/24` as specified above, refer to [this guide here](https://www.aelius.com/njh/subnet_sheet.html) for more details.
-
-Don't forget to replace `"network_ssid_name"` with your network SSID and `"**********"` with your network's passphrase key or pre-shared key password.
-
-Now refer to [Network configuration](#network-configuration) to apply the new configuration.
+Set `regulatory-domain` to your [two-letter country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 
 
-## Network configuration
+## Apply the configuration
 
-Save your configuration files under `/etc/netplan/` with the `.yaml` extension, e.g. `/etc/netplan/eth0-config.yaml`.
+The files contain passwords and Netplan warns if others can read them, so restrict them first:
 
-Apply the new configuration
-```cli
-sudo netplan apply
+```bash
+sudo chmod 600 /etc/netplan/*.yaml
 ```
-The configuration will be written to disk under `/etc/netplan/` and will persist between reboots if accepted and properly configured.
 
-Verify you are connected to the internet
-```cli
-ping google.com
+Then test the configuration. `netplan try` applies it and rolls back automatically after 120 seconds unless you press Enter, which saves you if a mistake cuts off your SSH session:
+
+```bash
+sudo netplan try
 ```
-You should start seeing data being received constantly, meaning you are downloading packets from google.com as a test. Type `Ctrl+C` to interrupt.
+
+**Check:** `ip -4 addr show eth0` shows the expected address, and `ping -c 3 ubuntu.com` gets replies.
