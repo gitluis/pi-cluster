@@ -17,3 +17,4 @@ The following set of sections cover all required information to build a cluster 
 7. [Single Node Setup](Single_Node_Setup.md) - Java on every node, HDFS on master alone
 8. [Cluster Setup](Cluster_Setup.md) - HDFS across all nodes; starting and stopping the cluster
 9. [Spark](Spark.md) - Spark in standalone mode, one executor per worker
+10. [Workload](Workload.md) - Train the 300 models, one per worker at a time, and benchmark the cluster

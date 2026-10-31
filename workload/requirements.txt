@@ -1,0 +1,7 @@
+# Python packages for the workload, installed in /opt/pyenv on every node.
+# PySpark itself comes from the Spark install (/opt/spark/python), not from here.
+numpy==2.5.4
+pandas==2.3.3   # PySpark 4.2 does not fully support pandas 3 yet
+pyarrow==26.0.0
+scipy==1.18.1
+xgboost==3.4.1
