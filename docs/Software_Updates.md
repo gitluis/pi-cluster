@@ -6,16 +6,48 @@
 
 # Software Updates
 
-After the OS is installed in your Raspberry Pi, both, hardware and software may need to be updated and possibly upgraded to any recent firmware and operating system updates (if any).
+**Goal:** keep the OS, packages and firmware on every node current and identical.
 
-Your Raspberry Pi will need to be connected to the internet via Ethernet or WiFi.
+**Run on:** `master`, using the [cluster commands](Cluster_Commands.md). Before those are set up, run the same commands on each node over SSH.
 
-## How-to Update & Upgrade
+The nodes need internet access through your router.
 
-Open a Terminal window (Ctrl+Alt+T) and run the following commands
-```cli
-sudo apt update -y
-sudo apt full-upgrade -y
+
+## Update packages
+
+```bash
+cluster-cmd sudo apt update
+cluster-cmd sudo apt full-upgrade -y
 ```
 
-**Note**: These commands work only for debian-based linux distributions. If you are using a different linux distro you will have to search the software package manager that such distro uses to install software from the command line. The same applies with Windows operating systems.
+`apt update` refreshes the list of available packages; `full-upgrade` installs the new versions. Updating all nodes at the same time keeps their software versions identical, which Hadoop and Spark expect.
+
+Then reboot any node that needs it:
+
+```bash
+cluster-cmd 'test -f /run/reboot-required && echo "reboot needed" || echo "ok"'
+cluster-reboot
+```
+
+
+## Update firmware
+
+The Raspberry Pi 4 keeps its bootloader in a small chip on the board (the EEPROM). Check whether an update is available:
+
+```bash
+cluster-cmd sudo rpi-eeprom-update
+```
+
+If any node reports an update, apply it and reboot:
+
+```bash
+cluster-cmd sudo rpi-eeprom-update -a
+cluster-reboot
+```
+
+
+## When to update
+
+- Before installing Hadoop or Spark.
+- Every month or so afterwards, when no job is running.
+- Stop HDFS and Spark first (see [Cluster Setup](Cluster_Setup.md#start-and-stop-the-cluster)), so a reboot doesn't interrupt a job.
