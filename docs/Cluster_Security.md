@@ -6,233 +6,186 @@
 
 # Cluster Security
 
-"The security of your Raspberry Pi is important. Gaps in security leave your Raspberry Pi open to hackers who can then use it without your permission." - [The Raspberry Pi Foundation](https://www.raspberrypi.org/documentation/configuration/security.md)
+**Goal:** only you can log in to the nodes, failed login attempts get blocked, and each node accepts network traffic only from the cluster and your computer.
 
-Here we take some extra-security measurements for our cluster to avoid any suspicious or unknown incoming traffic to our cluster and keep our cluster secured.
+**Run on:** `master`, using the [cluster commands](Cluster_Commands.md), unless a step says otherwise.
 
-* [Change Pi default password](#change-pi-default-password)
-* [Change default username](#change-default-username)
-    * [Add new user](#add-new-user)
-    * [Remove `pi` user](#remove-pi-user)
-    * [Edit cluster commands!](#edit-cluster-commands)
-* [Key-based Authentication](#key-based-authentication)
-    * [Disable Password Login](#disable-password-login)
-* [Install `fail2ban`](#install-fail2ban)
-* [Install Uncomplicated Firewall](#install-uncomplicated-firewall)
+Do the steps **in order**. Two of them can lock you out of a node if done early, and each step says how to check it before moving on. If you're ever locked out of a node with no monitor, put its card in your computer, reflash it with [Install OS](Install_OS.md), and repeat the setup for that node.
 
+* [What Imager already did](#what-imager-already-did)
+* [Allow cluster-reboot without a password](#allow-cluster-reboot-without-a-password)
+* [Turn off password logins](#turn-off-password-logins)
+* [Block repeated failed logins with fail2ban](#block-repeated-failed-logins-with-fail2ban)
+* [Firewall](#firewall)
+* [Old installs with a `pi` user](#old-installs-with-a-pi-user)
 
 
-# Change Pi default password
+# What Imager already did
 
-The default password is `raspberry`.
+If you flashed the cards as described in [Install OS](Install_OS.md), each node already has:
 
-Keep in mind you have a cluster, meaning more than one Raspberry Pi. Our recommendation is to construct something easy you will not forget as your password for each node. We will setup [key-based authentication](#key-based-authentication) later, thus your password may not need to be strong.
+- **No default user.** Your own username replaces the old `pi`/`raspberry` pair that attackers try first.
+- **A strong password**, still needed for `sudo`. Use a real password, not an easy one: it protects every administrative command.
+- **Key-only SSH**, if you chose public-key authentication.
 
-Open a new terminal window (`Ctrl+Alt+T`)
-```cli
-passwd
+**Check** that password logins over SSH are off on every node:
+
+```bash
+cluster-cmd 'sudo sshd -T | grep -E "^(passwordauthentication|kbdinteractiveauthentication) "'
 ```
 
-Follow the prompts.
-
-**Reminder:** You will have to do this manually on each Raspberry Pi.
+Each node should print `passwordauthentication no` and `kbdinteractiveauthentication no`. If any prints `yes`, do [Turn off password logins](#turn-off-password-logins).
 
 
-# Change default username
+# Allow cluster-reboot without a password
 
-The default username is `pi`. You add another security layer to your Raspberry Pi by changing the default username so that nobody knows your username.
+`cluster-reboot` and `cluster-shutdown` run `sudo shutdown` on each node over SSH, where nobody can type a password. Check whether your user already has passwordless `sudo`:
 
-**Note(s):**
-1. Although `root` is a user, you cannot login as `root` to your Raspberry Pi. That is why the user `pi` must use `sudo` or `su -` to perform commands with administrative privileges.
-2. You will have to change the username manually on each Raspberry Pi.
-
-## Add new user
-
-Add new user
-```cli
-sudo adduser alice
+```bash
+cluster-cmd 'sudo -n true 2>/dev/null && echo "passwordless sudo" || echo "password required"'
 ```
 
-Add new user to the `sudo` group
-```cli
-sudo usermod -a -G adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,netdev,gpio,i2c,spi alice
+If nodes print `password required`, allow passwordless `sudo` for `shutdown` only. Run this on each node over SSH (`ssh -t worker1`), since `sudo` asks for your password this one time:
+
+```bash
+echo "$USER ALL=(root) NOPASSWD: /usr/sbin/shutdown" | sudo tee /etc/sudoers.d/010-cluster-shutdown
+sudo chmod 440 /etc/sudoers.d/010-cluster-shutdown
+sudo visudo -c
 ```
 
-Verify user belongs to the `sudo` group
-```cli
-sudo su - alice
+`visudo -c` must print `parsed OK` for every file. A broken sudoers file can block `sudo` entirely; if it reports an error, remove the file with `sudo rm /etc/sudoers.d/010-cluster-shutdown` before closing your session.
+
+If nodes print `passwordless sudo`, your user can run anything as root without a password, which the rest of this guide relies on for `cluster-cmd sudo ...`. That's convenient on a home network. To tighten it later, remove the rule in `/etc/sudoers.d/` that grants it and add the `shutdown` rule above.
+
+
+# Turn off password logins
+
+Skip this if the check in [What Imager already did](#what-imager-already-did) printed `no` on every node.
+
+1. **Make sure key login works first.** From your computer, in a new terminal, run `ssh alice@worker1.local` for every node. Each must log you in **without** asking for a password. If one asks, fix its keys ([The Pi Network](The_Pi_Network.md#ssh-keys-from-master-to-every-node)) before going on.
+
+2. Add a small settings file instead of editing the main SSH configuration, then check it and restart SSH:
+
+    ```bash
+    cluster-cmd "printf 'PasswordAuthentication no\nKbdInteractiveAuthentication no\n' | sudo tee /etc/ssh/sshd_config.d/10-cluster.conf"
+    cluster-cmd 'sudo sshd -t && sudo systemctl restart ssh'
+    ```
+
+    `sshd -t` checks the settings and only lets the restart happen if they're valid. Restarting SSH doesn't end sessions that are already open.
+
+3. **Check** with the command in [What Imager already did](#what-imager-already-did), then open a new SSH session from your computer to confirm you still get in.
+
+Older guides also set `ChallengeResponseAuthentication no` (renamed `KbdInteractiveAuthentication` in OpenSSH 8.7) and `UsePAM no`. Leave `UsePAM` alone: turning it off breaks parts of the login process on Debian and adds no protection here.
+
+
+# Block repeated failed logins with fail2ban
+
+[fail2ban](https://github.com/fail2ban/fail2ban) watches the login log and blocks addresses that fail to log in several times. With key-only SSH on a home network it's a second layer, not a necessity; it matters most if a node is ever reachable from the internet.
+
+1. Install it on every node:
+
+    ```bash
+    cluster-cmd sudo apt install -y fail2ban python3-systemd
+    ```
+
+2. Write the settings for the SSH jail. Current Raspberry Pi OS keeps logs in the systemd journal instead of `/var/log/auth.log`, so fail2ban must read the journal (`backend = systemd`):
+
+    ```bash
+    cluster-cmd "printf '[sshd]\nenabled  = true\nbackend  = systemd\nmaxretry = 4\nfindtime = 10m\nbantime  = 1h\nignoreip = 127.0.0.1/8 ::1 192.168.0.0/24\n' | sudo tee /etc/fail2ban/jail.d/sshd.local"
+    cluster-cmd 'sudo systemctl enable --now fail2ban && sudo systemctl restart fail2ban'
+    ```
+
+    | Setting | Meaning |
+    | --- | --- |
+    | `maxretry = 4`, `findtime = 10m` | Block an address after 4 failed logins within 10 minutes |
+    | `bantime = 1h` | Unblock it after 1 hour. Avoid `-1` (forever): a few typos would lock out your own computer for good |
+    | `ignoreip` | Never block the cluster's own network. Change `192.168.0.0/24` to yours |
+
+**Check:**
+
+```bash
+cluster-cmd 'sudo fail2ban-client status sshd | head -4'
 ```
 
-If you are now `root`, then `alice` belongs to the `sudo` group, as expected.
-
-A new home directory for `alice` will be created at `/home/alice`.
+Each node prints `Status for the jail: sshd`. To unblock an address early: `sudo fail2ban-client set sshd unbanip <address>`.
 
 
-## Remove `pi` user
+# Firewall
 
-Close the `pi` process
-```cli
-sudo pkill -u pi
-```
+A firewall drops network traffic you didn't allow. [ufw](https://help.ubuntu.com/community/UFW) (Uncomplicated Firewall) makes the rules easy to write.
 
-Delete `pi` user
-```cli
-sudo deluser -remove-home pi
-```
+**Order matters:** if you turn the firewall on before allowing SSH, it cuts off your session and every new one. The rules below allow the cluster's network first.
 
-**Note:** If you have data in `/home/pi/` make sure to move it somewhere else before running the command above.
+Hadoop and Spark talk between nodes on many ports, some chosen at random. Rather than list them all, allow everything from the cluster's own network, and rate-limit SSH from anywhere else.
 
+1. **Try it on one worker first.** On `master`:
 
-## Edit cluster commands
+    ```bash
+    ssh worker1 'sudo apt install -y ufw && sudo ufw default deny incoming && sudo ufw default allow outgoing && sudo ufw allow from 192.168.0.0/24 && sudo ufw limit ssh && sudo ufw --force enable'
+    ```
 
-**NOT TESTED YET!!!**
+    Replace `192.168.0.0/24` with your network.
 
-Remember that our [Cluster Commands](Cluster-Commands) were all constructed based on a `pi` user. Therefore, if you created a new user `alice`, you need to perform the steps below.
+2. **Check** that you can still log in to `worker1` from `master` and from your computer, and that `ssh worker1 sudo ufw status verbose` lists the rules:
 
-Steps:
-1. [Add new user](#add-new-user) `alice` in each node to ensure the same user exists across the cluster
-2. [Setup Cluster Keys](The_Pi_Network.md#setup-cluster-keys) for all nodes logged in as `alice`
-3. [Add commands to `~/.bashrc`](Cluster_Commands.md#add-commands-to-bashrc) in the master node
-4. Edit `cluster_commands.sh`
-```cli
-nano ~/.scripts/cluster_commands.sh
-```
+    ```
+    Status: active
+    Logging: on (low)
+    Default: deny (incoming), allow (outgoing), disabled (routed)
+    New profiles: skip
 
-5. Replace `USER="pi"` with `USER="alice"` and save the file
-6. Copy over work done to all workers
-```cli
-cluster-scp ~/.bashrc
-cluster-scpr ~/.scripts/
-cluster-cmd source ~/.bashrc
-```
+    To                         Action      From
+    --                         ------      ----
+    Anywhere                   ALLOW IN    192.168.0.0/24
+    22/tcp                     LIMIT IN    Anywhere
+    22/tcp (v6)                LIMIT IN    Anywhere (v6)
+    ```
 
-Having these commands under the user's `home` directory (`/home/<user>`) is very useful because it allows you to have multiple users in your cluster all with keys separated from each other and still provides full communication between the nodes and their users. Same applies with cluster commands, each user may have their own defined commands.
+3. Then do every node:
 
+    ```bash
+    cluster-cmd 'sudo apt install -y ufw && sudo ufw default deny incoming && sudo ufw default allow outgoing && sudo ufw allow from 192.168.0.0/24 && sudo ufw limit ssh && sudo ufw --force enable'
+    ```
 
-# Key-based Authentication
+`ufw limit ssh` blocks an address that opens 6 or more SSH connections within 30 seconds. SSH uses TCP only, so there's no need for a UDP rule. If your computer is on a different network from the cluster, add a rule for it before enabling, such as `sudo ufw allow from 192.168.50.0/24 to any port 22 proto tcp`.
 
-We learned about SSH Keys in section [Generate SSH Keys](The_Pi_Network.md#generate-ssh-keys).
-
-Since we have already created keys for each node in the cluster and they can communicate with each other we simply need to enforce authentication through key-pairs only.
+To block one address: `sudo ufw deny from 192.168.0.250`. To turn the firewall off while troubleshooting: `sudo ufw disable`.
 
 
-## Disable Password Login
+# Old installs with a `pi` user
 
-Edit `/etc/ssh/sshd_config` file
-```cli
-sudo nano /etc/ssh/sshd_config
-```
+Cards flashed before April 2022, or set up with the username `pi`, still have that well-known user. Replace it with your own on each such node. Stay logged in as `pi` in one session the whole time, so you can undo anything.
 
-Modify the following lines to `no`
-```text
-ChallengeResponseAuthentication no
-PasswordAuthentication no
-UsePAM no
-```
+1. Create the new user and give it the same groups `pi` had:
 
-Reboot the Pi
-```cli
-shutdown -r now
-```
+    ```bash
+    sudo adduser alice
+    for g in $(id -Gn pi); do [ "$g" != pi ] && sudo usermod -aG "$g" alice; done
+    ```
 
+2. Copy your SSH keys to it:
 
-# Install `fail2ban`
+    ```bash
+    sudo mkdir -p /home/alice/.ssh
+    sudo cp ~/.ssh/authorized_keys /home/alice/.ssh/
+    sudo chown -R alice:alice /home/alice/.ssh
+    sudo chmod 700 /home/alice/.ssh
+    ```
 
-"If you are using your Raspberry Pi as some sort of server, for example an `ssh` or a webserver, your firewall will have deliberate 'holes' in it to let the server traffic through. In these cases, [Fail2ban](www.fail2ban.org) can be useful. Fail2ban, written in Python, is a scanner that examines the log files produced by the Raspberry Pi, and checks them for suspicious activity. It catches things like multiple brute-force attempts to log in, and can inform any installed firewall to stop further login attempts from suspicious IP addresses. It saves you having to manually check log files for intrusion attempts and then update the firewall (via `iptables`) to prevent them." - [The Raspberry Pi Foundation](https://www.raspberrypi.org/documentation/configuration/security.md)
+3. **Check** from your computer, in a new terminal: `ssh alice@<node>` logs in without a password, and `sudo -v` there accepts the new user's password.
 
-Install fail2ban
-```cli
-sudo apt install fail2ban
-```
+4. From that `alice` session, remove `pi`:
 
-Enable fail2ban and take a look at rules for SSH
-```cli
-sudo /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-sudo nano /etc/fail2ban/jail.local
-```
+    ```bash
+    sudo pkill -u pi
+    sudo deluser --remove-home pi
+    ```
 
-Look for section named `[ssh]` that look as follows
-```configuration
-[ssh]
-enabled  = true
-port     = ssh
-filter   = sshd
-logpath  = /var/log/auth.log
-maxretry = 6
-```
+    Move anything you need out of `/home/pi` first.
 
-This section let's you know that `fail2ban` will examine the SSH port, filter it using `/etc/fail2ban/filter.d/sshd.conf` parameters, parse `/var/log/auth.log` for malicious activity and allow 6 connection attempt retries before detection threshold is reached.
+Repeat on every node, then redo [SSH keys from master](The_Pi_Network.md#ssh-keys-from-master-to-every-node) as `alice` and set `CLUSTER_USER=alice` if your [cluster commands](Cluster_Commands.md) were set up under `pi`.
 
-The default ban action is
-```configuration
-# Default banning action (e.g. iptables, iptables-new,
-# iptables-multiport, shorewall, etc) It is used to define
-# action_* variables. Can be overridden globally or per
-# section within jail.local file
-banaction = iptables-multiport
-```
-
-`iptables-multiport` means that the Fail2ban system will run the `/etc/fail2ban/action.d/iptables-multiport.conf` file when the detection threshold is reached.
-
-To permanently ban an IP address after 4 failed attempts, change `bantime` to -1
-```configuration
-[ssh]
-enabled  = true
-port     = ssh
-filter   = sshd
-logpath  = /var/log/auth.log
-maxretry = 4
-bantime = -1
-```
-
-You can find more on Fail2Ban at [this tutorial](https://www.digitalocean.com/community/tutorials/how-fail2ban-works-to-protect-services-on-a-linux-server).
-
-
-## Install Uncomplicated Firewall
-
-If your cluster will continuously be exposed (connected) to the Internet, you will need to setup [fail2ban](#install-fail2ban) previously discussed along with firewall.
-
-A firewall is a software that provides network security by filtering incoming and outgoing network traffic (packets) based on user-defined rules. The idea is to reduce unwanted network traffic while allowing legitimate communication.
-
-We can use [ufw](https://www.linux.com/tutorials/introduction-uncomplicated-firewall-ufw/) which is the default firewall tool in Ubuntu.
-
-Install the firewall
-```cli
-sudo apt install ufw
-```
-
-To enable the firewall, use
-```cli
-sudo ufw enable
-```
-
-To disable the firewall, use
-```cli
-sudo ufw disable
-```
-
-To list the firewall current settings
-```cli
-sudo ufw status
-```
-
-To limit login attempts on SSH port (22) using TCP
-```cli
-sudo ufw limit ssh/tcp
-```
-
-To limit login attempts on SSH port (22) using UDP
-```cli
-sudo ufw limit ssh/udp
-```
-
-The last two configurations denies connection if an IP address has attempted to connect six or more times in the last 30 seconds.
-
-Deny access to port 30 from IP address 192.168.2.1
-```cli
-sudo ufw deny from 192.168.2.1 port 30
-```
 
 Resources:
-* [Securing your Raspberry Pi](https://www.raspberrypi.org/documentation/configuration/security.md)
-* [An Introduction to Uncomplicated Firewall](https://www.linux.com/tutorials/introduction-uncomplicated-firewall-ufw/)
+* [Securing your Raspberry Pi](https://www.raspberrypi.com/documentation/computers/configuration.html)
+* [UFW on Ubuntu's community wiki](https://help.ubuntu.com/community/UFW)
