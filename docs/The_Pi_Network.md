@@ -6,83 +6,89 @@
 
 # The Pi Network
 
-The so called [Local Area Network (LAN)](https://www.howtogeek.com/353283/what-is-a-local-area-network-lan/). In order for the cluster to communicate, we need to set up a LAN switch so that each Pi board knows where to send and receive data, commands, and output results.
+**Goal:** every node has a fixed IP address, every node can reach the others by name, and `master` can log in to every node with an SSH key.
 
-* [Network Lookup Table](#network-lookup-table)
-* [Assign a static IP address](#assign-a-static-ip-address)
-* [Change Hostname](#change-hostname)
-    * [Rename the hostname](#rename-the-hostname)
-    * [Mapping the hostname](#mapping-the-hostname)
-    * [Reboot the Pi](#reboot-the-pi)
-* [Enable Secure Shell (SSH)](#enable-secure-shell-ssh)
-    * [Enable SSH](#enable-ssh)
-        * [Enable via Terminal](#enable-via-terminal)
-        * [Enable via Desktop](#enable-via-desktop)
-        * [Enable via raspi-config](#enable-via-raspi-config)
-    * [Start SSH](#start-ssh)
-* [Remote Log-in](#remote-log-in)
-    * [Generate SSH Keys](#generate-ssh-keys)
-        * [How to Generate Keys](#how-to-generate-keys)
-    * [Setup Cluster Keys](#setup-cluster-keys)
+**Run on:** your own computer and `master`, as each step says.
 
-# Network Lookup Table
+The Pis talk to each other over a [local area network (LAN)](https://www.howtogeek.com/353283/what-is-a-local-area-network-lan/): all five plug into the switch, and the switch plugs into your router for internet access.
 
-Let's enumerate each Pi and outline the network configuration for reference.
-
-| Pi Number | Interface | IP Address    | Hostname |
-|:---------:|:----------|:--------------|:---------|
-|     0     | eth0      | 192.168.0.100 | master   |
-|     1     | eth0      | 192.168.0.101 | worker1  |
-|     2     | eth0      | 192.168.0.102 | worker2  |
-|     3     | eth0      | 192.168.0.103 | worker3  |
-|     4     | eth0      | 192.168.0.104 | worker4  |
-
-You guessed right! There is a "master" node that will oversee and control the cluster while each "worker" executes whatever command the master issued.
+* [Network lookup table](#network-lookup-table)
+* [Give each node a fixed address](#give-each-node-a-fixed-address)
+* [Mapping the hostname](#mapping-the-hostname)
+* [SSH keys from master to every node](#ssh-keys-from-master-to-every-node)
 
 
-# Assign a static IP address
+# Network lookup table
 
-To facilitate communication between the cluster, let's assign a static local IP address to each Raspberry Pi board in the network switch.
+| Pi | Interface | IP address | Hostname | Role |
+|:-:|:--|:--|:--|:--|
+| 0 | eth0 | 192.168.0.100 | master | Runs the HDFS NameNode and Spark master; sends commands |
+| 1 | eth0 | 192.168.0.101 | worker1 | Stores data and runs work |
+| 2 | eth0 | 192.168.0.102 | worker2 | Stores data and runs work |
+| 3 | eth0 | 192.168.0.103 | worker3 | Stores data and runs work |
+| 4 | eth0 | 192.168.0.104 | worker4 | Stores data and runs work |
 
-Edit file `/etc/dhcpcd.conf`
-```cli
-sudo nano /etc/dhcpcd.conf
+**Use your router's network, not necessarily these numbers.** Find it on any node:
+
+```bash
+ip route | grep default
 ```
 
-Uncomment the following lines and add `X`
-```conf
-interface eth0
-static ip_address=192.168.0.10X/24
+If it prints `default via 192.168.1.1 ...`, your network is `192.168.1.x`: use `192.168.1.100` to `192.168.1.104` and gateway `192.168.1.1` everywhere this guide says `192.168.0.x`. Also pick addresses your router doesn't hand out to other devices (outside its DHCP range, which its admin page shows).
+
+The hostnames were set when you flashed the cards ([Install OS](Install_OS.md)). Check with `hostname` on each node.
+
+
+# Give each node a fixed address
+
+Hadoop and Spark find nodes by name, and the names below map to fixed addresses. If a node's address changed after a reboot, the cluster would lose it. Pick **one** of these two options.
+
+
+## Option A: reserve addresses on your router (recommended)
+
+Nothing to change on the Pis, and it survives reflashing a card.
+
+1. Find each node's hardware (MAC) address:
+
+    ```bash
+    cat /sys/class/net/eth0/address
+    ```
+
+2. In your router's admin page, look for *DHCP reservation*, *static lease* or *address reservation*, and assign each MAC address the IP from the table.
+3. Reboot the Pis: `sudo reboot`.
+
+**Check:** `ip -4 addr show eth0` on each node shows its address from the table.
+
+
+## Option B: set a static address on each Pi
+
+Current Raspberry Pi OS manages the network with NetworkManager, so use `nmcli`. Editing `/etc/dhcpcd.conf`, as older guides say, has no effect anymore.
+
+Run on each node, with that node's address from the table. The first line finds the name of the wired connection, which differs between OS versions:
+
+```bash
+CON="$(nmcli -g NAME,DEVICE connection show --active | awk -F: '$2=="eth0"{print $1}')"
+sudo nmcli connection modify "$CON" \
+  ipv4.method manual \
+  ipv4.addresses 192.168.0.101/24 \
+  ipv4.gateway 192.168.0.1 \
+  ipv4.dns 192.168.0.1
+sudo nmcli connection up "$CON"
 ```
-Where `X` represents the Pi Number in the [Network Lookup Table](#network-lookup-table).
 
-**Reminder**: You have to edit this file manually on each Raspberry Pi.
+`/24` matches a subnet mask of `255.255.255.0`, which home routers use. The gateway and DNS server are your router.
 
+If you're logged in over SSH, your session freezes when the address changes. Close it and log in again with the new address.
 
-# Change Hostname
-
-Raspbian by default, sets the `hostname` of each Pi to `raspberrypi`. Such hostname is not mapped to the IP address given it can change via DHCP but since we assigned a static IP address we can map it. Mapping the hostname to the static IP will ease communication between the network.
+**Check:** reboot, then `ip -4 addr show eth0` shows the new address and `ping -c 3 raspberrypi.com` gets replies.
 
 
-## Rename the hostname
+# Mapping the hostname
 
-By changing the hostname to `master` and `workerX` you will be able to distinguish between the nodes.
+Every node needs the same table of names and addresses, so `master` can reach `worker3` by name and the other way around. It lives in `/etc/hosts`.
 
-Edit file `/etc/hostname` and replace `raspberrypi` with each the Pi's hostname
-```cli
-sudo nano /etc/hostname
-```
+Current Raspberry Pi OS rebuilds `/etc/hosts` from a template at every boot, so edits made only to `/etc/hosts` disappear after a reboot. The file also maps each node's own name to `127.0.1.1`, which would make Hadoop listen only to itself. [`scripts/setup_hosts.sh`](../scripts/setup_hosts.sh) handles both: it writes the block below to `/etc/hosts` and to the template, and removes the `127.0.1.1` line.
 
-Each Pi's hostname is specified in the [Network Lookup Table](#network-lookup-table).
-
-**Reminder**: You have to change the hostname manually on each Raspberry Pi.
-
-
-## Mapping the hostname
-
-All of your Raspberry Pi's must have each of their IP addresses mapped to their hostnames in the `/etc/hosts` file so that each Pi can fully communicate with each other.
-
-Edit file `/etc/hosts` and add the following:
 ```
 # pi-cluster network
 192.168.0.100    master
@@ -95,136 +101,56 @@ Edit file `/etc/hosts` and add the following:
 
 Keep the first and last comment lines exactly as written: the [cluster commands](Cluster_Commands.md) use them to find the node list.
 
-Reboot system for changes to take effect
-```cli
-shutdown -r now
-```
+1. On your computer, download the script and edit the addresses at its top if your network differs:
 
-**Reminder**: You have to do this manually on each Raspberry Pi.
+    ```bash
+    curl -fsSLO https://raw.githubusercontent.com/gitluis/pi-cluster/master/scripts/setup_hosts.sh
+    ```
 
+2. Copy it to every node and run it there (you'll be asked for your password for `sudo` on each):
 
-# Enable Secure Shell (SSH)
+    ```bash
+    for h in master worker1 worker2 worker3 worker4; do
+      scp setup_hosts.sh alice@$h.local: && ssh -t alice@$h.local 'sudo bash setup_hosts.sh'
+    done
+    ```
 
-SSH is a network protocol for operating network services **securely** such as log into a remote computer, execute commands, tunneling, forwarding TCP ports and transfer files (via secure copy or scp).
+    If `.local` names don't work on your network, run it once per node with its IP address instead of `$h.local`.
 
-We need SSH for each Pi to communicate with each other and be able to execute commands coming from the Master node.
-
-
-## Enable SSH
-
-SSH is disabled by default as of latest Raspbian versions. Thus, we need to enable it but first, you must change your default password.
-
-To change your default password, simply open a terminal window, type in `passwd`, press enter and follow the prompts. We suggest something easy while configuring the cluster, we will discuss [Cluster Security](Cluster_Security.md) measurements later.
+**Check:** on any node, `getent hosts worker3` prints `192.168.0.103 worker3`, and `ping -c 1 master` replies from `192.168.0.100`. Reboot one node and check again: the block must still be there.
 
 
-### Enable via Terminal
+# SSH keys from master to every node
 
-Open a terminal window and type in
-```cli
-sudo systemctl enable ssh
-```
+Imager already installed your computer's key on every node. `master` needs its own key on every node too, because Hadoop and Spark start their services on the workers by logging in from `master` over SSH. That includes `master` itself.
 
+Your nodes accept keys only, not passwords, so `ssh-copy-id` from `master` won't work. Copy the key through your computer, which can already log in everywhere.
 
-### Enable via Desktop
+1. Make a key on `master`, without a passphrase so services can start unattended:
 
-1. Go to `Preferences` menu and open `Raspberry Pi Configuration`
-1. Head over to the `Interfaces` tab
-1. Select `Enabled` right next to `SSH`
-1. Click `OK`
-1. Start the service
+    ```bash
+    ssh alice@master.local 'ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519'
+    ```
 
+2. From your computer, add `master`'s public key to every node, `master` included:
 
-### Enable via `raspi-config`
+    ```bash
+    KEY="$(ssh alice@master.local 'cat ~/.ssh/id_ed25519.pub')"
+    for h in master worker1 worker2 worker3 worker4; do
+      ssh alice@$h.local "grep -qxF '$KEY' ~/.ssh/authorized_keys || echo '$KEY' >> ~/.ssh/authorized_keys"
+    done
+    ```
 
-1. Open a terminal window and type in `sudo raspi-config`
-1. Select `Interfacing Options`
-1. Navigate to `SSH` and select it
-1. Choose `Yes`
-1. Select `Ok`
-1. Choose `Finish`
+3. On `master`, connect to every node once so it records their fingerprints:
 
+    ```bash
+    for h in master worker1 worker2 worker3 worker4; do
+      ssh -o StrictHostKeyChecking=accept-new $h hostname
+    done
+    ```
 
-## Start SSH
+**Check:** step 3 prints all five hostnames without asking for a password or confirmation.
 
-To start up the SSH service, run the following command
-```cli
-sudo systemctl start ssh
-```
+The private key `~/.ssh/id_ed25519` on `master` lets anyone who has it into every node. Never copy or share it; only the `.pub` file goes to other machines.
 
-
-# Remote Log-in
-
-With the `hostname` mapped to each IP address on each Pi and SSH enabled, remote login becomes easier
-```cli
-ssh pi@worker3
-```
-
-If that is your first time remotely logging in to `worker3`, it will ask you if you trust the destination, type in `yes` and press enter.
-
-The **problem** here is that every time you log in remotely to any other Pi, it will ask you for that Pi's password.
-
-
-## Generate SSH Keys
-
-To avoid typing in the password of the computer we're trying to remotely log in to, we create what is called **private** and **public** key-pairs.
-
-The private key is solely for the computer in which the key is being generated (**not to be shared**) while the public key can be shared among other computers for these to be able to securely login remotely without entering a password.
-
-
-### How to Generate Keys
-
-To generate private/public keys, run this command
-```cli
-ssh-keygen -t ed25519
-```
-
-Press Enter three (3) times.
-
-That will generate a private and public key-pair within the `~/.ssh` hidden directory. The private key is stored in file `~/.ssh/id_ed25519` and the public key is in file `~/.ssh/id_ed25519.pub`. **DO NOT modify or share the private key file!**
-
-
-## Setup Cluster Keys
-
-1. Login to master node and generate keys for it
-```cli
-ssh-keygen -t ed25519
-```
-
-Press Enter three (3) times.
-
-2. Append master's public key to its own SSH authorized keys file
-```cli
-cat ~/.ssh/id_ed22519.pub >> ~/.ssh/authorized_keys
-```
-
-3. Login to worker `X` node and generate keys for it
-```cli
-ssh-keygen -t ed25519
-```
-
-Press Enter three (3) times.
-
-4. Append worker `X`'s public key to the master's SSH authorized keys file
-```cli
-cat ~/.ssh/id_ed22519.pub | ssh pi@master 'cat >> ~/.ssh/authorized_keys'
-```
-
-Enter the `master`'s password if prompted.
-
-**Note:** If the destination username (master's username) is different from `pi`, change it accordingly in the command above.
-
-5. Repeat steps 3-4 for each worker specified in the [Network Lookup Table](#network-lookup-table)
-6. Login to master node
-6. Overwrite the master's SSH authorized keys file to each worker `X`
-```cli
-scp ~/.ssh/authorized_keys pi@workerX:~/.ssh/authorized_keys
-```
-
-Where `X` represents the Pi Number in the [Network Lookup Table](#network-lookup-table).
-
-**Note:** If the destination username (master's username) is different from `pi`, change it accordingly in the command above.
-
-7. Repeat step 6 for each worker specified in the [Network Lookup Table](#network-lookup-table)
-8. Done
-
-You should now be able to log in remotely to any Pi on the network from any other Pi.
+Next: install the [cluster commands](Cluster_Commands.md).
