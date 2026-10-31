@@ -1,14 +1,14 @@
 [Background](docs/Background.md) / [Purpose](docs/Purpose.md) / [Getting Started](docs/Getting_Started.md) / [Cluster Guide](docs/Cluster_Guide.md)
 
 
-<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/>
+<img src="docs/img/icons/cluster.svg" width="96" height="96" alt=""/>
 
 
 # Raspberry Pi Cluster
 
 A [full guide](docs/Cluster_Guide.md) on how to build a portable cluster of credit-card sized Raspberry Pi computer boards.
 
-<img src="https://images.ctfassets.net/tvfg2m04ppj4/5LhT20PZvvANcXRAEvkd6v/cf8adcc5c652c0be55acbb7cabec806e/assembly_4.jpg?w=800" width="400px"/>
+<img src="docs/img/diagrams/cluster-overview.svg" width="100%" alt="Illustration of the cluster: five Raspberry Pi 4 boards stacked in a case, master on top and four workers below, each wired to a network switch that connects to the router and the internet."/>
 
 
 ## What is a Raspberry Pi?
@@ -28,7 +28,7 @@ It is worth mentioning that operating system (OS) support is also different give
 
 You can still use a Raspberry Pi as your main computer and would still be able to accomplish almost the same as in a full-desktop PC if the desired operating system supports ARM processors. There is a whole open world when it comes to using a Raspberry Pi. I encourage you to check out some cool and fun projects at [https://projects.raspberrypi.org](https://projects.raspberrypi.org/en).
 
-<img src="https://cloud.githubusercontent.com/assets/10035308/22178093/cf7ecf00-dfe2-11e6-8fb3-dab3b1e17f7d.png" width="100px" height="100px"/> <img src="https://cloud.githubusercontent.com/assets/10035308/22178091/cf7ebdf8-dfe2-11e6-9d19-f7bd06cc7751.png" width="100px" height="100px"/>
+<img src="docs/img/icons/hardware.svg" width="64" height="64" alt=""/> <img src="docs/img/icons/software.svg" width="64" height="64" alt=""/>
 
 # Acknowledgements
 

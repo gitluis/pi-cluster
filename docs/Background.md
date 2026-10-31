@@ -1,7 +1,7 @@
 [Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
 
-<img src="https://content.linkedin.com/content/dam/engineering/site-assets/images/blog/posts/2019/02/hadoopmeetup2.png" width="15%"/> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Apache_Spark_logo.svg/388px-Apache_Spark_logo.svg.png" width="20%"/>
+<img src="img/icons/background.svg" width="96" height="96" alt=""/>
 
 
 # Background
@@ -14,6 +14,6 @@ We live in a digital world full of data. Whether that is un-, semi- or structure
 
 Yes. It all sounds the same, let the following image sink in...
 
-<img src="https://www.clearpeaks.com/wp-content/uploads/2016/02/Big-Data-ecosystem.png"/>
+<img src="img/diagrams/hadoop-spark-stack.svg" width="100%" alt="How Hadoop and Spark fit together: your work runs on Spark or MapReduce, YARN hands out CPU and memory, HDFS stores the data across the workers. The master runs the NameNode and ResourceManager; each worker runs a DataNode and NodeManager."/>
 
 The intention of the cluster is to provide to you with the option of being able to Extract, Transform and Load (ETL) data with Spark while using Hadoop's File System (HDFS) for storaging needs. Data Analysis and Visualization is out this scope and up to your choice.

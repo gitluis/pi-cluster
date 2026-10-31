@@ -1,8 +1,7 @@
 [Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
 
-<img src="https://image.flaticon.com/icons/svg/2482/2482403.svg" width="100px" height="100px"/>
-<img src="https://image.flaticon.com/icons/svg/888/888929.svg" width="100px" height="100px"/>
+<img src="img/icons/desktop.svg" width="96" height="96" alt=""/>
 
 
 # Front-end Desktop

@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" role="img" aria-label="Illustration of the Pi cluster: five Raspberry Pi 4 boards stacked in a case, master on top and four workers below, each wired by Ethernet to a network switch that connects to a home router and the internet.">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F172A"/><stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="pcb" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22C55E"/><stop offset="1" stop-color="#15803D"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E2E8F0"/><stop offset="1" stop-color="#94A3B8"/>
+    </linearGradient>
+    <linearGradient id="sink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#CBD5E1"/><stop offset="1" stop-color="#64748B"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#6366F1" stop-opacity=".28"/><stop offset="1" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- one Raspberry Pi board, side view, drawn at its PCB's top-left corner -->
+    <g id="board">
+      <!-- acrylic plate + standoffs -->
+      <rect x="-14" y="12" width="292" height="6" rx="2" fill="#F8FAFC" fill-opacity=".14" stroke="#F8FAFC" stroke-opacity=".35"/>
+      <!-- board -->
+      <rect x="0" y="0" width="264" height="9" rx="2" fill="url(#pcb)"/>
+      <!-- GPIO header -->
+      <rect x="14" y="-9" width="64" height="9" rx="1" fill="#0B1220"/>
+      <path d="M18 -9v-4M24 -9v-4M30 -9v-4M36 -9v-4M42 -9v-4M48 -9v-4M54 -9v-4M60 -9v-4M66 -9v-4M72 -9v-4" stroke="#FACC15" stroke-width="2"/>
+      <!-- SoC heatsink -->
+      <rect x="92" y="-6" width="42" height="6" fill="#475569"/>
+      <path d="M95 -6v-14M101 -6v-14M107 -6v-14M113 -6v-14M119 -6v-14M125 -6v-14M131 -6v-14" stroke="url(#sink)" stroke-width="4"/>
+      <!-- RAM -->
+      <rect x="142" y="-5" width="24" height="5" rx="1" fill="#0B1220"/>
+      <!-- USB stack -->
+      <rect x="184" y="-46" width="36" height="46" rx="2" fill="url(#metal)"/>
+      <rect x="190" y="-40" width="24" height="8" rx="1" fill="#1D4ED8"/>
+      <rect x="190" y="-18" width="24" height="8" rx="1" fill="#0B1220"/>
+      <!-- Ethernet jack -->
+      <rect x="226" y="-40" width="36" height="40" rx="2" fill="url(#metal)"/>
+      <rect x="232" y="-32" width="24" height="18" rx="2" fill="#0B1220"/>
+      <!-- status LEDs -->
+      <circle cx="6" cy="-3" r="2.5" fill="#EF4444"/>
+      <circle cx="6" cy="-10" r="2.5" fill="#22C55E"/>
+    </g>
+  </defs>
+
+  <rect width="880" height="520" rx="24" fill="url(#bg)"/>
+  <rect width="880" height="520" rx="24" fill="url(#glow)"/>
+
+  <!-- title -->
+  <g font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="40" y="54" fill="#F8FAFC" font-size="26" font-weight="700">Raspberry Pi cluster</text>
+    <text x="40" y="80" fill="#94A3B8" font-size="15">1 master · 4 workers · 1 network switch</text>
+  </g>
+
+  <!-- case: brass standoff columns, then the top plate -->
+  <rect x="142" y="104" width="5" height="364" fill="#D4A017"/>
+  <rect x="417" y="104" width="5" height="364" fill="#D4A017"/>
+  <rect x="136" y="98" width="292" height="6" rx="2" fill="#F8FAFC" fill-opacity=".14" stroke="#F8FAFC" stroke-opacity=".35"/>
+
+  <!-- the stack: PCB tops at y = 162, 234, 306, 378, 450 -->
+  <use href="#board" x="150" y="162"/>
+  <use href="#board" x="150" y="234"/>
+  <use href="#board" x="150" y="306"/>
+  <use href="#board" x="150" y="378"/>
+  <use href="#board" x="150" y="450"/>
+  <!-- feet -->
+  <rect x="140" y="469" width="10" height="9" rx="2" fill="#475569"/>
+  <rect x="414" y="469" width="10" height="9" rx="2" fill="#475569"/>
+
+  <!-- node labels -->
+  <g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14" text-anchor="end">
+    <rect x="44" y="144" width="80" height="24" rx="12" fill="#6366F1"/>
+    <text x="114" y="161" fill="#fff" font-weight="700">master</text>
+    <text x="118" y="232" fill="#CBD5E1">worker1</text>
+    <text x="118" y="304" fill="#CBD5E1">worker2</text>
+    <text x="118" y="376" fill="#CBD5E1">worker3</text>
+    <text x="118" y="448" fill="#CBD5E1">worker4</text>
+  </g>
+
+  <!-- Ethernet cables: jack (412, y) to the switch's ports on its left face -->
+  <g fill="none" stroke-width="4" stroke-linecap="round">
+    <path d="M412 139 C480 139 500 163 566 163" stroke="#818CF8"/>
+    <path d="M412 211 C480 211 500 223 566 223" stroke="#38BDF8"/>
+    <path d="M412 283 L566 283" stroke="#2DD4BF"/>
+    <path d="M412 355 C480 355 500 343 566 343" stroke="#A78BFA"/>
+    <path d="M412 427 C480 427 500 403 566 403" stroke="#FBBF24"/>
+    <!-- uplink to router -->
+    <path d="M612 314 L700 314" stroke="#94A3B8"/>
+  </g>
+
+  <!-- switch, standing on its side -->
+  <rect x="562" y="136" width="50" height="294" rx="8" fill="#334155" stroke="#475569"/>
+  <g fill="#0B1220">
+    <rect x="566" y="156" width="16" height="14" rx="2"/>
+    <rect x="566" y="216" width="16" height="14" rx="2"/>
+    <rect x="566" y="276" width="16" height="14" rx="2"/>
+    <rect x="566" y="336" width="16" height="14" rx="2"/>
+    <rect x="566" y="396" width="16" height="14" rx="2"/>
+    <rect x="596" y="307" width="12" height="14" rx="2"/>
+  </g>
+  <g fill="#22C55E">
+    <circle cx="592" cy="163" r="2.5"/><circle cx="592" cy="223" r="2.5"/><circle cx="592" cy="283" r="2.5"/>
+    <circle cx="592" cy="343" r="2.5"/><circle cx="592" cy="403" r="2.5"/>
+  </g>
+
+  <!-- router -->
+  <rect x="700" y="296" width="96" height="36" rx="8" fill="#334155" stroke="#475569"/>
+  <path d="M716 296v-24M780 296v-24" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="718" cy="314" r="2.5" fill="#22C55E"/><circle cx="728" cy="314" r="2.5" fill="#22C55E"/>
+  <rect x="742" y="311" width="40" height="6" rx="3" fill="#0B1220"/>
+
+  <!-- internet -->
+  <g fill="none" stroke="#94A3B8" stroke-width="3">
+    <circle cx="748" cy="166" r="20"/>
+    <ellipse cx="748" cy="166" rx="9" ry="20"/>
+    <path d="M729 159h38M729 173h38"/>
+  </g>
+  <path d="M748 192v60" stroke="#94A3B8" stroke-width="3" stroke-dasharray="4 5" stroke-linecap="round"/>
+
+  <g font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#CBD5E1" text-anchor="middle">
+    <text x="587" y="454">switch</text>
+    <text x="748" y="354">router</text>
+    <text x="748" y="130">internet</text>
+  </g>
+</svg>

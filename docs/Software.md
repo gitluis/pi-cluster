@@ -1,7 +1,7 @@
 [Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
 
-<img src="https://cloud.githubusercontent.com/assets/10035308/22178091/cf7ebdf8-dfe2-11e6-9d19-f7bd06cc7751.png" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/226/226772.svg" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/888/888882.svg" width="100px" height="100px"/> <img src="https://image.flaticon.com/icons/svg/2/2235.svg" width="100px" height="100px"/>
+<img src="img/icons/software.svg" width="96" height="96" alt=""/>
 
 
 # Software
@@ -9,7 +9,7 @@ Raspberry Pi is a small computer that needs an operating system (OS) to operate 
 
 There are multiple operating systems that you can install into your raspberry board, however, the official operating system is [**Raspbian**](https://www.raspberrypi.org/downloads/raspbian/). Raspbian is a Debian-based Linux distribution specifically designed and optimized for the low-performance hardware of the Raspberry Pi.
 
-<img src="https://www.raspberrypi.org/app/uploads/2016/09/origdesk.jpg" width="60%"/>
+<img src="img/diagrams/os-editions.svg" width="100%" alt="Raspbian Desktop, a full graphical desktop, next to Raspbian Lite, a command line only edition suited to cluster nodes managed over SSH."/>
 
 
 # Third-Party Operating Systems

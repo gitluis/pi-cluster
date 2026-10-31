@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" role="img" aria-label="Layer diagram: your work (ETL, model training, analysis) runs on Spark or MapReduce, which get CPU and memory from YARN and read data from HDFS. The master node runs the NameNode and ResourceManager; each worker runs a DataNode and NodeManager.">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F172A"/><stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="540" rx="24" fill="url(#bg)"/>
+
+  <g font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="40" y="54" fill="#F8FAFC" font-size="26" font-weight="700">How Hadoop and Spark fit together</text>
+    <text x="40" y="80" fill="#94A3B8" font-size="15">Each layer uses the one below it</text>
+
+    <!-- layer labels -->
+    <g font-size="13" font-weight="700" letter-spacing=".08em" fill="#94A3B8">
+      <text x="40" y="136">YOUR WORK</text>
+      <text x="40" y="212">PROCESSING</text>
+      <text x="40" y="288">RESOURCES</text>
+      <text x="40" y="364">STORAGE</text>
+      <text x="40" y="452">HARDWARE</text>
+    </g>
+
+    <!-- your work -->
+    <rect x="180" y="104" width="660" height="56" rx="12" fill="#6366F1" fill-opacity=".18" stroke="#818CF8"/>
+    <g font-size="16" fill="#E0E7FF" text-anchor="middle">
+      <rect x="200" y="116" width="190" height="32" rx="16" fill="#6366F1"/>
+      <text x="295" y="137" fill="#fff">Extract, transform, load</text>
+      <rect x="415" y="116" width="190" height="32" rx="16" fill="#6366F1"/>
+      <text x="510" y="137" fill="#fff">Train ML models</text>
+      <rect x="630" y="116" width="190" height="32" rx="16" fill="#6366F1"/>
+      <text x="725" y="137" fill="#fff">Query and analyze</text>
+    </g>
+
+    <!-- processing -->
+    <rect x="180" y="180" width="660" height="56" rx="12" fill="#0EA5E9" fill-opacity=".18" stroke="#38BDF8"/>
+    <rect x="196" y="190" width="306" height="36" rx="8" fill="#0EA5E9"/>
+    <text x="214" y="214" fill="#fff" font-size="17" font-weight="700">Spark</text>
+    <text x="270" y="214" fill="#E0F2FE" font-size="14">in-memory, fast, Python API</text>
+    <rect x="518" y="190" width="306" height="36" rx="8" fill="#0369A1"/>
+    <text x="536" y="214" fill="#fff" font-size="17" font-weight="700">MapReduce</text>
+    <text x="652" y="214" fill="#E0F2FE" font-size="14">disk-based batch jobs</text>
+
+    <!-- resources -->
+    <rect x="180" y="256" width="660" height="56" rx="12" fill="#8B5CF6" fill-opacity=".18" stroke="#A78BFA"/>
+    <text x="200" y="290" fill="#fff" font-size="17" font-weight="700">YARN</text>
+    <text x="256" y="290" fill="#EDE9FE" font-size="15">hands out CPU cores and memory on each node to running jobs</text>
+
+    <!-- storage -->
+    <rect x="180" y="332" width="660" height="56" rx="12" fill="#14B8A6" fill-opacity=".18" stroke="#2DD4BF"/>
+    <text x="200" y="366" fill="#fff" font-size="17" font-weight="700">HDFS</text>
+    <text x="256" y="366" fill="#CCFBF1" font-size="15">splits files into blocks and keeps copies on several workers</text>
+
+    <!-- arrows between layers -->
+    <g fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M160 132v232M155 359l5 5 5-5"/>
+    </g>
+
+    <!-- hardware -->
+    <g font-size="14" text-anchor="middle">
+      <rect x="180" y="414" width="120" height="82" rx="12" fill="#1E1B4B" stroke="#818CF8" stroke-width="2"/>
+      <text x="240" y="440" fill="#fff" font-weight="700">master</text>
+      <text x="240" y="462" fill="#A5B4FC" font-size="12.5">NameNode</text>
+      <text x="240" y="480" fill="#A5B4FC" font-size="12.5">ResourceManager</text>
+
+      <rect x="315" y="414" width="120" height="82" rx="12" fill="#0B1220" stroke="#475569"/>
+      <text x="375" y="440" fill="#fff" font-weight="700">worker1</text>
+      <text x="375" y="462" fill="#94A3B8" font-size="12.5">DataNode</text>
+      <text x="375" y="480" fill="#94A3B8" font-size="12.5">NodeManager</text>
+
+      <rect x="450" y="414" width="120" height="82" rx="12" fill="#0B1220" stroke="#475569"/>
+      <text x="510" y="440" fill="#fff" font-weight="700">worker2</text>
+      <text x="510" y="462" fill="#94A3B8" font-size="12.5">DataNode</text>
+      <text x="510" y="480" fill="#94A3B8" font-size="12.5">NodeManager</text>
+
+      <rect x="585" y="414" width="120" height="82" rx="12" fill="#0B1220" stroke="#475569"/>
+      <text x="645" y="440" fill="#fff" font-weight="700">worker3</text>
+      <text x="645" y="462" fill="#94A3B8" font-size="12.5">DataNode</text>
+      <text x="645" y="480" fill="#94A3B8" font-size="12.5">NodeManager</text>
+
+      <rect x="720" y="414" width="120" height="82" rx="12" fill="#0B1220" stroke="#475569"/>
+      <text x="780" y="440" fill="#fff" font-weight="700">worker4</text>
+      <text x="780" y="462" fill="#94A3B8" font-size="12.5">DataNode</text>
+      <text x="780" y="480" fill="#94A3B8" font-size="12.5">NodeManager</text>
+    </g>
+    <text x="40" y="474" fill="#64748B" font-size="12.5">services per node</text>
+  </g>
+</svg>
