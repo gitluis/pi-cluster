@@ -6,19 +6,19 @@
 
 # Raspberry Pi Cluster
 
-A step-by-step guide to building a portable cluster of five Raspberry Pi 5 boards that stores data with Hadoop (HDFS) and trains machine learning models in parallel with Spark.
+A step-by-step guide to building a portable cluster of five Raspberry Pi 5 or Raspberry Pi 4 boards that stores data with Hadoop (HDFS) and trains machine learning models in parallel with Spark.
 
-<img src="docs/img/diagrams/cluster-overview.svg" width="100%" alt="Illustration of the cluster: five Raspberry Pi 5 boards with Active Coolers stacked in a case, master on top and four workers below, each wired to a network switch that connects to the router and the internet."/>
+<img src="docs/img/diagrams/cluster-overview.svg" width="100%" alt="Illustration of the cluster: five Raspberry Pi boards (Raspberry Pi 5 with Active Coolers shown) stacked in a case, master on top and four workers below, each wired to a network switch that connects to the router and the internet."/>
 
 
 ## Builds
 
-The cluster was first built in 2020 on Raspberry Pi 4 boards and ran Hadoop and Spark successfully. The guide has since been rewritten for the **Raspberry Pi 5**, the newest model, and current software. A Raspberry Pi 4 still works with the same steps.
+The cluster was first built in 2020 on Raspberry Pi 4 boards and ran Hadoop and Spark successfully. The guide has since been updated for current software and for the **Raspberry Pi 5**, the newest model, while keeping full support for the **Raspberry Pi 4**. Where the two boards need different parts or settings, the guide shows both.
 
 | Build | When | Boards | Operating system | Result |
 | --- | --- | --- | --- | --- |
 | Original build | 2020 | 5 × Raspberry Pi 4 Model B, 2 GB | Raspbian (2020 release) | **Worked**, including HDFS and Spark. The Hadoop and Spark pages were written later, in the 2026 update |
-| 2026 update | October 2026 | Written for 5 × Raspberry Pi 5 (Pi 4 also works) | Raspberry Pi OS Lite 64-bit (Debian 13) | Not built on hardware. Steps updated from the original build; the training job was tested on a Spark 4.2 cluster on a regular computer |
+| 2026 update | October 2026 | Written for 5 × Raspberry Pi 5 or 5 × Raspberry Pi 4 | Raspberry Pi OS Lite 64-bit (Debian 13) | Not built on hardware. Steps updated from the original build; the training job was tested on a Spark 4.2 cluster on a regular computer |
 
 Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-cluster/issues) with your boards, RAM, OS image date and [benchmark](docs/Workload.md#benchmark) time, or if a step didn't work for you.
 
@@ -42,7 +42,7 @@ New here? Read [Getting Started](docs/Getting_Started.md) first. [Background](do
 
 ## What you need
 
-- Five Raspberry Pi 5 boards (4 GB minimum, 8 GB recommended), each with the official 27 W power supply and an Active Cooler, plus microSD cards, an 8-port switch and cables. See [Hardware List](docs/Hardware_List.md).
+- Five Raspberry Pi 5 boards (4 GB minimum, 8 GB recommended) or five Raspberry Pi 4 boards (2 GB minimum, 4 GB recommended), each with its official power supply and cooling, plus microSD cards, an 8-port switch and cables. See [Hardware List](docs/Hardware_List.md).
 - A Windows, macOS or Linux computer with a card reader.
 - Comfort typing commands in a terminal. No Hadoop or Spark experience needed.
 

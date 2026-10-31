@@ -70,12 +70,12 @@ Spark's settings live in `/opt/spark/conf`.
 
 2. **Memory and cores.** Pick the row for the RAM of your **workers**:
 
-    | Worker RAM | `SPARK_WORKER_MEMORY` | `spark.executor.memory` |
-    | --- | --- | --- |
-    | 4 GB | `2g` | `1536m` |
-    | 8 GB | `5g` | `4g` |
-    | 16 GB | `12g` | `8g` |
-    | 2 GB (Pi 4, as in the original build) | `640m` | `512m` |
+    | Worker RAM | Boards | `SPARK_WORKER_MEMORY` | `spark.executor.memory` |
+    | --- | --- | --- | --- |
+    | 2 GB | Pi 4 (the original build), Pi 5 | `640m` | `512m` |
+    | 4 GB | Pi 4, Pi 5 | `2g` | `1536m` |
+    | 8 GB | Pi 4, Pi 5 | `5g` | `4g` |
+    | 16 GB | Pi 5 | `12g` | `8g` |
 
     The rest of each worker's memory goes to the OS, the HDFS DataNode, the Spark worker itself, and the Python processes that train the models. Python memory isn't part of `spark.executor.memory`, which is why the executor gets well under half of a 4 GB board.
 

@@ -193,7 +193,7 @@ STEP_GLYPHS = {
 FLOWS = {
     "imager-flash-node": (
         "Flash one node with Raspberry Pi Imager",
-        [("device", "Device", "Raspberry Pi 5"),
+        [("device", "Device", "Raspberry Pi 5 or 4"),
          ("os", "OS", "Pi OS Lite (64-bit)"),
          ("pick", "Storage", "your microSD card"),
          ("gear", "Customize", "name, user, SSH key"),
@@ -207,7 +207,7 @@ FLOWS = {
          ("done", "Write", "card is blank")]),
     "imager-restore-image": (
         "Restore a backup image with Raspberry Pi Imager",
-        [("device", "Device", "Raspberry Pi 5"),
+        [("device", "Device", "Raspberry Pi 5 or 4"),
          ("file", "OS", "Use custom: your .img"),
          ("pick", "Storage", "your microSD card"),
          ("skip", "Customize", "skip it"),
