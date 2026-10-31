@@ -8,12 +8,10 @@
 
 Each of the following sections is intended to prepare you for all of your needs during the build and configuration of your Pi-cluster.
 
-1. [Hardware](Hardware.md) - General Pi hardware information, specifications, costs and overclocking
-2. [Software](Software.md) - High-level operating system and software information
-3. [Formatting SD Cards](Formatting_SD_Cards.md) - A quick-guide on how to format SD cards
-4. [Read & Write Images](Read_Write_OS_Images.md) - A quick-guide on how to flash, write, and read operating system images
-5. [Installing NOOBS](Installing_NOOBS.md) - A guide on how to install the NOOBS operating system installer
-6. [Installing Raspbian](Installing_Raspbian.md) - A guide on how to install Raspbian into your Pi
-7. [Internet Connection](Internet_Connection.md) - Information on how to connect your Pi to the internet
-8. [Software Updates](Software_Updates.md) - How to update and upgrade operating system, software and hardware
-9. [Miscellaneous](Miscellaneous.md) - Other "good-to-know" information
+1. [Hardware](Hardware.md) - Which Raspberry Pi boards fit, power and cooling, optional overclocking
+2. [Software](Software.md) - Raspberry Pi OS and which edition to use
+3. [Install OS](Install_OS.md) - Flash every card with Raspberry Pi Imager, ready for SSH
+4. [Back Up and Restore Cards](Read_Write_OS_Images.md) - Save a card to an image file and write it back
+5. [Internet Connection](Internet_Connection.md) - Connect a Pi to the internet
+6. [Software Updates](Software_Updates.md) - Update packages and firmware on every node
+7. [Miscellaneous](Miscellaneous.md) - Other "good-to-know" information

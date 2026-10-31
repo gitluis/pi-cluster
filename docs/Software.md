@@ -5,18 +5,28 @@
 
 
 # Software
-Raspberry Pi is a small computer that needs an operating system (OS) to operate just like you may probably have a copy of Windows OS installed in your computer. An OS is also software that supports and performs the basic functions of a computer.
 
-There are multiple operating systems that you can install into your raspberry board, however, the official operating system is [**Raspbian**](https://www.raspberrypi.org/downloads/raspbian/). Raspbian is a Debian-based Linux distribution specifically designed and optimized for the low-performance hardware of the Raspberry Pi.
+A Raspberry Pi needs an operating system (OS) on its microSD card, just as a laptop needs Windows, macOS or Linux.
 
-<img src="img/diagrams/os-editions.svg" width="100%" alt="Raspbian Desktop, a full graphical desktop, next to Raspbian Lite, a command line only edition suited to cluster nodes managed over SSH."/>
+The official one is **Raspberry Pi OS**, a version of Debian Linux built for the Pi. It was called *Raspbian* until 2020, and older tutorials still use that name. The current release is based on Debian 13 ("Trixie").
 
-
-# Third-Party Operating Systems
-Third-party OS for the Raspberry Pi are available for download at [raspberrypi.org/downloads](https://www.raspberrypi.org/downloads/).
+<img src="img/diagrams/os-editions.svg" width="100%" alt="Raspberry Pi OS Desktop, a full graphical desktop, next to Raspberry Pi OS Lite, a command line only edition suited to cluster nodes managed over SSH."/>
 
 
-### I strongly recommend NOOBS or Raspbian
-If all of this is new to you, I encourage you to choose NOOBS.
-- [NOOBS](https://www.raspberrypi.org/downloads/noobs/) is an easy operating system installer for beginners.
-- [Raspbian](https://www.raspberrypi.org/downloads/raspbian/) is an image of the Raspbian operating system in which the OS is already pre-installed.
+## Which edition to use
+
+Use **Raspberry Pi OS Lite (64-bit)** on every node.
+
+- **Lite** has no desktop, which leaves more memory for Hadoop and Spark. You manage the nodes over SSH from your own computer.
+- **64-bit** lets Java use the board's full memory, and Hadoop publishes ready-made 64-bit ARM builds.
+
+The Desktop edition works too, but the desktop uses a few hundred megabytes of memory on every node for no benefit in a cluster.
+
+Other operating systems, such as Ubuntu Server, also run on the Pi and can be picked in Raspberry Pi Imager. This guide assumes Raspberry Pi OS; commands may differ elsewhere.
+
+
+## How you install it
+
+Use **Raspberry Pi Imager**, the official tool for writing an OS to a card. It downloads the OS, writes it, and lets you set each node's hostname, user and SSH access before the first boot. [Install OS](Install_OS.md) walks through it.
+
+NOOBS, the older installer that earlier versions of this guide recommended, is no longer maintained. Imager replaces it.

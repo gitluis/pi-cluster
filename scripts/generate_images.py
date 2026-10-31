@@ -178,29 +178,34 @@ STEP_GLYPHS = {
     "pick": SD_CARD + SD_PINS + "<circle cx='25' cy='29' r='6'/><path d='M29.5 33.5l5 5'/>",
     "write": "<path d='M24 6v22M16 20l8 8 8-8'/><path d='M8 30v9a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2v-9'/>",
     "done": "<circle cx='24' cy='24' r='18'/><path d='M16 24l6 6 11-12'/>",
+    "device": "<rect x='4' y='10' width='40' height='28' rx='3'/><rect x='18' y='18' width='12' height='12' rx='1.5'/>"
+              "<path d='M8 14h14' stroke-dasharray='1.5 2.5'/><path d='M36 18v12'/>",
+    "gear": "<circle cx='24' cy='24' r='6'/><path d='M24 5v6M24 37v6M5 24h6M37 24h6M10.6 10.6l4.2 4.2M33.2 33.2l4.2 4.2"
+            "M10.6 37.4l4.2-4.2M33.2 14.8l4.2-4.2'/>",
+    "skip": "<path d='M10 12l12 12-12 12M26 12l12 12-12 12'/>",
 }
 
 FLOWS = {
-    "imager-format-sd-card": (
-        "Format a microSD card with Raspberry Pi Imager",
+    "imager-flash-node": (
+        "Flash one node with Raspberry Pi Imager",
+        [("device", "Device", "Raspberry Pi 4"),
+         ("os", "OS", "Pi OS Lite (64-bit)"),
+         ("pick", "Storage", "your microSD card"),
+         ("gear", "Customize", "name, user, SSH key"),
+         ("done", "Write", "repeat for each node")]),
+    "imager-erase-card": (
+        "Erase a microSD card with Raspberry Pi Imager",
         [("card", "Insert card", "into your computer"),
-         ("app", "Open Imager", "Raspberry Pi Imager"),
-         ("erase", "Choose OS", "select Erase"),
-         ("pick", "Choose storage", "your microSD card"),
-         ("done", "Write", "card is formatted")]),
-    "imager-install-os": (
-        "Install Raspbian (Raspberry Pi OS) with Raspberry Pi Imager",
-        [("app", "Open Imager", "Raspberry Pi Imager"),
-         ("os", "Choose OS", "Raspbian / Lite / Full"),
-         ("pick", "Choose storage", "your microSD card"),
-         ("write", "Write", "image is written"),
-         ("done", "Verify", "card is checked")]),
-    "imager-write-custom-image": (
-        "Write your own image with Raspberry Pi Imager",
-        [("app", "Open Imager", "Raspberry Pi Imager"),
-         ("os", "Choose OS", "select Use custom"),
-         ("file", "Pick the image", ".img .zip .gz .xz"),
-         ("pick", "Choose storage", "your microSD card"),
+         ("device", "Device", "any Raspberry Pi"),
+         ("erase", "OS", "choose Erase"),
+         ("pick", "Storage", "your microSD card"),
+         ("done", "Write", "card is blank")]),
+    "imager-restore-image": (
+        "Restore a backup image with Raspberry Pi Imager",
+        [("device", "Device", "Raspberry Pi 4"),
+         ("file", "OS", "Use custom: your .img"),
+         ("pick", "Storage", "your microSD card"),
+         ("skip", "Customize", "skip it"),
          ("done", "Write", "written and verified")]),
 }
 

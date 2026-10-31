@@ -4,52 +4,94 @@
 <img src="img/icons/read-write-images.svg" width="96" height="96" alt=""/>
 
 
-# Read & Write OS Images
+# Back Up and Restore Cards
 
-Operating system images are similar but different from zipped files. Similar because contents are "compressed" but different because an image cannot be extracted like a zip file.
+**Goal:** save a microSD card to an image file on your computer, and write it back later.
 
-It is worth mentioning that sometimes images can come in zip format. The reason for that is to compress the image even further and have a lighter file.
+**Run on:** your own computer, with the card in a card reader.
 
-* [Read Images](#read-images)
-* [Write Custom Images](#write-custom-images)
+An OS *image* (`.img`) is a byte-for-byte copy of a whole card: every partition, file and setting. You can compress it (`.img.gz`, `.img.xz` or `.zip`) and Raspberry Pi Imager will still write it.
 
+Back up `master` once the cluster works: it holds the HDFS NameNode's metadata, and without it the data on the workers can't be read.
 
-## Read Images
-
-[Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/) is strictly for Windows operating system.
-
-1. Download [Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/)
-1. Install Win32 Disk Imager
-1. Open Win32 Disk Imager
-1. Write the Image file destination path (blue folder to browse)
-    * Make sure file name ends with ".img"
-    * Image will be stored in the folder location specified with the file name given
-        * Example: `C:\Users\gitluis\Desktop\your-image-file-name.img`
-1. Select the Device (micro SD drive)
-1. Click on Read
-1. Done
+* [Back up a card](#back-up-a-card)
+* [Restore a card](#restore-a-card)
+* [Cloning one card to the others](#cloning-one-card-to-the-others)
 
 
-## Write Custom Images
+# Back up a card
 
-<img src="img/diagrams/imager-write-custom-image.svg" width="100%" alt="Steps to write a custom image with Raspberry Pi Imager: open Imager, choose OS: Use custom, pick the image file, choose your card, write."/>
+Shut the Pi down first (`sudo shutdown -h now`), then move its card to your computer. The image is as large as the card, not the data on it, so a 32 GB card needs 32 GB free.
 
-1. Format your micro SD card ([how-to](Formatting-SD-Cards))
-2. Download [Raspberry Pi Imager](Formatting-SD-Cards#raspberry-pi-imager-downloads)
-3. Install Raspberry Pi Imager in your computer
-4. Open Raspberry Pi Imager
-5. Click on `Choose OS`
 
-6. Select `Use custom`
+## Windows
 
-7. Navigate to your `image.img` file and open it (images supported: *.img, *.zip, *.gz, *.xz)
+1. Install [Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/).
+2. In **Image File**, type a path ending in `.img`, for example `C:\Users\alice\Desktop\master-2026-10-30.img`.
+3. In **Device**, pick the card's drive letter. Check it twice.
+4. Click **Read** and wait.
 
-8. Click on `Choose SD Card`
 
-9. Select your micro SD card
+## macOS
 
-10. Click on `Write`
+```bash
+diskutil list                          # find the card, e.g. /dev/disk4
+diskutil unmountDisk /dev/disk4
+sudo dd if=/dev/rdisk4 of=master.img bs=4m status=progress
+gzip master.img                        # optional: compress to master.img.gz
+```
 
-10. The image will start being written to the micro SD card and verify its contents
-11. Wait until it finish
-12. Done
+Replace `disk4` with your card's number. `rdisk` (with an r) is much faster than `disk`.
+
+
+## Linux
+
+```bash
+lsblk                                  # find the card, e.g. /dev/sdb or /dev/mmcblk0
+sudo umount /dev/sdb?*
+sudo dd if=/dev/sdb of=master.img bs=4M status=progress conv=fsync
+gzip master.img                        # optional
+```
+
+Replace `/dev/sdb` with your card. `dd` overwrites whatever `of=` points to without asking, so make sure `if=` is the card and `of=` is a file.
+
+
+# Restore a card
+
+<img src="img/diagrams/imager-restore-image.svg" width="100%" alt="Steps to restore a backup with Raspberry Pi Imager: choose the device, choose Use custom and pick your image file, choose your card, skip customization, write."/>
+
+1. Open Raspberry Pi Imager and choose your device.
+2. For the operating system, scroll down to **Use custom** and pick your `.img`, `.img.gz`, `.img.xz` or `.zip` file.
+3. Choose your microSD card.
+4. **Skip customization**: the backup already has its hostname, user and keys.
+5. Write and wait for the verification.
+
+The new card must be at least as large as the one you backed up.
+
+
+# Cloning one card to the others
+
+Flashing each card separately with Imager ([Install OS](Install_OS.md)) is quicker and safer than cloning, since Imager sets each node's identity for you. Clone only if you have customized one node heavily and want to copy that work.
+
+A clone is an exact copy, so every cloned node starts with the **same hostname, the same SSH host keys and the same machine ID** as the original. Nodes with duplicate identities confuse SSH ("host key changed" warnings) and some network services. Fix each clone on its first boot:
+
+1. Before the first boot, with the card still in your computer, open `user-data` on the card's `bootfs` partition and change the `hostname:` line to the new name, such as `hostname: worker2`. Current Raspberry Pi OS resets the hostname from this file on every boot. Older images without this file can skip this step.
+
+2. Boot the clone, log in with `ssh alice@<its-ip-address>` and give it new SSH host keys and a new machine ID:
+
+    ```bash
+    sudo hostnamectl set-hostname worker2
+    sudo rm /etc/ssh/ssh_host_*
+    sudo ssh-keygen -A
+    sudo rm /etc/machine-id
+    sudo systemd-machine-id-setup
+    sudo reboot
+    ```
+
+3. On every computer that had logged in to the original, remove the old fingerprint for the new name:
+
+    ```bash
+    ssh-keygen -R worker2
+    ```
+
+**Check:** `hostname` prints the new name, and `cat /etc/machine-id` differs on every node.
