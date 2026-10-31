@@ -90,7 +90,10 @@ Edit file `/etc/hosts` and add the following:
 192.168.0.102    worker2
 192.168.0.103    worker3
 192.168.0.104    worker4
+# end pi-cluster network
 ```
+
+Keep the first and last comment lines exactly as written: the [cluster commands](Cluster_Commands.md) use them to find the node list.
 
 Reboot system for changes to take effect
 ```cli
