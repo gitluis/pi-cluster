@@ -34,14 +34,14 @@
 
 # Flash each card
 
-<img src="img/diagrams/imager-flash-node.svg" width="100%" alt="Steps to flash one node with Raspberry Pi Imager: choose the device (Raspberry Pi 4), the OS (Raspberry Pi OS Lite 64-bit), the storage (your microSD card), customize the hostname, user and SSH key, then write. Repeat for each node."/>
+<img src="img/diagrams/imager-flash-node.svg" width="100%" alt="Steps to flash one node with Raspberry Pi Imager: choose the device (Raspberry Pi 5 or 4), the OS (Raspberry Pi OS Lite 64-bit), the storage (your microSD card), customize the hostname, user and SSH key, then write. Repeat for each node."/>
 
 Do this five times, once per card. Imager remembers your settings, so after the first card you only change the hostname.
 
 1. Insert a microSD card into your computer and open Raspberry Pi Imager.
-2. **Device:** choose *Raspberry Pi 4*.
+2. **Device:** choose *Raspberry Pi 5* or *Raspberry Pi 4*, whichever boards you have.
 3. **Operating system:** choose *Raspberry Pi OS (other)*, then *Raspberry Pi OS Lite (64-bit)*.
-4. **Storage:** choose your microSD card. Double-check it's the card and not another drive: everything on it will be erased.
+4. **Storage:** choose your microSD card, or your SSD in a USB adapter if you use one ([Storage](Hardware_List.md#storage)). Double-check you picked the right drive: everything on it will be erased.
 5. **Customize:** fill in the settings below.
 6. **Write**, confirm, and wait. Imager writes the card and then verifies it.
 7. Label the card with its hostname, then repeat with the next card.

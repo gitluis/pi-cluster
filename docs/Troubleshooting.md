@@ -34,7 +34,7 @@ Find the symptom, then try the fix. Most problems show up in a log: Hadoop's are
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | `vcgencmd get_throttled` isn't `throttled=0x0` | Under-voltage or overheating | See [Power](Hardware_List.md#power) and [Cooling](Hardware_List.md#cooling). If the last hex digit is odd (`1`, `3`, `5`...), the Pi has too little power right now; if the fifth digit from the right is odd, it has had too little since boot |
-| Random crashes, corrupted cards, read-only file system | Weak power supply, or a worn card | One 3 A supply per Pi; replace the card; consider [an SSD](Hardware_List.md#storage) |
+| Random crashes, corrupted cards, read-only file system | Weak power supply, or a worn card | The official supply for each Pi ([Power](Hardware_List.md#power)); replace the card; consider [an SSD](Hardware_List.md#storage) |
 | One worker trains far fewer models than the others | That worker is throttling | `cluster-cmd vcgencmd measure_temp` during a job; improve its cooling |
 
 

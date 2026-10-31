@@ -6,11 +6,21 @@
 
 # Raspberry Pi Cluster
 
-A step-by-step guide to building a portable cluster of five Raspberry Pi 4 boards that stores data with Hadoop (HDFS) and trains machine learning models in parallel with Spark.
+A step-by-step guide to building a portable cluster of five Raspberry Pi 5 or Raspberry Pi 4 boards that stores data with Hadoop (HDFS) and trains machine learning models in parallel with Spark.
 
-<img src="docs/img/diagrams/cluster-overview.svg" width="100%" alt="Illustration of the cluster: five Raspberry Pi 4 boards stacked in a case, master on top and four workers below, each wired to a network switch that connects to the router and the internet."/>
+<img src="docs/img/diagrams/cluster-overview.svg" width="100%" alt="Illustration of the cluster: five Raspberry Pi boards (Raspberry Pi 5 with Active Coolers shown) stacked in a case, master on top and four workers below, each wired to a network switch that connects to the router and the internet."/>
 
-**Status:** every step is written, from buying the hardware to training 300 XGBoost models. The training job has been tested on a Spark 4.2 cluster on a regular computer. The full build with these versions (Hadoop 3.5, Spark 4.2, Raspberry Pi OS based on Debian 13) has not yet been run end to end on Raspberry Pi hardware, so please [open an issue](https://github.com/gitluis/pi-cluster/issues) if a step doesn't work for you.
+
+## Builds
+
+The cluster was first built in 2020 on Raspberry Pi 4 boards and ran Hadoop and Spark successfully. The guide has since been updated for current software and for the **Raspberry Pi 5**, the newest model, while keeping full support for the **Raspberry Pi 4**. Where the two boards need different parts or settings, the guide shows both.
+
+| Build | When | Boards | Operating system | Result |
+| --- | --- | --- | --- | --- |
+| Original build | 2020 | 5 × Raspberry Pi 4 Model B, 2 GB | Raspbian (2020 release) | **Worked**, including HDFS and Spark. The Hadoop and Spark pages were written later, in the 2026 update |
+| 2026 update | October 2026 | Written for 5 × Raspberry Pi 5 or 5 × Raspberry Pi 4 | Raspberry Pi OS Lite 64-bit (Debian 13) | Not built on hardware. Steps updated from the original build; the training job was tested on a Spark 4.2 cluster on a regular computer |
+
+Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-cluster/issues) with your boards, RAM, OS image date and [benchmark](docs/Workload.md#benchmark) time, or if a step didn't work for you.
 
 
 ## The guide
@@ -32,7 +42,7 @@ New here? Read [Getting Started](docs/Getting_Started.md) first. [Background](do
 
 ## What you need
 
-- Five Raspberry Pi 4 boards (4 GB recommended), one 3 A power supply each, cooling, microSD cards, an 8-port switch and cables. See [Hardware List](docs/Hardware_List.md).
+- Five Raspberry Pi 5 boards (4 GB minimum, 8 GB recommended) or five Raspberry Pi 4 boards (2 GB minimum, 4 GB recommended), each with its official power supply and cooling, plus microSD cards, an 8-port switch and cables. See [Hardware List](docs/Hardware_List.md).
 - A Windows, macOS or Linux computer with a card reader.
 - Comfort typing commands in a terminal. No Hadoop or Spark experience needed.
 
@@ -52,7 +62,7 @@ The guide uses Raspberry Pi OS Lite (64-bit), Java 17, Hadoop 3.5.0 and Spark 4.
 
 A Raspberry Pi is a credit-card-sized, low-cost computer board. It can do most of what a desktop computer does: browse the internet, play video, edit documents and spreadsheets, or run a server.
 
-The current Raspberry Pi 4 Model B comes with 1, 2, 4 or 8 GB of memory (RAM), and the newer Raspberry Pi 5 with up to 16 GB, so for many tasks it's hard to tell apart from a regular computer.
+The Raspberry Pi 5, the newest model, comes with 1 to 16 GB of memory (RAM), and the Raspberry Pi 4 Model B with 1 to 8 GB, so for many tasks it's hard to tell apart from a regular computer.
 
 The main difference is the [**central processing unit (CPU)**](https://www.tutorialspoint.com/computer_fundamentals/computer_cpu.htm). Desktop and laptop processors mostly use the [x86 architecture](https://www.techopedia.com/definition/5334/x86-architecture), made by [Intel](https://www.intel.com/) and [AMD](https://www.amd.com/). The Raspberry Pi uses an [ARM processor](https://www.techopedia.com/definition/14875/arm-processor), the same family found in most phones.
 

@@ -10,34 +10,46 @@
 
 This list is for one `master` and four workers, as in the rest of the guide. Quantities scale with the number of nodes.
 
-| Component | Qty | Priority | Notes |
-|:--|:-:|:--|:--|
-| Raspberry Pi 4 Model B | 5 | Required | 2 GB works with smaller memory settings; **4 GB recommended**. Workers run an HDFS DataNode, a Spark executor and Python at once; `master` runs the NameNode, the Spark master and your driver program |
-| Power supply, 5.1 V 3 A USB-C | 5 | Required | One per Pi, such as the official Raspberry Pi 15.3 W supply. See [Power](#power) |
-| USB-C cable | 5 | Required | Only if your supply has no built-in cable |
-| microSD card, 32 GB, A1 or A2 | 5 | Required | A2 cards are faster at small reads and writes. See [Storage](#storage) for an SSD option |
-| microSD card reader | 1 | Required | For flashing the cards from your computer |
-| 8-port gigabit network switch | 1 | Required | 5 ports for the Pis + 1 uplink to your router. A 5-port switch is one port short |
-| Ethernet cable, Cat 5e or better | 6 | Required | 5 Pis + 1 uplink |
-| Heatsinks and fan, or a case with fans | 5 | Required | The cluster runs at full load for hours. See [Cooling](#cooling) |
-| Cluster case (stacking plates with standoffs) | 1 | Recommended | Keeps boards apart for airflow; many include fans |
-| Keyboard, mouse, monitor | 1 each | Optional | Not needed when you set up SSH while flashing ([Install OS](Install_OS.md)) |
-| Micro-HDMI to HDMI cable | 1 | Optional | The Pi 4 has micro-HDMI ports; match the other end to your monitor |
+The guide supports the **Raspberry Pi 5** and the **Raspberry Pi 4 Model B**. The Pi 5 is about two to three times faster at training; the Pi 4 is cheaper and is what the original cluster ran on. Pick one model and use it on all five nodes. Where the two boards need different parts, the table has a column for each.
 
-Prices change often, so check current ones on the [Raspberry Pi product page](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) and your local reseller.
+| Component | Raspberry Pi 5 | Raspberry Pi 4 | Qty | Priority |
+|:--|:--|:--|:-:|:--|
+| Board | Raspberry Pi 5, **4 GB minimum, 8 GB recommended** | Raspberry Pi 4 Model B, **2 GB minimum, 4 GB recommended** | 5 | Required |
+| Power supply | Official 27 W USB-C (5 V 5 A) | Official 15.3 W USB-C (5.1 V 3 A) | 5 | Required |
+| Cooling | Raspberry Pi Active Cooler | Heatsinks and a fan, or a case with fans | 5 | Required |
+| Storage | 32 GB A2 microSD card, or an NVMe SSD on the M.2 HAT+ | 32 GB A2 microSD card, or a USB 3 SSD | 5 | Required |
+| microSD card reader | same | same | 1 | Required |
+| 8-port gigabit network switch | same | same | 1 | Required |
+| Ethernet cable, Cat 5e or better | same | same | 6 | Required |
+| Cluster case (stacking plates with standoffs) | Room above each board for the Active Cooler, and the M.2 HAT+ if used | Room for heatsinks and fans | 1 | Recommended |
+| PoE+ HAT, instead of power supplies | A HAT made for the Pi 5 | A HAT made for the Pi 4 | 5 | Optional |
+| Keyboard, mouse, monitor | same | same | 1 each | Optional |
+| Micro-HDMI to HDMI cable | same | same | 1 | Optional |
+
+Notes:
+
+- **RAM:** workers run an HDFS DataNode, a Spark executor and Python at once; `master` runs the NameNode, the Spark master and your driver program. More RAM gives Spark more room; [Spark](Spark.md#configure-spark) has memory settings for every size. The original cluster worked on 2 GB Pi 4 boards.
+- **Switch:** 5 ports for the Pis plus 1 uplink to your router. A 5-port switch is one port short.
+- **Keyboard, mouse, monitor:** not needed when you set up SSH while flashing ([Install OS](Install_OS.md)).
+
+Prices change often, so check current ones on the [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) and [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) product pages and your local reseller.
 
 
 ## Power
 
-Each Raspberry Pi 4 needs 5.1 V at up to 3 A ([specifications](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/)). Five boards can draw up to 15 A together.
+Use the official supply for your board on every Pi:
 
-A multi-port USB charger rated 2.4 A *in total* is far below that. Under load the Pis see a voltage drop, slow themselves down, and can corrupt their SD cards. That defeats the point of the cluster, which is to train faster.
+| Board | Official supply | Five boards can draw up to |
+|:--|:--|:--|
+| Raspberry Pi 5 | 27 W, 5 V at up to 5 A ([product page](https://www.raspberrypi.com/products/raspberry-pi-5/)) | 25 A |
+| Raspberry Pi 4 | 15.3 W, 5.1 V at up to 3 A ([specifications](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/)) | 15 A |
+
+With too little power, the Pis see a voltage drop under load, slow themselves down, and can corrupt their cards. That defeats the point of the cluster, which is to train faster. A multi-port USB charger rarely delivers full current on every port at once, so avoid one unless its spec sheet says it does.
 
 Good options:
 
-- One official 5.1 V 3 A supply per Pi, on a power strip.
-- A multi-port USB-C charger only if it can deliver 3 A on **every** port at the same time. Most chargers share their total between ports; check the spec sheet.
-- PoE+ HATs on each Pi with a PoE+ switch, so one cable carries both network and power.
+- One official supply per Pi, on a power strip.
+- A PoE+ HAT on each board with a PoE+ switch, so one cable carries both network and power. HATs are made for one model: Pi 4 HATs don't fit the Pi 5.
 
 **Check:** after the cluster is running, every node should print `throttled=0x0`:
 
@@ -50,7 +62,10 @@ Anything else means a power or heat problem. `0x50005`, for example, means under
 
 ## Cooling
 
-A Raspberry Pi 4 slows its CPU down as it nears 80 °C. Bare boards reach that within minutes of training a model on all four cores. Heatsinks alone help; heatsinks with a fan keep the CPU at full speed.
+Both boards start slowing their CPU down at 80 °C, and slow further at 85 °C (a Pi 5 drops to about 1.5 GHz). Without cooling, they reach that within minutes of training a model on all four cores.
+
+- **Raspberry Pi 5:** the official **Active Cooler** keeps it around 60 °C under load, and its fan speeds up on its own as the board warms ([Raspberry Pi: heating and cooling Raspberry Pi 5](https://www.raspberrypi.com/news/heating-and-cooling-raspberry-pi-5/)).
+- **Raspberry Pi 4:** heatsinks alone help; heatsinks with a fan, or a case with fans, keep the CPU at full speed.
 
 **Check** the temperature of every node while a job runs:
 
@@ -65,13 +80,11 @@ Under about 70 °C at full load is comfortable.
 
 microSD cards are slow at random writes and wear out with heavy writing. HDFS writes data blocks and logs constantly, so:
 
-- Use A1 or A2 rated cards from a known brand, 32 GB or larger.
-- For heavier use, boot each Pi from a USB 3 SSD instead. The Pi 4 can boot from USB; flash the SSD with Raspberry Pi Imager the same way you flash a card.
+- **Good, either board:** A2 rated microSD cards from a known brand, 32 GB or larger.
+- **Better, Raspberry Pi 5:** an NVMe SSD on the official [M.2 HAT+](https://www.raspberrypi.com/documentation/accessories/m2-hat-plus.html). It takes 2230 or 2242 size drives and fits over the Active Cooler (the *Compact* version doesn't). With no card inserted, the Pi 5 boots from the SSD.
+- **Better, Raspberry Pi 4:** a USB 3 SSD in one of the blue USB 3 ports. The Pi 4 has no PCIe connector, so the M.2 HAT+ doesn't fit it.
 
-
-## Raspberry Pi 5 instead?
-
-A Raspberry Pi 5 is about two to three times faster than a Pi 4 and works with this guide. It needs a 5 V 5 A supply (the official 27 W one) and an active cooler, so budget for both. See [Hardware](Hardware.md) for a model comparison.
+Flash an SSD with Raspberry Pi Imager the same way you flash a card, using a USB adapter for an NVMe drive.
 
 ---
 

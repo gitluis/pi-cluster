@@ -6,12 +6,16 @@
 
 # Hardware
 
-This guide was built and tested on Raspberry Pi 4 Model B boards. The table shows which boards suit a Hadoop/Spark cluster.
+This guide supports two boards: the **Raspberry Pi 5**, the newest and fastest model, and the **Raspberry Pi 4 Model B**, which the original cluster ran Hadoop and Spark on (see [Builds](../README.md#builds)). Every step works on both; where they differ, the page shows both.
+
+Use the same model and the same amount of RAM on all five nodes if you can. Mixing works, but the memory settings in [Spark](Spark.md#configure-spark) have to suit the smallest board, and slower workers finish fewer models.
+
+The table shows which boards suit a Hadoop/Spark cluster.
 
 | Board | RAM options | Power supply | Fit for this cluster |
 |:--|:--|:--|:--|
-| [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) | up to 16 GB | 5 V 5 A USB-C | Yes, fastest option. Needs an active cooler |
-| [Raspberry Pi 4 Model B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) | 1, 2, 4 or 8 GB | 5.1 V 3 A USB-C | Yes, what this guide uses. 2 GB minimum, 4 GB recommended |
+| [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) | 1, 2, 4, 8 or 16 GB | 5 V 5 A USB-C (27 W) | **Supported, fastest.** About two to three times as fast as a Pi 4 at training. 4 GB minimum, 8 GB recommended. Needs the Active Cooler under sustained load |
+| [Raspberry Pi 4 Model B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) | 1 to 8 GB | 5.1 V 3 A USB-C (15.3 W) | **Supported.** The original cluster ran on 2 GB boards. 2 GB minimum, 4 GB recommended. Needs heatsinks and a fan under sustained load |
 | [Raspberry Pi 3 Model B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) | 1 GB | 5.1 V 2.5 A micro-USB | No: 1 GB is too little for Hadoop and Spark together |
 | [Raspberry Pi Zero 2 W](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/) | 512 MB | 5.1 V 2.5 A micro-USB | No: too little memory and no Ethernet port |
 
@@ -24,7 +28,11 @@ See [Hardware List](Hardware_List.md) for everything else to buy.
 
 **Skip this unless your cluster already runs cool and stable.** Overclocking adds heat and power draw, and a cluster under hours of full load is the worst case for both. Get `vcgencmd get_throttled` to report `throttled=0x0` first ([Power](Hardware_List.md#power)).
 
-Overclocking a Raspberry Pi 4 needs good cooling: heatsinks **and** a fan.
+Overclocking needs good cooling: heatsinks **and** a fan.
+
+**Raspberry Pi 5:** don't overclock a Pi 5 cluster. It already runs at 2.4 GHz, and under hours of full load the gain is small compared with the extra heat and the risk of an unstable node. If you want to try anyway, its settings go in a `[pi5]` section; see the official [overclocking options](https://www.raspberrypi.com/documentation/computers/config_txt.html#overclocking-options).
+
+**Raspberry Pi 4:** overclocking gives a Pi 4 a more noticeable boost. The values and steps below are for the Pi 4, as used in the original build.
 
 
 ## Known values for the Raspberry Pi 4

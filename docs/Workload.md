@@ -168,7 +168,7 @@ The [goal](Purpose.md) is to beat about 7 hours for 300 models on one computer. 
 
 Fill in your own numbers. The cluster's time is about 75 rounds of "one model per worker", so expect roughly 75 × the median per model on one Pi. To beat 7 hours, a single model must train on one Pi in under about 5½ minutes (7 h ÷ 75).
 
-A Raspberry Pi 4 core is several times slower than a current laptop core, so the cluster won't always win against a fast computer. Its advantage is that it runs on its own while your computer stays free, and it scales: each extra worker adds another model in parallel.
+A Raspberry Pi 5 core is still slower than a current laptop core (and a Pi 4 core much slower), so the cluster won't always win against a fast computer. Its advantage is that it runs on its own while your computer stays free, and it scales: each extra worker adds another model in parallel.
 
 If your computer's run uses all its cores, you can also compare **per model**: the cluster wins when one Pi's time per model is less than 4 times your computer's time per model, since four Pis train at once.
 
