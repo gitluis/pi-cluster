@@ -114,6 +114,26 @@ GLYPHS = {
     "security": (SECURITY, "Shield with check mark", """
         <path d='M24 4l16 6v12c0 10-7 18-16 22C15 40 8 32 8 22V10z' """ + ARROW_HEAD + """/>
         <path d='M17 24l5 5 9-10' """ + ARROW_HEAD + """/>"""),
+    "single-node": (CLUSTER, "One server with storage", """
+        <rect x='7' y='7' width='34' height='13' rx='2'/>
+        <circle cx='35' cy='13.5' r='1.6' fill='#fff' stroke='none'/>
+        <path d='M12 13.5h10'/>
+        <ellipse cx='24' cy='29' rx='13' ry='4'/>
+        <path d='M11 29v9c0 2.2 5.8 4 13 4s13-1.8 13-4v-9'/>"""),
+    "cluster-setup": (CLUSTER, "Four connected servers", """
+        <rect x='5' y='6' width='16' height='14' rx='2'/><rect x='27' y='6' width='16' height='14' rx='2'/>
+        <rect x='5' y='28' width='16' height='14' rx='2'/><rect x='27' y='28' width='16' height='14' rx='2'/>
+        <path d='M21 13h6M21 35h6M13 20v8M35 20v8'/>"""),
+    "spark": (CLUSTER, "Spark of light", """
+        <path d='M24 4v10M24 34v10M4 24h10M34 24h10M10 10l7 7M31 31l7 7M38 10l-7 7M17 31l-7 7' """ + ARROW_HEAD + """/>
+        <circle cx='24' cy='24' r='4' fill='#fff'/>"""),
+    "workload": (CLUSTER, "Bar chart", """
+        <path d='M6 42h36'/>
+        <rect x='9' y='26' width='7' height='16' rx='1.5'/>
+        <rect x='20.5' y='16' width='7' height='26' rx='1.5'/>
+        <rect x='32' y='8' width='7' height='34' rx='1.5'/>"""),
+    "troubleshooting": (EXTRA, "Wrench", """
+        <path d='M30 6a10 10 0 0 0-9 14L6 35a4 4 0 0 0 6 6l15-15a10 10 0 0 0 14-9l-6 6-5-1-1-5 6-6a10 10 0 0 0-5-1z' """ + ARROW_HEAD + """/>"""),
     # --- extras ---
     "miscellaneous": (EXTRA, "Light bulb", """
         <path d='M18 33c-4-3-7-7-7-13a13 13 0 0 1 26 0c0 6-3 10-7 13z'/>
