@@ -1,7 +1,7 @@
 [Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
 
-<img src="https://image.flaticon.com/icons/svg/2526/2526509.svg" width="100px" height="100px"/>
+<img src="img/icons/internet.svg" width="96" height="96" alt=""/>
 
 
 # Internet Connection
@@ -21,8 +21,8 @@ This section covers different methods on how-to set up and connect to the intern
 # Ethernet Connection
 
 Requirements:
-* <img src="https://image.flaticon.com/icons/svg/361/361390.svg" width="20px" height="20px"/> Internet access (router)
-* <img src="https://image.flaticon.com/icons/svg/403/403084.svg" width="20px" height="20px"/> An Ethernet cable
+* <img src="img/icons/router.svg" width="20" height="20" alt=""/> Internet access (router)
+* <img src="img/icons/ethernet.svg" width="20" height="20" alt=""/> An Ethernet cable
 
 Steps to connect:
 1. Make sure that your router is connected to the internet.
@@ -38,7 +38,7 @@ Troubleshooting:
 # WiFi Connection
 
 Requirements:
-* <img src="https://image.flaticon.com/icons/svg/361/361390.svg" width="20px" height="20px"/> Internet access (router)
+* <img src="img/icons/router.svg" width="20" height="20" alt=""/> Internet access (router)
 
 Steps to connect:
 1. If you are using the command-line interface, refer to the next section for details on how to set up WiFi through the command line.

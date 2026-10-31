@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 280" role="img" aria-label="Format a microSD card with Raspberry Pi Imager: Insert card (into your computer), then Open Imager (Raspberry Pi Imager), then Choose OS (select Erase), then Choose storage (your microSD card), then Write (card is formatted)">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F172A"/><stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="280" rx="24" fill="url(#bg)"/>
+  <g font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="40" y="54" fill="#F8FAFC" font-size="22" font-weight="700">Format a microSD card with Raspberry Pi Imager</text>
+    <g transform="translate(40 82)">
+      <rect width="140" height="160" rx="16" fill="#0B1220" stroke="#334155"/>
+      <circle cx="24" cy="24" r="13" fill="#0EA5E9"/>
+      <text x="24" y="29" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">1</text>
+      <g transform="translate(46 30)" fill="none" stroke="#7DD3FC" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round"><path d='M15 5h16l6 6v31a2 2 0 0 1-2 2H15a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z'/><path d='M19 9v6M24 9v6M29 9v6'/></g>
+      <text x="70" y="118" fill="#F8FAFC" font-size="15" font-weight="700" text-anchor="middle">Insert card</text>
+      <text x="70" y="140" fill="#94A3B8" font-size="12.5" text-anchor="middle">into your computer</text>
+    </g>
+    <path d="M186 162h12M193 157l5 5-5 5" fill="none" stroke="#475569" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(205 82)">
+      <rect width="140" height="160" rx="16" fill="#0B1220" stroke="#334155"/>
+      <circle cx="24" cy="24" r="13" fill="#0EA5E9"/>
+      <text x="24" y="29" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">2</text>
+      <g transform="translate(46 30)" fill="none" stroke="#7DD3FC" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round"><rect x='5' y='8' width='38' height='32' rx='3'/><path d='M5 16h38'/><circle cx='10' cy='12' r='1.3' fill='#7DD3FC' stroke='none'/><circle cx='14.5' cy='12' r='1.3' fill='#7DD3FC' stroke='none'/><path d='M12 25h24M12 32h16'/></g>
+      <text x="70" y="118" fill="#F8FAFC" font-size="15" font-weight="700" text-anchor="middle">Open Imager</text>
+      <text x="70" y="140" fill="#94A3B8" font-size="12.5" text-anchor="middle">Raspberry Pi Imager</text>
+    </g>
+    <path d="M351 162h12M358 157l5 5-5 5" fill="none" stroke="#475569" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(370 82)">
+      <rect width="140" height="160" rx="16" fill="#0B1220" stroke="#334155"/>
+      <circle cx="24" cy="24" r="13" fill="#0EA5E9"/>
+      <text x="24" y="29" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">3</text>
+      <g transform="translate(46 30)" fill="none" stroke="#7DD3FC" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round"><path d='M9 33l17-17a3 3 0 0 1 4 0l9 9a3 3 0 0 1 0 4L27 41H17z'/><path d='M19 23l13 13'/><path d='M27 41h14'/></g>
+      <text x="70" y="118" fill="#F8FAFC" font-size="15" font-weight="700" text-anchor="middle">Choose OS</text>
+      <text x="70" y="140" fill="#94A3B8" font-size="12.5" text-anchor="middle">select Erase</text>
+    </g>
+    <path d="M516 162h12M523 157l5 5-5 5" fill="none" stroke="#475569" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(535 82)">
+      <rect width="140" height="160" rx="16" fill="#0B1220" stroke="#334155"/>
+      <circle cx="24" cy="24" r="13" fill="#0EA5E9"/>
+      <text x="24" y="29" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">4</text>
+      <g transform="translate(46 30)" fill="none" stroke="#7DD3FC" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round"><path d='M15 5h16l6 6v31a2 2 0 0 1-2 2H15a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z'/><path d='M19 9v6M24 9v6M29 9v6'/><circle cx='25' cy='29' r='6'/><path d='M29.5 33.5l5 5'/></g>
+      <text x="70" y="118" fill="#F8FAFC" font-size="15" font-weight="700" text-anchor="middle">Choose storage</text>
+      <text x="70" y="140" fill="#94A3B8" font-size="12.5" text-anchor="middle">your microSD card</text>
+    </g>
+    <path d="M681 162h12M688 157l5 5-5 5" fill="none" stroke="#475569" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(700 82)">
+      <rect width="140" height="160" rx="16" fill="#0B1220" stroke="#334155"/>
+      <circle cx="24" cy="24" r="13" fill="#0EA5E9"/>
+      <text x="24" y="29" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">5</text>
+      <g transform="translate(46 30)" fill="none" stroke="#7DD3FC" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round"><circle cx='24' cy='24' r='18'/><path d='M16 24l6 6 11-12'/></g>
+      <text x="70" y="118" fill="#F8FAFC" font-size="15" font-weight="700" text-anchor="middle">Write</text>
+      <text x="70" y="140" fill="#94A3B8" font-size="12.5" text-anchor="middle">card is formatted</text>
+    </g>
+  </g>
+</svg>

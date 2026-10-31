@@ -1,7 +1,7 @@
 [Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
 
-<img src="https://image.flaticon.com/icons/svg/2463/2463414.svg" width="100px" height="100px"/>
+<img src="img/icons/getting-started.svg" width="96" height="96" alt=""/>
 
 
 # Getting Started

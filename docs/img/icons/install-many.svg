@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Stack of SD cards">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0EA5E9"/><stop offset="1" stop-color="#0369A1"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="url(#g)"/>
+  <rect x="1.5" y="1.5" width="117" height="117" rx="26.5" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="3"/>
+  <g transform="translate(24 24) scale(1.5)" fill="none" stroke="#fff" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+        <path d='M21 4h14l5 5v25a2 2 0 0 1-2 2'/>
+        <path d='M16 9h14l5 5v25a2 2 0 0 1-2 2'/>
+        <path d='M11 14h14l5 5v23a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2z'/>
+        <path d='M14 18v5M18.5 18v5M23 18v5'/>
+  </g>
+</svg>

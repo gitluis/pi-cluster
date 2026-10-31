@@ -1,7 +1,7 @@
 [Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
 
-<img src="https://image.flaticon.com/icons/svg/2489/2489788.svg" width="100px" height="100px"/>
+<img src="img/icons/format-sd-card.svg" width="96" height="96" alt=""/>
 
 
 # Formatting SD Cards
@@ -20,29 +20,21 @@ Formatting an SD card depends on the type of operating system you are using. Whe
 
 ## Format SD Card
 
+<img src="img/diagrams/imager-format-sd-card.svg" width="100%" alt="Steps to format a microSD card with Raspberry Pi Imager: insert the card, open Imager, choose OS: Erase, choose your card, write."/>
+
 1. Download [Raspberry Pi Imager](Formatting-SD-Cards#raspberry-pi-imager-downloads)
 2. Install Raspberry Pi Imager in your computer
 3. Insert your micro SD card to your computer
 4. Open Raspberry Pi Imager
 5. Click on `Choose OS`
 
-<img src="https://i.ibb.co/YX9fHVk/format-sd-card-1.png" width="600px" height="400px"/>
-
 6. Select `Erase`
-
-<img src="https://i.ibb.co/fvJfngM/format-sd-card-2.png" width="600px" height="400px"/>
 
 7. Click on `Choose SD Card`
 
-<img src="https://i.ibb.co/F5Z2YhD/format-sd-card-3.png" width="600px" height="400px"/>
-
 8. Select your micro SD card
 
-<img src="https://i.ibb.co/B42vYst/format-sd-card-4.png" width="600px" height="400px"/>
-
 9. Click on `Write`
-
-<img src="https://i.ibb.co/hXMKyLq/format-sd-card-5.png" width="600px" height="400px"/>
 
 10. micro SD Card is now formatted successfully
 11. Remove micro SD card from your computer

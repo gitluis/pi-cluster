@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Ethernet cable">
+  <style>g{color:#334155} @media (prefers-color-scheme: dark){g{color:#CBD5E1}}</style>
+  <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d='M14 6h20v18l-4 4H18l-4-4z'/>
+        <path d='M19 6v6M24 6v6M29 6v6'/>
+        <path d='M24 28v8c0 4 4 6 8 6h10'/>
+  </g>
+</svg>

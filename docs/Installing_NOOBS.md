@@ -1,7 +1,7 @@
 [Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
 
 
-<img src="https://www.raspberrypi.org/app/uploads/2015/08/noobs.png"/>
+<img src="img/icons/installer.svg" width="96" height="96" alt=""/>
 
 
 # Installing NOOBS

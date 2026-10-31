@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Router">
+  <style>g{color:#334155} @media (prefers-color-scheme: dark){g{color:#CBD5E1}}</style>
+  <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x='4' y='26' width='40' height='14' rx='3'/>
+        <path d='M14 26V12M34 26V12'/>
+        <circle cx='12' cy='33' r='1.5' fill='currentColor' stroke='none'/>
+        <circle cx='18' cy='33' r='1.5' fill='currentColor' stroke='none'/>
+        <path d='M26 33h12'/>
+  </g>
+</svg>
