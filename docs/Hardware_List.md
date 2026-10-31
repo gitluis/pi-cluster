@@ -12,7 +12,7 @@ This list is for one `master` and four workers, as in the rest of the guide. Qua
 
 | Component | Qty | Priority | Notes |
 |:--|:-:|:--|:--|
-| Raspberry Pi 4 Model B | 5 | Required | 2 GB works; **4 GB recommended for the workers**, which run a Spark executor, a Python process and an HDFS DataNode at once |
+| Raspberry Pi 4 Model B | 5 | Required | 2 GB works with smaller memory settings; **4 GB recommended**. Workers run an HDFS DataNode, a Spark executor and Python at once; `master` runs the NameNode, the Spark master and your driver program |
 | Power supply, 5.1 V 3 A USB-C | 5 | Required | One per Pi, such as the official Raspberry Pi 15.3 W supply. See [Power](#power) |
 | USB-C cable | 5 | Required | Only if your supply has no built-in cable |
 | microSD card, 32 GB, A1 or A2 | 5 | Required | A2 cards are faster at small reads and writes. See [Storage](#storage) for an SSD option |
