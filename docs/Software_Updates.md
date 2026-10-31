@@ -32,7 +32,7 @@ cluster-reboot
 
 ## Update firmware
 
-The Raspberry Pi 4 keeps its bootloader in a small chip on the board (the EEPROM). Check whether an update is available:
+The Raspberry Pi 4 and Pi 5 keep their bootloader in a small chip on the board (the EEPROM). Check whether an update is available:
 
 ```bash
 cluster-cmd sudo rpi-eeprom-update

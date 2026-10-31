@@ -6,11 +6,21 @@
 
 # Raspberry Pi Cluster
 
-A step-by-step guide to building a portable cluster of five Raspberry Pi 4 boards that stores data with Hadoop (HDFS) and trains machine learning models in parallel with Spark.
+A step-by-step guide to building a portable cluster of five Raspberry Pi boards (Raspberry Pi 4 or Raspberry Pi 5) that stores data with Hadoop (HDFS) and trains machine learning models in parallel with Spark.
 
-<img src="docs/img/diagrams/cluster-overview.svg" width="100%" alt="Illustration of the cluster: five Raspberry Pi 4 boards stacked in a case, master on top and four workers below, each wired to a network switch that connects to the router and the internet."/>
+<img src="docs/img/diagrams/cluster-overview.svg" width="100%" alt="Illustration of the cluster: five Raspberry Pi boards stacked in a case, master on top and four workers below, each wired to a network switch that connects to the router and the internet."/>
 
-**Status:** every step is written, from buying the hardware to training 300 XGBoost models. The training job has been tested on a Spark 4.2 cluster on a regular computer. The full build with these versions (Hadoop 3.5, Spark 4.2, Raspberry Pi OS based on Debian 13) has not yet been run end to end on Raspberry Pi hardware, so please [open an issue](https://github.com/gitluis/pi-cluster/issues) if a step doesn't work for you.
+
+## Builds
+
+Which hardware each version of the guide was built on. The steps are kept current for the Raspberry Pi models sold today, so the latest guide can be newer than the last physical build.
+
+| Build | When | Boards | Operating system | Result |
+| --- | --- | --- | --- | --- |
+| Original build | March 2020 | 5 × Raspberry Pi 4 Model B, 2 GB | Raspbian (2020 release) | Hardware through Cluster Security documented; Hadoop and Spark pages not yet written |
+| Current guide | Written October 2026 | Written for Raspberry Pi 4 and Raspberry Pi 5 | Raspberry Pi OS Lite 64-bit (Debian 13) | **Not yet built on hardware.** The training job was tested on a Spark 4.2 cluster on a regular computer |
+
+When you complete a build, add a row: the date, board model and RAM, the OS image date, the Hadoop and Spark versions, and your [benchmark](docs/Workload.md#benchmark) time for 300 models. If a step doesn't work for you, please [open an issue](https://github.com/gitluis/pi-cluster/issues).
 
 
 ## The guide
@@ -32,7 +42,7 @@ New here? Read [Getting Started](docs/Getting_Started.md) first. [Background](do
 
 ## What you need
 
-- Five Raspberry Pi 4 boards (4 GB recommended), one 3 A power supply each, cooling, microSD cards, an 8-port switch and cables. See [Hardware List](docs/Hardware_List.md).
+- Five Raspberry Pi 4 or Raspberry Pi 5 boards (4 GB or more recommended), one official power supply each, cooling, microSD cards, an 8-port switch and cables. See [Hardware List](docs/Hardware_List.md).
 - A Windows, macOS or Linux computer with a card reader.
 - Comfort typing commands in a terminal. No Hadoop or Spark experience needed.
 
@@ -52,7 +62,7 @@ The guide uses Raspberry Pi OS Lite (64-bit), Java 17, Hadoop 3.5.0 and Spark 4.
 
 A Raspberry Pi is a credit-card-sized, low-cost computer board. It can do most of what a desktop computer does: browse the internet, play video, edit documents and spreadsheets, or run a server.
 
-The current Raspberry Pi 4 Model B comes with 1, 2, 4 or 8 GB of memory (RAM), and the newer Raspberry Pi 5 with up to 16 GB, so for many tasks it's hard to tell apart from a regular computer.
+The Raspberry Pi 5, the newest model, comes with 1 to 16 GB of memory (RAM), and the Raspberry Pi 4 Model B with 1 to 8 GB, so for many tasks it's hard to tell apart from a regular computer.
 
 The main difference is the [**central processing unit (CPU)**](https://www.tutorialspoint.com/computer_fundamentals/computer_cpu.htm). Desktop and laptop processors mostly use the [x86 architecture](https://www.techopedia.com/definition/5334/x86-architecture), made by [Intel](https://www.intel.com/) and [AMD](https://www.amd.com/). The Raspberry Pi uses an [ARM processor](https://www.techopedia.com/definition/14875/arm-processor), the same family found in most phones.
 

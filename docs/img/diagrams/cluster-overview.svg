@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" role="img" aria-label="Illustration of the Pi cluster: five Raspberry Pi 4 boards stacked in a case, master on top and four workers below, each wired by Ethernet to a network switch that connects to a home router and the internet.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" role="img" aria-label="Illustration of the Pi cluster: five Raspberry Pi boards stacked in a case, master on top and four workers below, each wired by Ethernet to a network switch that connects to a home router and the internet.">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0F172A"/><stop offset="1" stop-color="#1E293B"/>

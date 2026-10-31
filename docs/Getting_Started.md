@@ -11,7 +11,7 @@
 
 ## What you need
 
-- **Hardware:** five Raspberry Pi 4 boards plus power, cooling, cards, a switch and cables. [Hardware List](Hardware_List.md) has the full list.
+- **Hardware:** five Raspberry Pi 4 or Raspberry Pi 5 boards plus power, cooling, cards, a switch and cables. [Hardware List](Hardware_List.md) has the full list.
 - **A computer** running Windows, macOS or Linux, with a microSD card reader. You use it to flash the cards and to log in to the cluster.
 - **A router** with a free Ethernet port, for the cluster's internet access.
 - **Comfort with a terminal:** typing commands, editing a file with `nano`, and reading error messages. No Hadoop or Spark experience is needed.

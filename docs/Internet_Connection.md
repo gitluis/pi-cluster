@@ -27,7 +27,7 @@ There is nothing to configure: Raspberry Pi OS asks the router for an address au
 
 # Wi-Fi
 
-Only use Wi-Fi for a single Pi you're testing, or if the cluster can't be wired to your router. The Raspberry Pi 4 has built-in Wi-Fi.
+Only use Wi-Fi for a single Pi you're testing, or if the cluster can't be wired to your router. The Raspberry Pi 4 and Pi 5 have built-in Wi-Fi.
 
 **Easiest:** set the network name (SSID), password and Wi-Fi country in Raspberry Pi Imager's customization step when you flash the card ([Install OS](Install_OS.md#flash-each-card)).
 

@@ -20,7 +20,7 @@ Hadoop's file system (HDFS) stores the data and the trained models, and Spark ha
 
 ## Measuring success
 
-Success means training all 300 models in less than the 7-hour baseline, measured with the same script and data on both sides. A Raspberry Pi 4 core is slower than a laptop core, so this isn't guaranteed: the cluster wins when a single Pi trains one model in under about 5½ minutes. [Workload](Workload.md#benchmark) shows how to measure it.
+Success means training all 300 models in less than the 7-hour baseline, measured with the same script and data on both sides. A Raspberry Pi core is slower than a laptop core, especially on a Pi 4, so this isn't guaranteed: the cluster wins when a single Pi trains one model in under about 5½ minutes. [Workload](Workload.md#benchmark) shows how to measure it.
 
 Even when a fast computer is quicker, the cluster still frees that computer for other work while the models train.
 
