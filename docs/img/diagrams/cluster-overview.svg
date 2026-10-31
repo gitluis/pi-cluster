@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" role="img" aria-label="Illustration of the Pi cluster: five Raspberry Pi boards stacked in a case, master on top and four workers below, each wired by Ethernet to a network switch that connects to a home router and the internet.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" role="img" aria-label="Illustration of the Pi cluster: five Raspberry Pi 5 boards with Active Coolers stacked in a case, master on top and four workers below, each wired by Ethernet to a network switch that connects to a home router and the internet.">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0F172A"/><stop offset="1" stop-color="#1E293B"/>
@@ -25,11 +25,12 @@
       <!-- GPIO header -->
       <rect x="14" y="-9" width="64" height="9" rx="1" fill="#0B1220"/>
       <path d="M18 -9v-4M24 -9v-4M30 -9v-4M36 -9v-4M42 -9v-4M48 -9v-4M54 -9v-4M60 -9v-4M66 -9v-4M72 -9v-4" stroke="#FACC15" stroke-width="2"/>
-      <!-- SoC heatsink -->
-      <rect x="92" y="-6" width="42" height="6" fill="#475569"/>
-      <path d="M95 -6v-14M101 -6v-14M107 -6v-14M113 -6v-14M119 -6v-14M125 -6v-14M131 -6v-14" stroke="url(#sink)" stroke-width="4"/>
-      <!-- RAM -->
-      <rect x="142" y="-5" width="24" height="5" rx="1" fill="#0B1220"/>
+      <!-- Active Cooler: fin block with a blower fan on top -->
+      <rect x="86" y="-6" width="84" height="6" fill="#475569"/>
+      <path d="M90 -6v-12M96 -6v-12M102 -6v-12M108 -6v-12M114 -6v-12M120 -6v-12M126 -6v-12M132 -6v-12M138 -6v-12M144 -6v-12M150 -6v-12M156 -6v-12M162 -6v-12M166 -6v-12" stroke="url(#sink)" stroke-width="3"/>
+      <rect x="104" y="-30" width="62" height="12" rx="3" fill="#1E293B" stroke="#64748B"/>
+      <ellipse cx="135" cy="-24" rx="18" ry="3.5" fill="none" stroke="#94A3B8" stroke-width="1.5"/>
+      <circle cx="135" cy="-24" r="2" fill="#94A3B8"/>
       <!-- USB stack -->
       <rect x="184" y="-46" width="36" height="46" rx="2" fill="url(#metal)"/>
       <rect x="190" y="-40" width="24" height="8" rx="1" fill="#1D4ED8"/>
@@ -49,7 +50,7 @@
   <!-- title -->
   <g font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
     <text x="40" y="54" fill="#F8FAFC" font-size="26" font-weight="700">Raspberry Pi cluster</text>
-    <text x="40" y="80" fill="#94A3B8" font-size="15">1 master · 4 workers · 1 network switch</text>
+    <text x="40" y="80" fill="#94A3B8" font-size="15">Raspberry Pi 5 with Active Cooler · 1 master · 4 workers · 1 switch</text>
   </g>
 
   <!-- case: brass standoff columns, then the top plate -->

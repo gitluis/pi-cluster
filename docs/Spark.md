@@ -72,10 +72,10 @@ Spark's settings live in `/opt/spark/conf`.
 
     | Worker RAM | `SPARK_WORKER_MEMORY` | `spark.executor.memory` |
     | --- | --- | --- |
-    | 2 GB | `640m` | `512m` |
     | 4 GB | `2g` | `1536m` |
     | 8 GB | `5g` | `4g` |
-    | 16 GB (Pi 5) | `12g` | `8g` |
+    | 16 GB | `12g` | `8g` |
+    | 2 GB (Pi 4, as in the original build) | `640m` | `512m` |
 
     The rest of each worker's memory goes to the OS, the HDFS DataNode, the Spark worker itself, and the Python processes that train the models. Python memory isn't part of `spark.executor.memory`, which is why the executor gets well under half of a 4 GB board.
 
@@ -113,7 +113,7 @@ Spark's settings live in `/opt/spark/conf`.
     cluster-scp /opt/spark/conf
     ```
 
-If `master` has 2 GB of RAM, it is the tightest node: it runs the NameNode, the Spark master and your driver program at once. Keep `spark.driver.memory` at `512m`, and don't collect large results back to the driver.
+`master` is the tightest node, especially with 2 or 4 GB of RAM: it runs the NameNode, the Spark master and your driver program at once. Keep `spark.driver.memory` at `512m`, and don't collect large results back to the driver.
 
 
 # Start Spark and test it
