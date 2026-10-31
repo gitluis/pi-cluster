@@ -1,89 +1,99 @@
 # ------------------- #
 # Pi-Cluster Commands #
 # ------------------- #
+# Source this file from ~/.bashrc:  source ~/.scripts/cluster_commands.sh
+#
+# Nodes are read from the "# pi-cluster network" block in /etc/hosts:
+#   # pi-cluster network
+#   192.168.0.100    master
+#   192.168.0.101    worker1
+#   ...
+#   # end pi-cluster network
+
+# common user across all nodes (do NOT use USER: it is a standard shell variable)
+CLUSTER_USER="${CLUSTER_USER:-$(id -un)}"
+CLUSTER_HOSTS_FILE="${CLUSTER_HOSTS_FILE:-/etc/hosts}"
+CLUSTER_SSH_OPTS=(-o BatchMode=yes -o ConnectTimeout=5)
 
 
-# define cluster user
-USER="pi"
+# print the lines of the pi-cluster block in /etc/hosts (IP + hostname)
+function nodes {
+  awk '/^# pi-cluster network/{f=1; next} /^# end pi-cluster network/{f=0} f && /^[0-9]/ {print $1"\t"$2}' \
+    "$CLUSTER_HOSTS_FILE"
+}
 
 
 # return the common user across all nodes in the cluster
 function cluster-user {
-  echo $USER
-}
-
-
-# return the IP address and mapped hostname of each node in the cluster
-function nodes {
-  grep "master" /etc/hosts | awk '{print $0}' && \
-  grep "worker" /etc/hosts | awk '{print $0}'
-}
-
-
-# return which nodes are currently up and running
-function nodes-up {
-  echo "Pinging master..."
-  ping master -c 1 | grep "packet loss"
-
-  for worker in $(workers)
-  do
-    echo "Pinging $worker..."
-    ping $worker -c 1 | grep "packet loss"
-  done
+  echo "$CLUSTER_USER"
 }
 
 
 # return only the hostname of each worker in the cluster
 function workers {
-  grep "worker" /etc/hosts | awk '{print $2}'
+  nodes | awk '$2 ~ /^worker[0-9]+$/ {print $2}'
 }
 
 
-# send a command to be executed by all workers in the cluster
+# return which nodes are currently up
+function nodes-up {
+  local host
+  for host in $(nodes | awk '{print $2}'); do
+    if ping -c 1 -W 2 "$host" > /dev/null 2>&1; then
+      echo "$host: up"
+    else
+      echo "$host: DOWN"
+    fi
+  done
+}
+
+
+# run a command on every worker (not on master)
 function master-cmd {
-  for worker in $(workers)
-  do
-    echo "Executing '$@' in $worker as $USER..."
-    ssh $USER@$worker "$@"
+  local worker
+  for worker in $(workers); do
+    echo "==> $worker: $*"
+    # shellcheck disable=SC2029  # expanding here is intended: the command runs remotely as one string
+    ssh "${CLUSTER_SSH_OPTS[@]}" "$CLUSTER_USER@$worker" "$*" \
+      || echo "!! $worker: command failed (exit $?)" >&2
   done
 }
 
 
-# send a command to be executed by all nodes in the cluster
+# run a command on every worker, then on master (master last so reboot/shutdown reach the workers)
 function cluster-cmd {
-  master-cmd $@
-  echo "Executing '$@' in master as $USER..."
-  $@
+  master-cmd "$@"
+  echo "==> $(hostname): $*"
+  bash -c "$*"
 }
 
 
-# reboot all nodes in the cluster at the same time
-function cluster-reboot {
-  cluster-cmd sudo shutdown -r now
-}
+# reboot / shut down all nodes (workers first, master last)
+function cluster-reboot   { cluster-cmd "sudo shutdown -r now"; }
+function cluster-shutdown { cluster-cmd "sudo shutdown -h now"; }
 
 
-# shutdown all nodes in the cluster at the same time
-function cluster-shutdown {
-  cluster-cmd sudo shutdown now
-}
-
-
-# transfer files from one node to all other nodes
+# copy a file or directory to the same path on every worker
+#   cluster-scp ~/.bashrc
+#   cluster-scp ~/.scripts            (directories are copied recursively)
+#   cluster-scp ./data.csv /tmp/      (optional destination)
 function cluster-scp {
-  for worker in $(workers)
-  do
-    echo "Executing 'scp $1 $USER@$worker:$2' in $worker as $USER..."
-    scp $1 $USER@$worker:$2
+  local src="$1" dest="${2:-$1}" worker
+  if [[ -z "$src" ]]; then
+    echo "usage: cluster-scp <path> [dest]" >&2
+    return 1
+  fi
+  # copy a directory into its parent, so ~/.scripts lands at ~/.scripts, not ~/.scripts/.scripts
+  if [[ -d "$src" && -z "$2" ]]; then
+    dest="$(dirname "$(realpath "$src")")/"
+  fi
+  for worker in $(workers); do
+    echo "==> $worker: $src -> $dest"
+    scp -r -q "${CLUSTER_SSH_OPTS[@]}" "$src" "$CLUSTER_USER@$worker:$dest" \
+      || echo "!! $worker: copy failed" >&2
   done
 }
 
 
-# transfer directories from one node to all other nodes
-function cluster-scpr {
-  for worker in $(workers)
-  do
-    echo "Executing 'scp -r $1 $USER@$worker:$2' in $worker as $USER..."
-    scp -r $1 $USER@$worker:$2
-  done
-}
+# kept for backward compatibility with the guide
+function cluster-scpr { cluster-scp "$@"; }

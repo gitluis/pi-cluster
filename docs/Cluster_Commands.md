@@ -6,199 +6,74 @@
 
 # Cluster Commands
 
-The following are user-defined cluster command functions that will also facilitate communication across the cluster network. Many thanks to [Andrew and his guide](https://dev.to/awwsmm/building-a-raspberry-pi-hadoop-spark-cluster-8b2) for coming up with this idea.
+**Goal:** run a command, copy a file, or reboot every node with one command from `master`.
 
-All of these `functions` are to be defined in each Pi's `~/.bashrc` file and note that some of these depend on having the IP addresses mapped to each hostname in the `/etc/hosts` file.
+**Run on:** `master` (the script is then copied to the workers).
 
-* [Back-up file `~/.bashrc`](#back-up-file-bashrc)
-* [Add commands to `~/.bashrc`](#add-commands-to-bashrc)
-* [All commands (`cluster_commands.sh`)](#all-commands)
-    * [Define cluster user](#define-cluster-user)
-    * [`cluster-user` command explained](#cluster-user-command-explained)
-    * [`nodes` command explained](#nodes-command-explained)
-    * [`nodes-up` command explained](#nodes-up-command-explained)
-    * [`workers` command explained](#workers-command-explained)
-    * [`master-cmd` command explained](#master-cmd-command-explained)
-    * [`cluster-cmd` command explained](#cluster-cmd-command-explained)
-        * [`date` sync](#date-sync)
-    * [`cluster-reboot` command explained](#cluster-reboot-command-explained)
-    * [`cluster-shutdown` command explained](#cluster-shutdown-command-explained)
-    * [`cluster-scp` command explained](#cluster-scp-command-explained)
-    * [`cluster-scpr` command explained](#cluster-scpr-command-explained)
+These are shell functions defined in [`scripts/cluster_commands.sh`](../scripts/cluster_commands.sh). Many thanks to [Andrew and his guide](https://dev.to/awwsmm/building-a-raspberry-pi-hadoop-spark-cluster-8b2) for the idea.
+
+They read the node list from the `# pi-cluster network` block in `/etc/hosts`, so finish [The Pi Network](The_Pi_Network.md#mapping-the-hostname) first. SSH keys must also be set up, because the functions log in to each worker without a password.
+
+* [Install the commands](#install-the-commands)
+* [Command reference](#command-reference)
+* [Clock sync](#clock-sync)
 
 
-# Back-up file `~/.bashrc`
+# Install the commands
 
-Before we proceed, let's back up current `~/.bashrc` file in every Pi just in case
-```cli
-cp ~/.bashrc ~/.bashrc.bak
-```
+1. Back up your `~/.bashrc` in case you need to undo this:
 
-If you mess up the file, you can always revert back your changes using
-```cli
-cp ~/.bashrc.bak ~/.bashrc
-source ~/.bashrc
-```
+    ```bash
+    cp ~/.bashrc ~/.bashrc.bak
+    ```
 
+2. Download the script into a hidden `~/.scripts` folder:
 
-# Add commands to `~/.bashrc`
+    ```bash
+    mkdir -p ~/.scripts
+    wget -O ~/.scripts/cluster_commands.sh \
+      https://raw.githubusercontent.com/gitluis/pi-cluster/master/scripts/cluster_commands.sh
+    ```
 
-Download our cluster_command.sh` script to a hidden `scripts` directory
-```cli
-mkdir -p ~/.scripts
-cd ~/.scripts
-wget https://raw.githubusercontent.com/gitluis/pi-cluster/master/scripts/cluster_commands.sh
-```
+3. Load it from `~/.bashrc` and reload your shell:
 
-Edit `~/.bashrc` file to include `cluster_commands.sh` file
-```cli
-sudo nano ~/.bashrc
-```
+    ```bash
+    printf '\n# pi-cluster commands\nsource ~/.scripts/cluster_commands.sh\n' >> ~/.bashrc
+    source ~/.bashrc
+    ```
 
-Append the following lines at the bottom
-```shell
-...
+4. Copy the script and the updated `~/.bashrc` to every worker:
 
-# including pi-cluster commands
-source ~/.scripts/cluster_commands.sh
-```
+    ```bash
+    cluster-scp ~/.scripts
+    cluster-scp ~/.bashrc
+    ```
 
-Source for changes to take effect
-```cli
-source ~/.bashrc
-```
+**Check:** `workers` lists `worker1` to `worker4`, each once.
 
-Copy over the `~/.bashrc` file to all workers
-```cli
-cluster-scp ~/.bashrc
-```
-
-**Note:** For these commands to work, you must have had mapped each Raspberry Pi's IP address to its hostname as specified in [The Pi Network](The_Pi_Network.html#mapping-the-hostname).
+To undo, run `cp ~/.bashrc.bak ~/.bashrc` and `source ~/.bashrc`.
 
 
-# All commands
+# Command reference
 
-`cluster_commands.sh`
-```shell
-# ------------------- #
-# Pi-Cluster Commands #
-# ------------------- #
+| Command | What it does |
+| --- | --- |
+| `cluster-user` | Print the user the commands log in as (your own username by default) |
+| `nodes` | Print the IP address and hostname of every node |
+| `workers` | Print only the worker hostnames |
+| `nodes-up` | Ping every node and report `up` or `DOWN` |
+| `master-cmd <command>` | Run a command on every worker, not on `master` |
+| `cluster-cmd <command>` | Run a command on every worker, then on `master` |
+| `cluster-scp <path> [dest]` | Copy a file or folder to the same path on every worker |
+| `cluster-reboot` | Reboot all nodes, `master` last |
+| `cluster-shutdown` | Shut down all nodes, `master` last |
 
-
-# define cluster user
-USER="pi"
-
-
-# return the common user across all nodes in the cluster
-function cluster-user {
-  echo $USER
-}
+The commands log in as your own user. To use a different user, set `CLUSTER_USER` before the `source` line in `~/.bashrc`, for example `CLUSTER_USER=alice`. The variable is deliberately not called `USER`, which is a standard shell variable that other programs read.
 
 
-# return the IP address and mapped hostname of each node in the cluster
-function nodes {
-  grep "master" /etc/hosts | awk '{print $0}' && \
-  grep "worker" /etc/hosts | awk '{print $0}'
-}
+## `nodes`
 
-
-# return which nodes are currently up and running
-function nodes-up {
-  echo "Pinging master..."
-  ping master -c 1 | grep "packet loss"
-
-  for worker in $(workers)
-  do
-    echo "Pinging $worker..."
-    ping $worker -c 1 | grep "packet loss"
-  done
-}
-
-
-# return only the hostname of each worker in the cluster
-function workers {
-  grep "worker" /etc/hosts | awk '{print $2}'
-}
-
-
-# send a command to be executed by all workers in the cluster
-function master-cmd {
-  for worker in $(workers)
-  do
-    echo "Executing '$@' in $worker as $USER..."
-    ssh $USER@$worker "$@"
-  done
-}
-
-
-# send a command to be executed by all nodes in the cluster
-function cluster-cmd {
-  master-cmd $@
-  echo "Executing '$@' in master as $USER..."
-  $@
-}
-
-
-# reboot all nodes in the cluster at the same time
-function cluster-reboot {
-  cluster-cmd sudo shutdown -r now
-}
-
-
-# shutdown all nodes in the cluster at the same time
-function cluster-shutdown {
-  cluster-cmd sudo shutdown now
-}
-
-
-# transfer files from one node to all other nodes
-function cluster-scp {
-  for worker in $(workers)
-  do
-    echo "Executing 'scp $1 $USER@$worker:$2' in $worker as $USER..."
-    scp $1 $USER@$worker:$2
-  done
-}
-
-
-# transfer directories from one node to all other nodes
-function cluster-scpr {
-  for worker in $(workers)
-  do
-    echo "Executing 'scp -r $1 $USER@$worker:$2' in $worker as $USER..."
-    scp -r $1 $USER@$worker:$2
-  done
-}
-```
-
-
-# Define cluster user
-
-Define a common user across all nodes in the cluster.
-
-```shell
-# define cluster user
-USER="pi"
-```
-
-
-# `cluster-user` command explained
-
-Return the common user across all nodes in the cluster.
-
-Usage example
-```cli
-$ cluster-user
-pi
-```
-
-
-# `nodes` command explained
-
-Return the IP address and mapped hostname of each node in the cluster.
-
-Usage example
-```cli
+```console
 $ nodes
 192.168.0.100	master
 192.168.0.101	worker1
@@ -208,34 +83,9 @@ $ nodes
 ```
 
 
-# `nodes-up` command explained
+## `workers`
 
-Return which nodes are currently up and running.
-
-Usage example
-```cli
-$ nodes-up
-Pinging master...
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-Pinging worker1...
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-Pinging worker2...
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-Pinging worker3...
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-Pinging worker4...
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-```
-
-`0%` packet loss reflects that such node is up and running. In the case of a node being down, it will display a `100%` packet loss, meaning all packets sent were not received.
-
-
-# `workers` command explained
-
-Return only the hostname of each worker in the cluster.
-
-Usage example
-```cli
+```console
 $ workers
 worker1
 worker2
@@ -244,124 +94,94 @@ worker4
 ```
 
 
-# `master-cmd` command explained
+## `nodes-up`
 
-Send a command to be executed by all workers in the cluster.
-
-Usage example
-```cli
-$ master-cmd date
-Executing 'date' in worker1 as pi...
-Wed 11 Mar 2020 08:31:47 PM AST
-Executing 'date' in worker2 as pi...
-Wed 11 Mar 2020 08:31:47 PM AST
-Executing 'date' in worker3 as pi...
-Wed 11 Mar 2020 08:31:48 PM AST
-Executing 'date' in worker4 as pi...
-Wed 11 Mar 2020 08:31:48 PM AST
+```console
+$ nodes-up
+master: up
+worker1: up
+worker2: up
+worker3: DOWN
+worker4: up
 ```
 
+Each node gets one ping with a 2-second timeout. `DOWN` means no reply: the node is off, still booting, or not on the network.
 
-# `cluster-cmd` command explained
 
-Send a command to be executed by all nodes in the cluster.
+## `master-cmd` and `cluster-cmd`
 
-The difference between these `master-cmd` and `cluster-cmd` is that sometimes you want workers to do something but not the master, for that case you can use `master-cmd`. And for the case in which you want all nodes in the cluster to do something, you use `cluster-cmd` instead.
-
-Usage example
-```cli
+```console
 $ cluster-cmd date
-Executing 'date' in worker1 as pi...
-Wed 11 Mar 2020 10:38:56 PM AST
-Executing 'date' in worker2 as pi...
-Wed 11 Mar 2020 08:32:11 PM AST
-Executing 'date' in worker3 as pi...
-Wed 11 Mar 2020 06:22:40 PM AST
-Executing 'date' in worker4 as pi...
-Wed 11 Mar 2020 09:47:10 PM AST
-Executing 'date' in master as pi...
-Wed 11 Mar 2020 12:12:58 PM AST
+==> worker1: date
+Fri 30 Oct 2026 08:31:47 PM AST
+==> worker2: date
+Fri 30 Oct 2026 08:31:47 PM AST
+==> worker3: date
+Fri 30 Oct 2026 08:31:48 PM AST
+==> worker4: date
+Fri 30 Oct 2026 08:31:48 PM AST
+==> master: date
+Fri 30 Oct 2026 08:31:48 PM AST
 ```
 
-**Note**: The reason for `$@` being after `master-cmd $@` is so that the command is executed in the workers first and then in the master node. If a `reboot` or `shutdown` command is passed and was to be executed in the master node first then the master would be halted before it can tell the workers what they were supposed to do, thus rebooting/shutting down the master but not the workers.
+Use `master-cmd` when only the workers should run something, and `cluster-cmd` when every node should.
 
+Quote commands that contain pipes, redirects or `;`, so they run on each node instead of on `master`:
 
-## `date` sync
-
-As you may have seen, each Pi's date and time may not be synchronized. It may not be a problem now, but for those people who intend on creating "crontab" jobs, which are nothing more but scheduled job or tasks, it could be a critical issue.
-
-First, we need to make sure `htpdate` is installed on all of our Pi boards
-```cli
-cluster-cmd "sudo apt install htpdate -y > /dev/null 2&1"
+```bash
+cluster-cmd 'df -h / | tail -1'
 ```
 
-That will align the nodes within +/- 10 seconds.
+`cluster-cmd` runs on the workers first and on `master` last. That order matters for `reboot` and `shutdown`: if `master` went first, it would turn off before it could reach the workers.
 
-A more reliable and robust way is to have them synchronized using a remote server such as `time.nist.gov`
-```cli
-cluster-cmd sudo htpdate -a -l time.nist.gov
+If a worker is down or refuses the login, you see a `!! worker3: command failed` line and the loop moves on to the next worker after 5 seconds, instead of hanging.
+
+
+## `cluster-scp`
+
+```console
+$ cluster-scp ~/.bashrc
+==> worker1: /home/alice/.bashrc -> /home/alice/.bashrc
+==> worker2: /home/alice/.bashrc -> /home/alice/.bashrc
+==> worker3: /home/alice/.bashrc -> /home/alice/.bashrc
+==> worker4: /home/alice/.bashrc -> /home/alice/.bashrc
 ```
 
-This may take a few minutes before it finished yet it will sync all clocks. Being off by less than 5 seconds is good enough.
+With one argument, the file lands at the same path on every worker and overwrites what is there. A folder is copied with its contents, so `cluster-scp ~/.scripts` creates or updates `~/.scripts` on each worker. Give a second argument to choose a different destination, for example `cluster-scp data.csv /tmp/`.
+
+`cluster-scpr` still works as an alias of `cluster-scp`, for older notes that use it.
 
 
-# `cluster-reboot` command explained
+## `cluster-reboot` and `cluster-shutdown`
 
-Reboot all nodes in the cluster at the same time.
-
-Usage example
-```cli
+```bash
 cluster-reboot
-```
-
-
-# `cluster-shutdown` command explained
-
-Shutdown all nodes in the cluster at the same time.
-
-Usage example
-```cli
 cluster-shutdown
 ```
 
+These run `sudo shutdown` over SSH, which only works if your user can use `sudo` without typing a password. Check on any node:
 
-# `cluster-scp` command explained
-
-Transfer (secure copy) files from one node to all other nodes.
-
-Usage example
-```cli
-$ cluster-scp ~/.bashrc
-Executing 'scp /home/pi/.bashrc pi@worker1:' in worker1 as pi...
-.bashrc                                       100% 3594     2.3MB/s   00:00    
-Executing 'scp /home/pi/.bashrc pi@worker2:' in worker2 as pi...
-.bashrc                                       100% 3594     2.1MB/s   00:00    
-Executing 'scp /home/pi/.bashrc pi@worker3:' in worker3 as pi...
-.bashrc                                       100% 3594     2.5MB/s   00:00    
-Executing 'scp /home/pi/.bashrc pi@worker4:' in worker4 as pi...
-.bashrc                                       100% 3594     2.2MB/s   00:00
+```bash
+sudo -n true && echo "passwordless sudo: yes"
 ```
 
-This overwrites the `/home/pi/.bashrc` file to the same `path` in all workers.
+If it prints nothing, see [Cluster Security](Cluster_Security.md#allow-cluster-reboot-without-a-password) for a narrow rule that allows only `shutdown`.
 
 
-# `cluster-scpr` command explained
+# Clock sync
 
-Transfer (secure copy) directories from one node to all other nodes.
+Nodes must agree on the time: logs, scheduled jobs and HDFS all compare timestamps across nodes. Raspberry Pi OS already syncs the clock over the internet with `systemd-timesyncd`, so normally there is nothing to install.
 
-Usage example
-```cli
-$ cluster-scpr ~/.scripts/
-Executing 'scp -r /home/pi/.scripts/ pi@worker1:' in worker1 as pi...
-cluster_commands.sh                           100% 1805     1.5MB/s   00:00    
-Executing 'scp -r /home/pi/.scripts/ pi@worker2:' in worker2 as pi...
-cluster_commands.sh                           100% 1805     1.7MB/s   00:00    
-Executing 'scp -r /home/pi/.scripts/ pi@worker3:' in worker3 as pi...
-cluster_commands.sh                           100% 1805     1.7MB/s   00:00    
-Executing 'scp -r /home/pi/.scripts/ pi@worker4:' in worker4 as pi...
-cluster_commands.sh                           100% 1805     1.1MB/s   00:00
+Check every node:
+
+```bash
+cluster-cmd timedatectl show -p NTPSynchronized --value
 ```
 
-This overwrites the `/home/pi/.scripts` directory and its contents to the same `path` in all workers.
+Each node should print `yes`. Set the same time zone everywhere too, for example:
 
-**Note:** You must ensure that the preceding `/` at the end is specified for all contents to be transferred over.
+```bash
+cluster-cmd sudo timedatectl set-timezone America/Puerto_Rico
+```
+
+If a node prints `no`, it usually can't reach the internet. Fix its network first ([The Pi Network](The_Pi_Network.md)), then check again with `timedatectl timesync-status`.
