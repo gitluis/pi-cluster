@@ -65,33 +65,18 @@ GLYPHS = {
         <rect x='11' y='22' width='11' height='7' rx='1.5'/>
         <rect x='26' y='22' width='11' height='7' rx='1.5'/>
         <path d='M11 34h26'/>"""),
-    "format-sd-card": (OS, "SD card with check mark", SD_CARD + SD_PINS + """
-        <path d='M18 29l4 4 8-9' """ + ARROW_HEAD + """/>"""),
     "read-write-images": (OS, "SD card with read and write arrows", """
         <path d='M7 9h11l4 4v24a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V11a2 2 0 0 1 2-2z'/>
         <path d='M10 13v4M15 13v4'/>
         <path d='M27 19h15M37 14l5 5-5 5M42 31H27M32 26l-5 5 5 5' """ + ARROW_HEAD + """/>"""),
-    "installer": (OS, "Download arrow", """
-        <path d='M24 6v24M15 21l9 9 9-9' """ + ARROW_HEAD + """/>
-        <path d='M8 30v9a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2v-9'/>"""),
-    "install-os": (OS, "SD card with install arrow", SD_CARD + SD_PINS + """
-        <path d='M25 21v13M20 29l5 5 5-5' """ + ARROW_HEAD + """/>"""),
     "install-many": (OS, "Stack of SD cards", """
         <path d='M21 4h14l5 5v25a2 2 0 0 1-2 2'/>
         <path d='M16 9h14l5 5v25a2 2 0 0 1-2 2'/>
         <path d='M11 14h14l5 5v23a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2z'/>
         <path d='M14 18v5M18.5 18v5M23 18v5'/>"""),
-    "clone": (OS, "Copy", """
-        <rect x='16' y='16' width='26' height='26' rx='3'/>
-        <path d='M32 16v-7a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v21a2 2 0 0 0 2 2h7'/>
-        <path d='M29 23v12M23 29h12'/>"""),
     "updates": (OS, "Refresh arrows", """
         <path d='M39 20A16 16 0 0 0 10 17'/><path d='M9 9v8h8' """ + ARROW_HEAD + """/>
         <path d='M9 28a16 16 0 0 0 29 3'/><path d='M39 39v-8h-8' """ + ARROW_HEAD + """/>"""),
-    "desktop": (EXTRA, "Monitor", """
-        <rect x='5' y='7' width='38' height='26' rx='3'/>
-        <path d='M17 42h14M24 33v9'/>
-        <path d='M5 27h38'/>"""),
     # --- network ---
     "internet": (NETWORK, "Globe", """
         <circle cx='24' cy='24' r='18'/>
@@ -135,9 +120,9 @@ GLYPHS = {
     "troubleshooting": (EXTRA, "Wrench", """
         <path d='M30 6a10 10 0 0 0-9 14L6 35a4 4 0 0 0 6 6l15-15a10 10 0 0 0 14-9l-6 6-5-1-1-5 6-6a10 10 0 0 0-5-1z' """ + ARROW_HEAD + """/>"""),
     # --- extras ---
-    "miscellaneous": (EXTRA, "Light bulb", """
-        <path d='M18 33c-4-3-7-7-7-13a13 13 0 0 1 26 0c0 6-3 10-7 13z'/>
-        <path d='M19 38h10M21 43h6'/>"""),
+    "versions": (EXTRA, "Tag", """
+        <path d='M6 8v14l20 20 16-16L22 6H8a2 2 0 0 0-2 2z' """ + ARROW_HEAD + """/>
+        <circle cx='15' cy='15' r='3'/>"""),
     "references": (EXTRA, "Bookmark", """
         <path d='M14 5h20a2 2 0 0 1 2 2v36l-12-9-12 9V7a2 2 0 0 1 2-2z' """ + ARROW_HEAD + """/>
         <path d='M19 14h10M19 20h7'/>"""),

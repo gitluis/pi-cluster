@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/cluster-commands.svg" width="96" height="96" alt=""/>
@@ -185,3 +185,7 @@ cluster-cmd sudo timedatectl set-timezone America/Puerto_Rico
 ```
 
 If a node prints `no`, it usually can't reach the internet. Fix its network first ([The Pi Network](The_Pi_Network.md)), then check again with `timedatectl timesync-status`.
+
+---
+
+**Step 4 of 9** · ← Step 3: [The Pi Network](The_Pi_Network.md) · Step 5: [Cluster Security](Cluster_Security.md) →

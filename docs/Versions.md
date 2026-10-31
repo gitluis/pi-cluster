@@ -1,12 +1,12 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
-<img src="img/icons/references.svg" width="96" height="96" alt=""/>
+<img src="img/icons/versions.svg" width="96" height="96" alt=""/>
 
 
 # Versions
 
-Java, Hadoop and Spark must be compatible with each other, so the guide pins one tested combination. Use these versions on **every** node.
+Java, Hadoop and Spark must work together, so the guide pins one combination that their documentation lists as compatible. Use these versions on **every** node.
 
 | Component | Version | Why this one |
 |:--|:--|:--|
@@ -20,3 +20,7 @@ Java, Hadoop and Spark must be compatible with each other, so the guide pins one
 Versions chosen on 30 October 2026. Newer patch releases (3.5.x, 4.2.x) should work the same; for anything else, check the release notes of each project before upgrading one piece on its own.
 
 Download links in this guide use [Apache's download CDN](https://dlcdn.apache.org/), which only keeps current releases. If a link stops working, the same file is in the [Apache archive](https://archive.apache.org/dist/) under the same path.
+
+---
+
+Back to the [Cluster Guide](Cluster_Guide.md)

@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/read-write-images.svg" width="96" height="96" alt=""/>
@@ -95,3 +95,7 @@ A clone is an exact copy, so every cloned node starts with the **same hostname, 
     ```
 
 **Check:** `hostname` prints the new name, and `cat /etc/machine-id` differs on every node.
+
+---
+
+Back to the [Cluster Guide](Cluster_Guide.md)

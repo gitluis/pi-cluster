@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/cluster-setup.svg" width="96" height="96" alt=""/>
@@ -192,4 +192,6 @@ Set up YARN only if you want to try MapReduce, and **stop it before running Spar
 
     `yarn node -list` shows 4 nodes, and the job ends with `Estimated value of Pi is 3.14...`. The ResourceManager's web page is `http://master.local:8088` while YARN runs.
 
-Next: [Spark](Spark.md).
+---
+
+**Step 7 of 9** · ← Step 6: [Single Node Setup](Single_Node_Setup.md) · Step 8: [Spark](Spark.md) →

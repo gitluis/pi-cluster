@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/workload.svg" width="96" height="96" alt=""/>
@@ -171,3 +171,7 @@ Fill in your own numbers. The cluster's time is about 75 rounds of "one model pe
 A Raspberry Pi 4 core is several times slower than a current laptop core, so the cluster won't always win against a fast computer. Its advantage is that it runs on its own while your computer stays free, and it scales: each extra worker adds another model in parallel.
 
 If your computer's run uses all its cores, you can also compare **per model**: the cluster wins when one Pi's time per model is less than 4 times your computer's time per model, since four Pis train at once.
+
+---
+
+**Step 9 of 9** · ← Step 8: [Spark](Spark.md) · Done! Back to the [Cluster Guide](Cluster_Guide.md)

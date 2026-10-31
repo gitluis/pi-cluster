@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/hardware.svg" width="96" height="96" alt=""/>
@@ -81,3 +81,7 @@ Values above 6 are only allowed together with `force_turbo=1`, and that combinat
     ```
 
 If the Pi doesn't boot or `get_throttled` is not `0x0`, raise `over_voltage` by 1 (up to 6) or lower `arm_freq`. If a Pi won't boot at all, put its card in your computer and remove the lines from `config.txt` on the `bootfs` partition.
+
+---
+
+Back to the [Cluster Guide](Cluster_Guide.md)

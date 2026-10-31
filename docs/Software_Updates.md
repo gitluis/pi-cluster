@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/updates.svg" width="96" height="96" alt=""/>
@@ -51,3 +51,7 @@ cluster-reboot
 - Before installing Hadoop or Spark.
 - Every month or so afterwards, when no job is running.
 - Stop HDFS and Spark first (see [Cluster Setup](Cluster_Setup.md#start-and-stop-the-cluster)), so a reboot doesn't interrupt a job.
+
+---
+
+Back to the [Cluster Guide](Cluster_Guide.md)

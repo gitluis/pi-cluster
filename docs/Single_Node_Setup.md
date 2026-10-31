@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/single-node.svg" width="96" height="96" alt=""/>
@@ -207,4 +207,6 @@ Stop HDFS before moving on:
 stop-dfs.sh
 ```
 
-Next: [Cluster Setup](Cluster_Setup.md).
+---
+
+**Step 6 of 9** · ← Step 5: [Cluster Security](Cluster_Security.md) · Step 7: [Cluster Setup](Cluster_Setup.md) →

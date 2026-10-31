@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/pi-network.svg" width="96" height="96" alt=""/>
@@ -153,4 +153,6 @@ Your nodes accept keys only, not passwords, so `ssh-copy-id` from `master` won't
 
 The private key `~/.ssh/id_ed25519` on `master` lets anyone who has it into every node. Never copy or share it; only the `.pub` file goes to other machines.
 
-Next: install the [cluster commands](Cluster_Commands.md).
+---
+
+**Step 3 of 9** · ← Step 2: [Install OS](Install_OS.md) · Step 4: [Cluster Commands](Cluster_Commands.md) →

@@ -1,4 +1,4 @@
-[Background](Background.md) / [Purpose](Purpose.md) / [Getting Started](Getting_Started.md) / [Cluster Guide](Cluster_Guide.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
 
 
 <img src="img/icons/security.svg" width="96" height="96" alt=""/>
@@ -189,3 +189,7 @@ Repeat on every node, then redo [SSH keys from master](The_Pi_Network.md#ssh-key
 Resources:
 * [Securing your Raspberry Pi](https://www.raspberrypi.com/documentation/computers/configuration.html)
 * [UFW on Ubuntu's community wiki](https://help.ubuntu.com/community/UFW)
+
+---
+
+**Step 5 of 9** · ← Step 4: [Cluster Commands](Cluster_Commands.md) · Step 6: [Single Node Setup](Single_Node_Setup.md) →
