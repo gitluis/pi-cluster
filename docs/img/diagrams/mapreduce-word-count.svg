@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 584" role="img" aria-label="MapReduce counting words in a file. Split: HDFS stores the file as three blocks on worker1 to worker3 (pi spark pi; pi data; spark pi). Map: each worker reads its own block and writes a word-and-1 pair for every word. Shuffle: the pairs are grouped by word, so every pi pair goes to one place, every spark pair to another and the data pair to a third. Reduce: each group adds up its 1s, giving pi 4, spark 2, data 1. Output: the counts are written back to HDFS as a new file.">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F172A"/><stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="584" rx="24" fill="url(#bg)"/>
+
+  <g font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="40" y="54" fill="#F8FAFC" font-size="26" font-weight="700">How MapReduce works</text>
+    <text x="40" y="80" fill="#94A3B8" font-size="15">The classic example: count how often each word appears in a file</text>
+
+    <!-- step labels -->
+    <g font-size="13" font-weight="700" letter-spacing=".08em" fill="#94A3B8">
+      <text x="40" y="138">SPLIT</text>
+      <text x="40" y="224">MAP</text>
+      <text x="40" y="348">SHUFFLE</text>
+      <text x="40" y="434">REDUCE</text>
+      <text x="40" y="520">OUTPUT</text>
+    </g>
+    <g font-size="12.5" fill="#64748B">
+      <text x="40" y="156">HDFS blocks</text>
+      <text x="40" y="242">where data lives</text>
+      <text x="40" y="366">group by word</text>
+      <text x="40" y="452">add up</text>
+      <text x="40" y="538">back to HDFS</text>
+    </g>
+
+    <!-- 1. split: the file as HDFS blocks -->
+    <g fill="#14B8A6" fill-opacity=".18" stroke="#2DD4BF">
+      <rect x="180" y="110" width="200" height="60" rx="12"/>
+      <rect x="410" y="110" width="200" height="60" rx="12"/>
+      <rect x="640" y="110" width="200" height="60" rx="12"/>
+    </g>
+    <g font-size="12.5" fill="#CCFBF1">
+      <text x="196" y="133">block 1 · worker1</text>
+      <text x="426" y="133">block 2 · worker2</text>
+      <text x="656" y="133">block 3 · worker3</text>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" font-weight="700">
+      <text x="196" y="158"><tspan fill="#FDA4AF">pi</tspan> <tspan fill="#FCD34D">spark</tspan> <tspan fill="#FDA4AF">pi</tspan></text>
+      <text x="426" y="158"><tspan fill="#FDA4AF">pi</tspan> <tspan fill="#6EE7B7">data</tspan></text>
+      <text x="656" y="158"><tspan fill="#FCD34D">spark</tspan> <tspan fill="#FDA4AF">pi</tspan></text>
+    </g>
+
+    <!-- 2. map: every word becomes a (word, 1) pair, on the worker that holds the block -->
+    <g fill="#0EA5E9" fill-opacity=".18" stroke="#38BDF8">
+      <rect x="180" y="196" width="200" height="60" rx="12"/>
+      <rect x="410" y="196" width="200" height="60" rx="12"/>
+      <rect x="640" y="196" width="200" height="60" rx="12"/>
+    </g>
+    <g font-size="12.5" fill="#E0F2FE">
+      <text x="196" y="217">worker1</text>
+      <text x="426" y="217">worker2</text>
+      <text x="656" y="217">worker3</text>
+    </g>
+    <!-- word chips: pi = rose, spark = amber, data = emerald -->
+    <g fill-opacity=".22">
+      <g fill="#F43F5E" stroke="#FB7185">
+        <rect x="196" y="226" width="44" height="24" rx="12"/>
+        <rect x="320" y="226" width="44" height="24" rx="12"/>
+        <rect x="426" y="226" width="44" height="24" rx="12"/>
+        <rect x="730" y="226" width="44" height="24" rx="12"/>
+      </g>
+      <g fill="#F59E0B" stroke="#FBBF24">
+        <rect x="246" y="226" width="68" height="24" rx="12"/>
+        <rect x="656" y="226" width="68" height="24" rx="12"/>
+      </g>
+      <g fill="#10B981" stroke="#34D399">
+        <rect x="476" y="226" width="60" height="24" rx="12"/>
+      </g>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" text-anchor="middle">
+      <g fill="#FFE4E6">
+        <text x="218" y="242.5">pi 1</text>
+        <text x="342" y="242.5">pi 1</text>
+        <text x="448" y="242.5">pi 1</text>
+        <text x="752" y="242.5">pi 1</text>
+      </g>
+      <g fill="#FEF3C7">
+        <text x="280" y="242.5">spark 1</text>
+        <text x="690" y="242.5">spark 1</text>
+      </g>
+      <g fill="#D1FAE5">
+        <text x="506" y="242.5">data 1</text>
+      </g>
+    </g>
+
+    <!-- shuffle lines: each pair travels to the group for its word -->
+    <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <g stroke="#FB7185">
+        <path d="M218 258C218 288 235 288 235 316M231 312l4 4 4-4"/>
+        <path d="M342 258C342 288 265 288 265 316M261 312l4 4 4-4"/>
+        <path d="M448 258C448 288 295 288 295 316M291 312l4 4 4-4"/>
+        <path d="M752 258C752 288 325 288 325 316M321 312l4 4 4-4"/>
+      </g>
+      <g stroke="#FBBF24">
+        <path d="M280 258C280 288 495 288 495 316M491 312l4 4 4-4"/>
+        <path d="M690 258C690 288 525 288 525 316M521 312l4 4 4-4"/>
+      </g>
+      <g stroke="#34D399">
+        <path d="M506 258C506 288 740 288 740 316M736 312l4 4 4-4"/>
+      </g>
+    </g>
+
+    <!-- 3. shuffle: pairs grouped by word -->
+    <g fill="#8B5CF6" fill-opacity=".18" stroke="#A78BFA">
+      <rect x="180" y="320" width="200" height="60" rx="12"/>
+      <rect x="410" y="320" width="200" height="60" rx="12"/>
+      <rect x="640" y="320" width="200" height="60" rx="12"/>
+    </g>
+
+    <!-- 4. reduce: add up each group -->
+    <g fill="#6366F1" fill-opacity=".18" stroke="#818CF8">
+      <rect x="180" y="406" width="200" height="60" rx="12"/>
+      <rect x="410" y="406" width="200" height="60" rx="12"/>
+      <rect x="640" y="406" width="200" height="60" rx="12"/>
+    </g>
+
+    <!-- 5. output: a new file in HDFS -->
+    <rect x="180" y="496" width="660" height="56" rx="12" fill="#14B8A6" fill-opacity=".18" stroke="#2DD4BF"/>
+    <text x="200" y="529" fill="#fff" font-size="16" font-weight="700">Output file</text>
+
+    <!-- word chips for shuffle, reduce and output rows -->
+    <g fill-opacity=".22">
+      <g fill="#F43F5E" stroke="#FB7185">
+        <rect x="196" y="338" width="34" height="24" rx="12"/>
+        <rect x="196" y="424" width="34" height="24" rx="12"/>
+        <rect x="310" y="512" width="44" height="24" rx="12"/>
+      </g>
+      <g fill="#F59E0B" stroke="#FBBF24">
+        <rect x="426" y="338" width="54" height="24" rx="12"/>
+        <rect x="426" y="424" width="54" height="24" rx="12"/>
+        <rect x="362" y="512" width="68" height="24" rx="12"/>
+      </g>
+      <g fill="#10B981" stroke="#34D399">
+        <rect x="656" y="338" width="46" height="24" rx="12"/>
+        <rect x="656" y="424" width="46" height="24" rx="12"/>
+        <rect x="438" y="512" width="60" height="24" rx="12"/>
+      </g>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" text-anchor="middle">
+      <g fill="#FFE4E6">
+        <text x="213" y="354.5">pi</text>
+        <text x="213" y="440.5">pi</text>
+        <text x="332" y="528.5">pi 4</text>
+      </g>
+      <g fill="#FEF3C7">
+        <text x="453" y="354.5">spark</text>
+        <text x="453" y="440.5">spark</text>
+        <text x="396" y="528.5">spark 2</text>
+      </g>
+      <g fill="#D1FAE5">
+        <text x="679" y="354.5">data</text>
+        <text x="679" y="440.5">data</text>
+        <text x="468" y="528.5">data 1</text>
+      </g>
+    </g>
+
+    <!-- grouped values and sums -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15">
+      <g fill="#EDE9FE">
+        <text x="242" y="355">1, 1, 1, 1</text>
+        <text x="492" y="355">1, 1</text>
+        <text x="714" y="355">1</text>
+      </g>
+      <g fill="#C7D2FE">
+        <text x="242" y="441">1+1+1+1 = <tspan fill="#fff" font-size="19" font-weight="700">4</tspan></text>
+        <text x="492" y="441">1+1 = <tspan fill="#fff" font-size="19" font-weight="700">2</tspan></text>
+        <text x="714" y="441">1 = <tspan fill="#fff" font-size="19" font-weight="700">1</tspan></text>
+      </g>
+    </g>
+
+    <!-- arrows between steps -->
+    <g fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M280 174v16M275 185l5 5 5-5"/>
+      <path d="M510 174v16M505 185l5 5 5-5"/>
+      <path d="M740 174v16M735 185l5 5 5-5"/>
+
+      <path d="M280 384v16M275 395l5 5 5-5"/>
+      <path d="M510 384v16M505 395l5 5 5-5"/>
+      <path d="M740 384v16M735 395l5 5 5-5"/>
+
+      <path d="M280 470v20M275 485l5 5 5-5"/>
+      <path d="M510 470v20M505 485l5 5 5-5"/>
+      <path d="M740 470v20M735 485l5 5 5-5"/>
+    </g>
+  </g>
+</svg>

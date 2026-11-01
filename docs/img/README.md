@@ -5,12 +5,12 @@ All images in this folder are original SVGs made for this guide and are covered 
 | Folder | Contents |
 | --- | --- |
 | `icons/` | One header icon per page, plus two small inline icons (`router.svg`, `ethernet.svg`) |
-| `diagrams/` | Larger illustrations: cluster overview, Hadoop/Spark stack, Raspbian editions, and the Raspberry Pi Imager step flows |
+| `diagrams/` | Larger illustrations: cluster overview, Hadoop/Spark stack, MapReduce word count, Raspbian editions, and the Raspberry Pi Imager step flows |
 
 ## Editing
 
 - Icons and the three `imager-*.svg` step flows are generated. Change `scripts/generate_images.py`, then run `python3 scripts/generate_images.py`.
-- `cluster-overview.svg`, `hadoop-spark-stack.svg` and `os-editions.svg` are hand-written SVG; edit them directly.
+- `cluster-overview.svg`, `hadoop-spark-stack.svg`, `mapreduce-word-count.svg` and `os-editions.svg` are hand-written SVG; edit them directly.
 
 ## Style
 
