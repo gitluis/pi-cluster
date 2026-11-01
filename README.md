@@ -35,6 +35,20 @@ Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-
 New here? Read [Getting Started](docs/Getting_Started.md) first. [About](docs/About.md) explains why this cluster exists and how Hadoop and Spark fit together.
 
 
+## Reference pages
+
+Read these when a step points to them, or when you need them later.
+
+| Page | Covers |
+| --- | --- |
+| [About](docs/About.md) | Why this cluster exists, Hadoop and Spark explained, and the build history |
+| [Getting Started](docs/Getting_Started.md) | What you need before step 1 |
+| [Software](docs/Software.md) | Raspberry Pi OS, which edition to use, and the Java, Hadoop and Spark versions the guide pins |
+| [Maintenance](docs/Maintenance.md) | Updating packages and firmware on every node; backing up, restoring and cloning cards |
+| [Troubleshooting](docs/Troubleshooting.md) | Symptoms and fixes |
+| [References](docs/References.md) | Sources this guide builds on |
+
+
 ## What you need
 
 - Five Raspberry Pi 5 boards (4 GB minimum, 8 GB recommended) or five Raspberry Pi 4 boards (2 GB minimum, 4 GB recommended), each with its official power supply and cooling, plus microSD cards, an 8-port switch and cables. See [Hardware List](docs/Hardware_List.md).
