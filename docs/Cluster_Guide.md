@@ -12,7 +12,7 @@ Follow these steps in order, from an empty desk to 300 trained models. Each page
 | :-: | --- | --- | --- |
 | 1 | [Hardware List](Hardware_List.md) | Everything bought and assembled, with enough power and cooling | – |
 | 2 | [Install OS](Install_OS.md) | Five cards flashed with Raspberry Pi OS Lite, each node reachable over SSH | Your computer |
-| 3 | [The Pi Network](The_Pi_Network.md) | Fixed addresses, nodes reachable by name, `master` able to log in everywhere | Your computer, `master` |
+| 3 | [The Pi Network](The_Pi_Network.md) | Internet access, fixed addresses, nodes reachable by name, `master` able to log in everywhere | Your computer, `master` |
 | 4 | [Cluster Commands](Cluster_Commands.md) | One command to run or copy anything on every node | `master` |
 | 5 | [Cluster Security](Cluster_Security.md) | Key-only logins, fail2ban and a firewall | `master` |
 | 6 | [Single Node Setup](Single_Node_Setup.md) | Java on every node; HDFS working on `master` alone | `master` |
@@ -32,9 +32,7 @@ Read these when a step points to them, or when you need them later.
 | [About](About.md) | Why this cluster exists, Hadoop and Spark explained, and the build history |
 | [Getting Started](Getting_Started.md) | What you need before step 1 |
 | [Software](Software.md) | Raspberry Pi OS, which edition to use, and the Java, Hadoop and Spark versions the guide pins |
-| [Internet Connection](Internet_Connection.md) | Ethernet and Wi-Fi |
 | [Software Updates](Software_Updates.md) | Updating packages and firmware on every node |
 | [Back Up and Restore Cards](Read_Write_OS_Images.md) | Saving a card to an image file; cloning cards |
-| [Netplan](Netplan.md) | Network setup for nodes running Ubuntu Server instead |
 | [Troubleshooting](Troubleshooting.md) | Symptoms and fixes |
 | [References](References.md) | Sources this guide builds on |

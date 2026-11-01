@@ -68,14 +68,6 @@ GLYPHS = {
         <path d='M39 20A16 16 0 0 0 10 17'/><path d='M9 9v8h8' """ + ARROW_HEAD + """/>
         <path d='M9 28a16 16 0 0 0 29 3'/><path d='M39 39v-8h-8' """ + ARROW_HEAD + """/>"""),
     # --- network ---
-    "internet": (NETWORK, "Globe", """
-        <circle cx='24' cy='24' r='18'/>
-        <ellipse cx='24' cy='24' rx='8' ry='18'/>
-        <path d='M7 18h34M7 30h34'/>"""),
-    "netplan": (NETWORK, "Configuration file", """
-        <path d='M12 5h17l9 9v27a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z'/>
-        <path d='M29 5v9h9'/>
-        <path d='M16 21h10M20 27h12M20 33h8M16 39h6'/>"""),
     "pi-network": (NETWORK, "Network topology", """
         <circle cx='24' cy='10' r='5.5'/>
         <circle cx='6' cy='38' r='3.5'/><circle cx='18' cy='38' r='3.5'/>
