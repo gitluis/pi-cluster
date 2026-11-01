@@ -1,4 +1,4 @@
-[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md) · [About](About.md)
 
 
 <img src="img/icons/getting-started.svg" width="96" height="96" alt=""/>
@@ -25,10 +25,6 @@
 - Examples use the username `alice` and the addresses `192.168.0.100` to `192.168.0.104`. Replace them with your own wherever they appear.
 - Reference pages, such as [Software](Software.md) or [Maintenance](Maintenance.md), explain a topic in more depth. The steps link to them when they're needed.
 
-
-## Why a cluster
-
-[About](About.md) explains what this cluster is for (training 300 forecasting models faster than one computer can) and what Hadoop and Spark are and how they fit together.
 
 Ready? Start with [step 1: Hardware List](Hardware_List.md).
 

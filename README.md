@@ -1,4 +1,4 @@
-[Cluster Guide](docs/Cluster_Guide.md) · [Getting Started](docs/Getting_Started.md) · [Troubleshooting](docs/Troubleshooting.md)
+[Getting Started](docs/Getting_Started.md) · [Cluster Guide](docs/Cluster_Guide.md) · [Troubleshooting](docs/Troubleshooting.md) · [About](docs/About.md)
 
 
 <img src="docs/img/icons/cluster.svg" width="96" height="96" alt=""/>
@@ -9,50 +9,6 @@
 A step-by-step guide to building a portable cluster of five Raspberry Pi 5 or Raspberry Pi 4 boards that stores data with Hadoop (HDFS) and trains machine learning models in parallel with Spark.
 
 <img src="docs/img/diagrams/cluster-overview.svg" width="100%" alt="Illustration of the cluster: five Raspberry Pi boards (Raspberry Pi 5 with Active Coolers shown) stacked in a case, master on top and four workers below, each wired to a network switch that connects to the router and the internet."/>
-
-
-## Status
-
-First built in 2020 on five Raspberry Pi 4 boards, with Hadoop and Spark working. The 2026 update adds the Raspberry Pi 5 and current software, but hasn't been built on hardware yet. [Builds](docs/About.md#builds) has the details and [photos of the original build](docs/About.md#the-original-build).
-
-<a href="docs/About.md#the-original-build"><img src="docs/img/photos/original-build-side.jpg" width="260" alt="Photo of the original 2020 cluster: five Raspberry Pi 4 boards stacked on a network switch, powered on and wired up."/></a>
-
-Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-cluster/issues) with your boards, RAM, OS image date and [benchmark](docs/Workload.md#benchmark) time, or if a step didn't work for you.
-
-
-## The guide
-
-| Step | Page | At the end you have |
-| :-: | --- | --- |
-| 1 | [Hardware List](docs/Hardware_List.md) | Everything bought and assembled, with enough power and cooling |
-| 2 | [Install OS](docs/Install_OS.md) | Five cards flashed, each node reachable over SSH |
-| 3 | [The Pi Network](docs/The_Pi_Network.md) | Internet access, fixed addresses, nodes reachable by name, SSH keys |
-| 4 | [Cluster Commands](docs/Cluster_Commands.md) | One command to run anything on every node |
-| 5 | [Cluster Security](docs/Cluster_Security.md) | Key-only logins, fail2ban and a firewall |
-| 6 | [Single Node Setup](docs/Single_Node_Setup.md) | Java everywhere; HDFS on `master` alone |
-| 7 | [Cluster Setup](docs/Cluster_Setup.md) | HDFS across four workers |
-| 8 | [Spark](docs/Spark.md) | Spark with one executor per worker |
-| 9 | [Workload](docs/Workload.md) | 300 models trained, one per worker at a time, and a benchmark |
-
-New here? Read [Getting Started](docs/Getting_Started.md) first. [About](docs/About.md) explains why this cluster exists and how Hadoop and Spark fit together.
-
-
-## What you need
-
-- Five Raspberry Pi 5 boards (4 GB minimum, 8 GB recommended) or five Raspberry Pi 4 boards (2 GB minimum, 4 GB recommended), each with its official power supply and cooling, plus microSD cards, an 8-port switch and cables. See [Hardware List](docs/Hardware_List.md).
-- A Windows, macOS or Linux computer with a card reader.
-- Comfort typing commands in a terminal. No Hadoop or Spark experience needed.
-
-The guide uses Raspberry Pi OS Lite (64-bit), Java 17, Hadoop 3.5.0 and Spark 4.2.1. [Software](docs/Software.md#versions) explains why these.
-
-
-## What's in this repository
-
-| Folder | Contents |
-| --- | --- |
-| [`docs/`](docs/) | The guide's pages, with original images in [`docs/img/`](docs/img/) |
-| [`scripts/`](scripts/) | `cluster_commands.sh` (run commands on every node), `setup_hosts.sh` (hostname map), `generate_images.py` (rebuilds the icons and step diagrams) |
-| [`workload/`](workload/) | The training job, a sample data generator, and the Python package list |
 
 
 ## What is a Raspberry Pi?
@@ -66,6 +22,20 @@ The main difference is the [**central processing unit (CPU)**](https://www.tutor
 Each architecture has its own instruction set, so software must be built for the one it runs on: a program built for x86 won't run on ARM. That's why the guide downloads ARM (`aarch64`) builds of Hadoop and uses Raspberry Pi OS, which is built for the Pi.
 
 For other things to do with a Raspberry Pi, see the Raspberry Pi Foundation's [projects site](https://projects.raspberrypi.org/en).
+
+
+## Status
+
+First built in 2020 on five Raspberry Pi 4 boards, with Hadoop and Spark working. The 2026 update adds the Raspberry Pi 5 and current software, but hasn't been built on hardware yet. [Builds](docs/About.md#builds) has the details and [photos of the original build](docs/About.md#the-original-build).
+
+<a href="docs/About.md#the-original-build"><img src="docs/img/photos/original-build-side.jpg" width="260" alt="Photo of the original 2020 cluster: five Raspberry Pi 4 boards stacked on a network switch, powered on and wired up."/></a>
+
+Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-cluster/issues) with your boards, RAM, OS image date and [benchmark](docs/Workload.md#benchmark) time, or if a step didn't work for you.
+
+
+## The guide
+
+The [Cluster Guide](docs/Cluster_Guide.md) takes you from an empty desk to 300 trained models in nine steps.
 
 
 # Acknowledgements
