@@ -10,7 +10,7 @@
 
 **Run on:** `master`. Java goes to every node with `cluster-cmd`.
 
-**Before you start:** [The Pi Network](The_Pi_Network.md), [Cluster Commands](Cluster_Commands.md) and [Cluster Security](Cluster_Security.md) are done, and `nodes-up` shows every node `up`. Versions are listed in [Versions](Versions.md).
+**Before you start:** [The Pi Network](The_Pi_Network.md), [Cluster Commands](Cluster_Commands.md) and [Cluster Security](Cluster_Security.md) are done, and `nodes-up` shows every node `up`. Versions are listed in [Software](Software.md#versions).
 
 * [Install Java 17 on every node](#install-java-17-on-every-node)
 * [Download Hadoop](#download-hadoop)

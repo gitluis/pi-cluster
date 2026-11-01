@@ -41,7 +41,7 @@ New here? Read [Getting Started](docs/Getting_Started.md) first. [About](docs/Ab
 - A Windows, macOS or Linux computer with a card reader.
 - Comfort typing commands in a terminal. No Hadoop or Spark experience needed.
 
-The guide uses Raspberry Pi OS Lite (64-bit), Java 17, Hadoop 3.5.0 and Spark 4.2.1. [Versions](docs/Versions.md) explains why these.
+The guide uses Raspberry Pi OS Lite (64-bit), Java 17, Hadoop 3.5.0 and Spark 4.2.1. [Software](docs/Software.md#versions) explains why these.
 
 
 ## What's in this repository
