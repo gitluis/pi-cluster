@@ -1,4 +1,4 @@
-[Home](../README.md) · [About](About.md) · [Getting Started](Getting_Started.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
+[Home](../README.md) · [Getting Started](Getting_Started.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md) · [About](About.md)
 
 
 <img src="img/icons/maintenance.svg" width="96" height="96" alt=""/>

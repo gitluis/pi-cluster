@@ -1,4 +1,4 @@
-[About](docs/About.md) · [Getting Started](docs/Getting_Started.md) · [Cluster Guide](docs/Cluster_Guide.md) · [Troubleshooting](docs/Troubleshooting.md)
+[Getting Started](docs/Getting_Started.md) · [Cluster Guide](docs/Cluster_Guide.md) · [Troubleshooting](docs/Troubleshooting.md) · [About](docs/About.md)
 
 
 <img src="docs/img/icons/cluster.svg" width="96" height="96" alt=""/>
