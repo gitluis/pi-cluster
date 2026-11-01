@@ -29,6 +29,7 @@ Read these when a step points to them, or when you need them later.
 
 | Page | Covers |
 | --- | --- |
+| [About](About.md) | Why this cluster exists, Hadoop and Spark explained, and the build history |
 | [Getting Started](Getting_Started.md) | What you need before step 1 |
 | [Hardware](Hardware.md) | Raspberry Pi models compared; optional overclocking |
 | [Software](Software.md) | Raspberry Pi OS and which edition to use |

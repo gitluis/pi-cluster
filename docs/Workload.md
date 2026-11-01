@@ -142,7 +142,7 @@ model.load_model(bytearray(row["model"]))
 
 # Benchmark
 
-The [goal](Purpose.md) is to beat about 7 hours for 300 models on one computer. Measure both sides with the same script, the same data and the same settings.
+The [goal](About.md#purpose) is to beat about 7 hours for 300 models on one computer. Measure both sides with the same script, the same data and the same settings.
 
 1. **One computer, no Spark.** On your computer, with the same `requirements.txt` installed:
 

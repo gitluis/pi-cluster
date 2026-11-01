@@ -28,7 +28,7 @@
 
 ## Why a cluster
 
-[Background](Background.md) explains what Hadoop and Spark are and how they fit together. [Purpose](Purpose.md) explains what this cluster is for: training 300 forecasting models faster than one computer can.
+[About](About.md) explains what this cluster is for (training 300 forecasting models faster than one computer can) and what Hadoop and Spark are and how they fit together.
 
 Ready? Start with [step 1: Hardware List](Hardware_List.md).
 
