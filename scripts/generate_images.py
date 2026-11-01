@@ -55,16 +55,12 @@ GLYPHS = {
         <rect x='11' y='22' width='11' height='7' rx='1.5'/>
         <rect x='26' y='22' width='11' height='7' rx='1.5'/>
         <path d='M11 34h26'/>"""),
-    "read-write-images": (OS, "SD card with read and write arrows", """
-        <path d='M7 9h11l4 4v24a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V11a2 2 0 0 1 2-2z'/>
-        <path d='M10 13v4M15 13v4'/>
-        <path d='M27 19h15M37 14l5 5-5 5M42 31H27M32 26l-5 5 5 5' """ + ARROW_HEAD + """/>"""),
     "install-many": (OS, "Stack of SD cards", """
         <path d='M21 4h14l5 5v25a2 2 0 0 1-2 2'/>
         <path d='M16 9h14l5 5v25a2 2 0 0 1-2 2'/>
         <path d='M11 14h14l5 5v23a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2z'/>
         <path d='M14 18v5M18.5 18v5M23 18v5'/>"""),
-    "updates": (OS, "Refresh arrows", """
+    "maintenance": (OS, "Refresh arrows", """
         <path d='M39 20A16 16 0 0 0 10 17'/><path d='M9 9v8h8' """ + ARROW_HEAD + """/>
         <path d='M9 28a16 16 0 0 0 29 3'/><path d='M39 39v-8h-8' """ + ARROW_HEAD + """/>"""),
     # --- network ---

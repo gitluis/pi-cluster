@@ -32,7 +32,6 @@ Read these when a step points to them, or when you need them later.
 | [About](About.md) | Why this cluster exists, Hadoop and Spark explained, and the build history |
 | [Getting Started](Getting_Started.md) | What you need before step 1 |
 | [Software](Software.md) | Raspberry Pi OS, which edition to use, and the Java, Hadoop and Spark versions the guide pins |
-| [Software Updates](Software_Updates.md) | Updating packages and firmware on every node |
-| [Back Up and Restore Cards](Read_Write_OS_Images.md) | Saving a card to an image file; cloning cards |
+| [Maintenance](Maintenance.md) | Updating packages and firmware on every node; backing up, restoring and cloning cards |
 | [Troubleshooting](Troubleshooting.md) | Symptoms and fixes |
 | [References](References.md) | Sources this guide builds on |
