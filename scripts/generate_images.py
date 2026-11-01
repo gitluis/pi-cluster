@@ -110,9 +110,6 @@ GLYPHS = {
     "troubleshooting": (EXTRA, "Wrench", """
         <path d='M30 6a10 10 0 0 0-9 14L6 35a4 4 0 0 0 6 6l15-15a10 10 0 0 0 14-9l-6 6-5-1-1-5 6-6a10 10 0 0 0-5-1z' """ + ARROW_HEAD + """/>"""),
     # --- extras ---
-    "versions": (EXTRA, "Tag", """
-        <path d='M6 8v14l20 20 16-16L22 6H8a2 2 0 0 0-2 2z' """ + ARROW_HEAD + """/>
-        <circle cx='15' cy='15' r='3'/>"""),
     "references": (EXTRA, "Bookmark", """
         <path d='M14 5h20a2 2 0 0 1 2 2v36l-12-9-12 9V7a2 2 0 0 1 2-2z' """ + ARROW_HEAD + """/>
         <path d='M19 14h10M19 20h7'/>"""),
