@@ -6,16 +6,69 @@
 
 # The Pi Network
 
-**Goal:** every node has a fixed IP address, every node can reach the others by name, and `master` can log in to every node with an SSH key.
+**Goal:** every node can reach the internet and has a fixed IP address, every node can reach the others by name, and `master` can log in to every node with an SSH key.
 
 **Run on:** your own computer and `master`, as each step says.
 
 The Pis talk to each other over a [local area network (LAN)](https://www.howtogeek.com/353283/what-is-a-local-area-network-lan/): all five plug into the switch, and the switch plugs into your router for internet access.
 
+* [Connect to the internet](#connect-to-the-internet)
 * [Network lookup table](#network-lookup-table)
 * [Give each node a fixed address](#give-each-node-a-fixed-address)
 * [Mapping the hostname](#mapping-the-hostname)
 * [SSH keys from master to every node](#ssh-keys-from-master-to-every-node)
+
+
+# Connect to the internet
+
+Each Pi needs the internet for software updates and downloads. **Ethernet is the recommended connection** for a cluster: it's faster and steadier than Wi-Fi, and the nodes already need it to talk to each other.
+
+
+## Ethernet
+
+You need:
+
+* <img src="img/icons/router.svg" width="20" height="20" alt=""/> A router with internet access
+* <img src="img/icons/ethernet.svg" width="20" height="20" alt=""/> An Ethernet cable from the Pi to your switch, and one from the switch to the router
+
+There is nothing to configure: Raspberry Pi OS asks the router for an address automatically (DHCP) as soon as the cable is plugged in. Fixed addresses come [next](#give-each-node-a-fixed-address).
+
+
+## Wi-Fi
+
+Only use Wi-Fi for a single Pi you're testing, or if the cluster can't be wired to your router. The Raspberry Pi 4 and Pi 5 have built-in Wi-Fi.
+
+**Easiest:** set the network name (SSID), password and Wi-Fi country in Raspberry Pi Imager's customization step when you flash the card ([Install OS](Install_OS.md#flash-each-card)).
+
+**On a running Pi:** Raspberry Pi OS manages networks with NetworkManager.
+
+1. List nearby networks:
+
+    ```bash
+    nmcli device wifi list
+    ```
+
+2. Connect, replacing the name and password:
+
+    ```bash
+    sudo nmcli device wifi connect "Your Network" password "your-password"
+    ```
+
+    The connection is saved and reconnects after a reboot.
+
+If you prefer menus, `sudo nmtui` opens a text interface for the same settings. If Wi-Fi is turned off, set your country first in `sudo raspi-config` under *Localisation Options*, then *WLAN Country*: Wi-Fi stays blocked until a country is set.
+
+Older guides edit `/etc/wpa_supplicant/wpa_supplicant.conf`. Current Raspberry Pi OS ignores that file.
+
+
+## Check the connection
+
+```bash
+ip -4 addr show eth0      # or wlan0 for Wi-Fi
+ping -c 3 raspberrypi.com
+```
+
+The first command should show an `inet` line with an address such as `192.168.0.101/24`. The second should show three replies. If there's an address but no replies, the problem is between your router and the internet; if there's no address, check the cable, the switch lights and the router.
 
 
 # Network lookup table

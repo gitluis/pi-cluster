@@ -22,14 +22,13 @@ Sources this guide builds on, and documentation for the versions it uses.
 7. [Raspberry Pi documentation](https://www.raspberrypi.com/documentation/computers/). Raspberry Pi Ltd.
 8. [A new Raspberry Pi Imager](https://www.raspberrypi.com/news/a-new-raspberry-pi-imager/) and [Cloud-init on Raspberry Pi OS](https://www.raspberrypi.com/news/cloud-init-on-raspberry-pi-os/). Raspberry Pi Ltd.
 9. [Eclipse Temurin Linux packages](https://adoptium.net/installation/linux). Adoptium.
-10. [Netplan](https://netplan.io/). Canonical Ltd.
-11. [XGBoost Python package](https://xgboost.readthedocs.io/en/stable/python/). XGBoost developers.
+10. [XGBoost Python package](https://xgboost.readthedocs.io/en/stable/python/). XGBoost developers.
 
 ### Background reading
 
-12. [Hadoop MapReduce](https://www.tutorialspoint.com/hadoop/hadoop_mapreduce.htm). Tutorialspoint.
-13. [What is a Local Area Network (LAN)?](https://www.howtogeek.com/353283/what-is-a-local-area-network-lan/). Brady Gavin, How-To Geek.
-14. [Raspberry Pi 4 overclocking](https://www.tomshardware.com/reviews/raspberry-pi-4-b-overclocking,6188.html). Gareth Halfacree, Tom's Hardware.
+11. [Hadoop MapReduce](https://www.tutorialspoint.com/hadoop/hadoop_mapreduce.htm). Tutorialspoint.
+12. [What is a Local Area Network (LAN)?](https://www.howtogeek.com/353283/what-is-a-local-area-network-lan/). Brady Gavin, How-To Geek.
+13. [Raspberry Pi 4 overclocking](https://www.tomshardware.com/reviews/raspberry-pi-4-b-overclocking,6188.html). Gareth Halfacree, Tom's Hardware.
 
 ---
 

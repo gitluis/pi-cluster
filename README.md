@@ -24,7 +24,7 @@ Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-
 | :-: | --- | --- |
 | 1 | [Hardware List](docs/Hardware_List.md) | Everything bought and assembled, with enough power and cooling |
 | 2 | [Install OS](docs/Install_OS.md) | Five cards flashed, each node reachable over SSH |
-| 3 | [The Pi Network](docs/The_Pi_Network.md) | Fixed addresses, nodes reachable by name, SSH keys |
+| 3 | [The Pi Network](docs/The_Pi_Network.md) | Internet access, fixed addresses, nodes reachable by name, SSH keys |
 | 4 | [Cluster Commands](docs/Cluster_Commands.md) | One command to run anything on every node |
 | 5 | [Cluster Security](docs/Cluster_Security.md) | Key-only logins, fail2ban and a firewall |
 | 6 | [Single Node Setup](docs/Single_Node_Setup.md) | Java everywhere; HDFS on `master` alone |
