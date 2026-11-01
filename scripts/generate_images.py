@@ -42,13 +42,6 @@ GLYPHS = {
         <circle cx='35' cy='37.5' r='1.6' fill='#fff' stroke='none'/>
         <path d='M12 11.5h10M12 24.5h10M12 37.5h10'/>"""),
     # --- hardware ---
-    "hardware": (HARDWARE, "Circuit board", """
-        <rect x='5' y='9' width='38' height='30' rx='3'/>
-        <rect x='17' y='18' width='13' height='13' rx='1.5'/>
-        <path d='M20 18v-3M24 18v-3M28 18v-3M20 31v3M24 31v3M28 31v3'/>
-        <path d='M9 13h30' stroke-dasharray='1.5 2.5'/>
-        <circle cx='9' cy='35' r='1.5' fill='#fff' stroke='none'/>
-        <circle cx='39' cy='35' r='1.5' fill='#fff' stroke='none'/>"""),
     "hardware-list": (HARDWARE, "Checklist", """
         <rect x='10' y='8' width='28' height='35' rx='3'/>
         <rect x='18' y='5' width='12' height='6' rx='2'/>
