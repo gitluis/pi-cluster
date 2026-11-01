@@ -85,7 +85,7 @@ sudo apt full-upgrade -y
 sudo reboot
 ```
 
-Once the [cluster commands](Cluster_Commands.md) are set up, you can do all nodes at once with `cluster-cmd`. [Software Updates](Software_Updates.md) has the details, including firmware.
+Once the [cluster commands](Cluster_Commands.md) are set up, you can do all nodes at once with `cluster-cmd`. [Maintenance](Maintenance.md#software-updates) has the details, including firmware.
 
 
 # Erase a card
@@ -96,7 +96,7 @@ To reuse a card for something else, or to start over, erase it with Imager:
 
 You don't need to erase a card before flashing it: writing an OS replaces everything on the card.
 
-Cards larger than 32 GB come formatted as exFAT. Erasing them with Imager reformats them as FAT32, which every device can read. To back up a card or copy one card to others, see [Back Up and Restore Cards](Read_Write_OS_Images.md).
+Cards larger than 32 GB come formatted as exFAT. Erasing them with Imager reformats them as FAT32, which every device can read. To back up a card or copy one card to others, see [Back up and restore cards](Maintenance.md#back-up-and-restore-cards).
 
 ---
 
