@@ -26,7 +26,9 @@ For other things to do with a Raspberry Pi, see the Raspberry Pi Foundation's [p
 
 ## Status
 
-First built in 2020 on five Raspberry Pi 4 boards, with Hadoop and Spark working. The 2026 update adds the Raspberry Pi 5 and current software, but hasn't been built on hardware yet. [Builds](docs/About.md#builds) has the details.
+First built in 2020 on five Raspberry Pi 4 boards, with Hadoop and Spark working. The 2026 update adds the Raspberry Pi 5 and current software, but hasn't been built on hardware yet. [Builds](docs/About.md#builds) has the details and [photos of the original build](docs/About.md#the-original-build).
+
+<a href="docs/About.md#the-original-build"><img src="docs/img/photos/original-build-side.jpg" width="260" alt="Photo of the original 2020 cluster: five Raspberry Pi 4 boards stacked on a network switch, powered on and wired up."/></a>
 
 Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-cluster/issues) with your boards, RAM, OS image date and [benchmark](docs/Workload.md#benchmark) time, or if a step didn't work for you.
 

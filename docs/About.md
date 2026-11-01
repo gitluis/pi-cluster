@@ -10,7 +10,7 @@ Why this cluster exists, what Hadoop and Spark are, and the history of the build
 
 * [Purpose](#purpose)
 * [Background: Hadoop and Spark](#background-hadoop-and-spark)
-* [Builds](#builds)
+* [Builds](#builds), with [photos of the original build](#the-original-build)
 
 
 # Purpose
@@ -60,6 +60,16 @@ The cluster was first built in 2020 on Raspberry Pi 4 boards and ran Hadoop and 
 | --- | --- | --- | --- | --- |
 | Original build | 2020 | 5 × Raspberry Pi 4 Model B, 2 GB | Raspbian (2020 release) | **Worked**, including HDFS and Spark. The Hadoop and Spark pages were written later, in the 2026 update |
 | 2026 update | October 2026 | Written for 5 × Raspberry Pi 5 or 5 × Raspberry Pi 4 | Raspberry Pi OS Lite 64-bit (Debian 13) | Not built on hardware. Steps updated from the original build; the training job was tested on a Spark 4.2 cluster on a regular computer |
+
+## The original build
+
+The 2020 cluster: five Raspberry Pi 4 boards in a stacked acrylic case with a fan on top, master at the top and four workers below. Each board has its own USB power cable on the left and an Ethernet cable on the right, running down to the network switch the stack sits on.
+
+<p>
+  <img src="img/photos/original-build-front.jpg" width="26%" alt="Front view of the original cluster: five Raspberry Pi 4 boards stacked in a black acrylic case on top of a network switch, with red USB power cables on the left and colour-coded Ethernet cables on the right."/>
+  <img src="img/photos/original-build-side.jpg" width="35%" alt="Side view of the original cluster powered on, showing the fan on the top plate, Ethernet cables from each board into the switch at the bottom, and the switch's green port lights."/>
+  <img src="img/photos/original-build-powered-on.jpg" width="35%" alt="The original cluster running next to the monitor it was set up with, with power cables bundled by Velcro straps and red power lights on each board."/>
+</p>
 
 Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-cluster/issues) with your boards, RAM, OS image date and [benchmark](Workload.md#benchmark) time, or if a step didn't work for you.
 
