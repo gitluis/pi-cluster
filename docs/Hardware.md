@@ -6,7 +6,7 @@
 
 # Hardware
 
-This guide supports two boards: the **Raspberry Pi 5**, the newest and fastest model, and the **Raspberry Pi 4 Model B**, which the original cluster ran Hadoop and Spark on (see [Builds](../README.md#builds)). Every step works on both; where they differ, the page shows both.
+This guide supports two boards: the **Raspberry Pi 5**, the newest and fastest model, and the **Raspberry Pi 4 Model B**, which the original cluster ran Hadoop and Spark on (see [Builds](About.md#builds)). Every step works on both; where they differ, the page shows both.
 
 Use the same model and the same amount of RAM on all five nodes if you can. Mixing works, but the memory settings in [Spark](Spark.md#configure-spark) have to suit the smallest board, and slower workers finish fewer models.
 

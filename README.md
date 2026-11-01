@@ -11,14 +11,9 @@ A step-by-step guide to building a portable cluster of five Raspberry Pi 5 or Ra
 <img src="docs/img/diagrams/cluster-overview.svg" width="100%" alt="Illustration of the cluster: five Raspberry Pi boards (Raspberry Pi 5 with Active Coolers shown) stacked in a case, master on top and four workers below, each wired to a network switch that connects to the router and the internet."/>
 
 
-## Builds
+## Status
 
-The cluster was first built in 2020 on Raspberry Pi 4 boards and ran Hadoop and Spark successfully. The guide has since been updated for current software and for the **Raspberry Pi 5**, the newest model, while keeping full support for the **Raspberry Pi 4**. Where the two boards need different parts or settings, the guide shows both.
-
-| Build | When | Boards | Operating system | Result |
-| --- | --- | --- | --- | --- |
-| Original build | 2020 | 5 × Raspberry Pi 4 Model B, 2 GB | Raspbian (2020 release) | **Worked**, including HDFS and Spark. The Hadoop and Spark pages were written later, in the 2026 update |
-| 2026 update | October 2026 | Written for 5 × Raspberry Pi 5 or 5 × Raspberry Pi 4 | Raspberry Pi OS Lite 64-bit (Debian 13) | Not built on hardware. Steps updated from the original build; the training job was tested on a Spark 4.2 cluster on a regular computer |
+First built in 2020 on five Raspberry Pi 4 boards, with Hadoop and Spark working. The 2026 update adds the Raspberry Pi 5 and current software, but hasn't been built on hardware yet. [Builds](docs/About.md#builds) has the details.
 
 Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-cluster/issues) with your boards, RAM, OS image date and [benchmark](docs/Workload.md#benchmark) time, or if a step didn't work for you.
 
@@ -37,7 +32,7 @@ Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-
 | 8 | [Spark](docs/Spark.md) | Spark with one executor per worker |
 | 9 | [Workload](docs/Workload.md) | 300 models trained, one per worker at a time, and a benchmark |
 
-New here? Read [Getting Started](docs/Getting_Started.md) first. [Background](docs/Background.md) explains Hadoop and Spark; [Purpose](docs/Purpose.md) explains why this cluster exists.
+New here? Read [Getting Started](docs/Getting_Started.md) first. [About](docs/About.md) explains why this cluster exists and how Hadoop and Spark fit together.
 
 
 ## What you need

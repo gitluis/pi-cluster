@@ -26,13 +26,10 @@ ARROW_HEAD = "stroke-linejoin='round'"
 
 GLYPHS = {
     # --- intro ---
-    "purpose": (INTRO, "Target", """
-        <circle cx='22' cy='26' r='16'/><circle cx='22' cy='26' r='9'/>
-        <circle cx='22' cy='26' r='2.5' fill='#fff'/>
-        <path d='M22 26L40 8M33 8h7v7'/>"""),
-    "background": (INTRO, "Open book", """
-        <path d='M24 13c-5-4-12-5-18-3v28c6-2 13-1 18 3 5-4 12-5 18-3V10c-6-2-13-1-18 3z'/>
-        <path d='M24 13v28'/>"""),
+    "about": (INTRO, "Information", """
+        <circle cx='24' cy='24' r='18'/>
+        <circle cx='24' cy='15' r='2' fill='#fff' stroke='none'/>
+        <path d='M21 22h3v12M20 34h8'/>"""),
     "getting-started": (INTRO, "Flag", """
         <path d='M12 43V6'/>
         <path d='M12 8h25l-6 8 6 8H12'/>"""),
