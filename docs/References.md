@@ -24,7 +24,7 @@ Sources this guide builds on, and documentation for the versions it uses.
 9. [Eclipse Temurin Linux packages](https://adoptium.net/installation/linux). Adoptium.
 10. [XGBoost Python package](https://xgboost.readthedocs.io/en/stable/python/). XGBoost developers.
 
-### Background reading
+### Further reading
 
 11. [Hadoop MapReduce](https://www.tutorialspoint.com/hadoop/hadoop_mapreduce.htm). Tutorialspoint.
 12. [What is a Local Area Network (LAN)?](https://www.howtogeek.com/353283/what-is-a-local-area-network-lan/). Brady Gavin, How-To Geek.
