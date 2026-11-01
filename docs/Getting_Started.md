@@ -23,7 +23,7 @@
 - Every step page starts with its **Goal** and where to **Run on** (your computer, `master`, or every node), and has **Check** points that tell you whether it worked.
 - Commands that start with `cluster-cmd`, `master-cmd` or `cluster-scp` act on several nodes at once. They're set up in step 4, [Cluster Commands](Cluster_Commands.md).
 - Examples use the username `alice` and the addresses `192.168.0.100` to `192.168.0.104`. Replace them with your own wherever they appear.
-- Reference pages, such as [Hardware](Hardware.md) or [Software Updates](Software_Updates.md), explain a topic in more depth. The steps link to them when they're needed.
+- Reference pages, such as [Software](Software.md) or [Software Updates](Software_Updates.md), explain a topic in more depth. The steps link to them when they're needed.
 
 
 ## Why a cluster
