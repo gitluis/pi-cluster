@@ -1,4 +1,4 @@
-[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md)
+[Home](../README.md) · [Cluster Guide](Cluster_Guide.md) · [Troubleshooting](Troubleshooting.md) · [About](About.md)
 
 
 <img src="img/icons/getting-started.svg" width="96" height="96" alt=""/>
