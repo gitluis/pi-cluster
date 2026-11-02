@@ -6,7 +6,7 @@
 
 # Cluster Guide
 
-Follow these steps in order, from an empty desk to 300 trained models. Each page starts with its goal and where to run it, and ends with a check that the step worked before you move on.
+Follow these steps in order, from an empty desk to 311 trained models. Each page starts with its goal and where to run it, and ends with a check that the step worked before you move on.
 
 | Step | Page | At the end you have | Run on |
 | :-: | --- | --- | --- |
@@ -18,7 +18,7 @@ Follow these steps in order, from an empty desk to 300 trained models. Each page
 | 6 | [Single Node Setup](Single_Node_Setup.md) | Java on every node; HDFS working on `master` alone | `master` |
 | 7 | [Cluster Setup](Cluster_Setup.md) | HDFS across four workers, with two copies of every block | `master` |
 | 8 | [Spark](Spark.md) | Spark with one 4-core executor per worker, reading from HDFS | `master` |
-| 9 | [Workload](Workload.md) | 300 models trained, one per worker at a time, and a benchmark | `master` |
+| 9 | [Workload](Workload.md) | 311 models trained, one per worker at a time, and a benchmark | `master` |
 
 Stuck? See [Troubleshooting](Troubleshooting.md).
 

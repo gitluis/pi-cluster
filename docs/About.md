@@ -10,28 +10,21 @@ Why this cluster exists, what Hadoop and Spark are, and the history of the build
 
 * [Purpose](#purpose)
 * [Background: Hadoop and Spark](#background-hadoop-and-spark)
-* [Builds](#builds), with [photos of the original build](#the-original-build)
+* [Builds](#builds), with [photos of the original build](#the-original-build) and [how to measure success](#measuring-success)
 
 
 # Purpose
 
 The main reason for building and configuring this cluster is to leverage Hadoop and Spark's distributed storage and processing capabilities to build, train, test and assess Machine Learning models in parallel for projects at work and also to demonstrate you may not need to invest in full-powered computers or servers to build a cluster.
 
-I found myself training about 300 XGBoost models on time-series financial data that would take about 7 hours to train total. As a result, the **goal** here is to at least reduce the amount of time it takes to train all models. By having a separate cluster, I allow myself to continue working on other tasks while the cluster takes the load. That is when the idea of a Raspberry Pi cluster kicked in.
+I found myself training 311 XGBoost models on time-series financial data that would take about 7 hours to train total. As a result, the **goal** here is to at least reduce the amount of time it takes to train all models. By having a separate cluster, I allow myself to continue working on other tasks while the cluster takes the load. That is when the idea of a Raspberry Pi cluster kicked in.
 
 
 ## Design
 
-The 300 models are independent: each learns from its own series. The cluster therefore splits the work by series and trains **one model at a time on each worker**, with all four of the worker's cores working on that one model. Four workers train four models at once.
+The 311 models are independent: each learns from its own series. The cluster therefore splits the work by series and trains **one model at a time on each worker**, with all four of the worker's cores working on that one model. Four workers train four models at once.
 
-Hadoop's file system (HDFS) stores the data and the trained models, and Spark hands out the series to the workers. Learning Hadoop and Spark on real hardware is part of the point of this project, alongside the speed-up.
-
-
-## Measuring success
-
-Success means training all 300 models in less than the 7-hour baseline, measured with the same script and data on both sides. A Raspberry Pi core is slower than a laptop core, especially on a Pi 4, so this isn't guaranteed: the cluster wins when a single Pi trains one model in under about 5½ minutes. [Workload](Workload.md#benchmark) shows how to measure it.
-
-Even when a fast computer is quicker, the cluster still frees that computer for other work while the models train.
+Hadoop's file system (HDFS) stores the data and the trained models, and Spark hands out the series to the workers. Learning Hadoop and Spark on real hardware is part of the point of this project, alongside the speed-up. [Measuring success](#measuring-success) explains how to tell whether the cluster is actually faster.
 
 
 # Background: Hadoop and Spark
@@ -70,6 +63,32 @@ The 2020 cluster: five Raspberry Pi 4 boards in a stacked acrylic case with a fa
   <img src="img/photos/original-build-side.jpg" width="35%" alt="Side view of the original cluster powered on, showing the fan on the top plate, Ethernet cables from each board into the switch at the bottom, and the switch's green port lights."/>
   <img src="img/photos/original-build-powered-on.jpg" width="35%" alt="The original cluster running next to the monitor it was set up with, with power cables bundled by Velcro straps and red power lights on each board."/>
 </p>
+
+## Measuring success
+
+**The baseline.** On my computer, each model took about **81 seconds** to train, including cross-validation and a randomized grid search. For all 311 models:
+
+> 311 models × 81 s ≈ 25,200 s ≈ **7 hours**
+
+Success means the cluster trains all 311 models in less than that, measured with the same script and data on both sides.
+
+**Why a slower Pi can still win.** A Raspberry Pi core is slower than a laptop core, especially on a Pi 4, so one model will usually take longer than 81 seconds on a Pi. That alone doesn't mean the cluster loses, because four workers train four models at the same time:
+
+1. **Rounds.** 311 models ÷ 4 workers = 77¾, so the cluster needs **78 rounds** of "one model on each worker".
+2. **Cluster time.** Each round takes about as long as one Pi takes to train one model, so the whole run takes about **78 × the time per model on one Pi**.
+3. **Break-even.** To finish under 7 hours, each round must take less than 25,200 s ÷ 78 ≈ **323 s, about 5.4 minutes**.
+
+So the line between a win and a loss is about **5.4 minutes per model on one Pi**, not 81 seconds:
+
+| Time per model on one Pi | Cluster time for 311 models | Result |
+| --- | --- | --- |
+| 81 s or less | 78 × 81 s ≈ 1¾ hours or less | **Clear win**, about 4 times faster than one computer |
+| 81 s to about 5.4 min | between 1¾ and 7 hours | **Still a win.** Each model is slower, but training four at once makes up for it |
+| More than about 5.4 min | more than 7 hours | **Slower** than one computer |
+
+On the original Pi 4 build, a model took longer than 81 seconds, but the exact time wasn't recorded, so it's unknown whether that build beat 7 hours. A Pi 5 is faster, so it has a better chance; the only way to know is to measure it. [Workload](Workload.md#benchmark) shows how.
+
+Even when a fast computer is quicker, the cluster still frees that computer for other work while the models train, and each extra worker adds another model in parallel.
 
 Built it with these steps? Please [open an issue](https://github.com/gitluis/pi-cluster/issues) with your boards, RAM, OS image date and [benchmark](Workload.md#benchmark) time, or if a step didn't work for you.
 
