@@ -23,15 +23,11 @@ Follow these steps in order, from an empty desk to 300 trained models. Each page
 Stuck? See [Troubleshooting](Troubleshooting.md).
 
 
-## Reference pages
+## Learn more
 
-Read these when a step points to them, or when you need them later.
+The steps link to these when you need them. They're also handy once the cluster is running.
 
 | Page | Covers |
 | --- | --- |
-| [About](About.md) | Why this cluster exists, Hadoop and Spark explained, and the build history |
-| [Getting Started](Getting_Started.md) | What you need before step 1 |
 | [Software](Software.md) | Raspberry Pi OS, which edition to use, and the Java, Hadoop and Spark versions the guide pins |
 | [Maintenance](Maintenance.md) | Updating packages and firmware on every node; backing up, restoring and cloning cards |
-| [Troubleshooting](Troubleshooting.md) | Symptoms and fixes |
-| [References](References.md) | Sources this guide builds on |
