@@ -5,7 +5,7 @@ One row per series per day: series_id, date, y. The values mimic daily
 transaction amounts per location: a base level, a weekly cycle, spikes
 around the 1st and 15th of the month, a slow trend, and noise.
 
-    python3 make_sample_data.py --series 300 --days 1095 --out sample.parquet
+    python3 make_sample_data.py --series 311 --days 1095 --out sample.parquet
 
 Then copy it to HDFS:
 
@@ -39,7 +39,7 @@ def make(series: int, days: int, seed: int) -> pd.DataFrame:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--series", type=int, default=300, help="number of series (models) to generate")
+    parser.add_argument("--series", type=int, default=311, help="number of series (models) to generate")
     parser.add_argument("--days", type=int, default=1095, help="days of history per series")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--out", default="sample.parquet")

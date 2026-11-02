@@ -6,7 +6,7 @@
 
 # Workload
 
-**Goal:** train one XGBoost model per series (300 of them) across the cluster, **one model at a time on each worker**, and measure whether the cluster beats training on one computer.
+**Goal:** train one XGBoost model per series (311 of them) across the cluster, **one model at a time on each worker**, and measure whether the cluster beats training on one computer.
 
 **Run on:** `master`.
 
@@ -22,7 +22,7 @@
 
 # How the work is split
 
-The 300 models don't depend on each other: each one learns from its own series only. So the job splits naturally by series, and Spark's job is just to hand series out to workers.
+The 311 models don't depend on each other: each one learns from its own series only. So the job splits naturally by series, and Spark's job is just to hand series out to workers.
 
 | Setting | Value | Effect |
 | --- | --- | --- |
@@ -74,11 +74,11 @@ cluster-cmd '/opt/pyenv/bin/python -c "import xgboost; print(xgboost.__version__
 
 The script expects Parquet with one row per series per day: a series ID, a date and the value to predict.
 
-**To try the cluster first**, make a sample data set with the same shape: 300 series of three years of daily values.
+**To try the cluster first**, make a sample data set with the same shape: 311 series of three years of daily values.
 
 ```bash
 cd ~/pi-cluster
-/opt/pyenv/bin/python make_sample_data.py --series 300 --days 1095 --out sample.parquet
+/opt/pyenv/bin/python make_sample_data.py --series 311 --days 1095 --out sample.parquet
 hdfs dfs -put -f sample.parquet /user/$USER/sample.parquet
 ```
 
@@ -104,17 +104,17 @@ If the data comes from work, check your employer's data-handling rules before co
 
     Spark's progress messages go to `train.log`; the summary prints on screen at the end. Follow the job on the Spark master's web page, `http://master.local:8080`.
 
-**Check** the summary. It should look like this, with your own times and roughly 75 models per worker:
+**Check** the summary. It should look like this, with your own times and roughly 78 models per worker:
 
 ```
-Trained 300 models in ... min (wall clock)
+Trained 311 models in ... min (wall clock)
 Median time per model: ... s; median RMSE: ...
 
 Per worker: models trained, most models training at the same moment
-  worker1        75 models   max concurrent: 1
-  worker2        76 models   max concurrent: 1
-  worker3        74 models   max concurrent: 1
-  worker4        75 models   max concurrent: 1
+  worker1        78 models   max concurrent: 1
+  worker2        79 models   max concurrent: 1
+  worker3        76 models   max concurrent: 1
+  worker4        78 models   max concurrent: 1
 ```
 
 `max concurrent: 1` on every worker confirms one model at a time per worker. A worker with fewer models than the others is usually slower: check its temperature and power with `vcgencmd` ([Power](Hardware_List.md#power)).
@@ -142,7 +142,7 @@ model.load_model(bytearray(row["model"]))
 
 # Benchmark
 
-The [goal](About.md#purpose) is to beat about 7 hours for 300 models on one computer. Measure both sides with the same script, the same data and the same settings.
+The [goal](About.md#purpose) is to beat about 7 hours for 311 models on one computer. Measure both sides with the same script, the same data and the same settings.
 
 1. **One computer, no Spark.** On your computer, with the same `requirements.txt` installed:
 
@@ -150,7 +150,7 @@ The [goal](About.md#purpose) is to beat about 7 hours for 300 models on one comp
     python3 train_models.py --local --input sample.parquet --output laptop_metrics.csv
     ```
 
-    `--local` trains the models one after another using all of the computer's cores. Add `--limit 20` for a quicker estimate and multiply by 15.
+    `--local` trains the models one after another using all of the computer's cores. Add `--limit 20` for a quicker estimate and multiply by 15.55 (311 ÷ 20).
 
 2. **One Pi**, to know what a single worker can do:
 
@@ -160,13 +160,13 @@ The [goal](About.md#purpose) is to beat about 7 hours for 300 models on one comp
 
 3. **The cluster:** the full run above.
 
-| Run | Time for 300 models | Median per model |
+| Run | Time for 311 models | Median per model |
 | --- | --- | --- |
 | Your computer (`--local`) | | |
-| One Pi worker (`--limit 8`, ×37.5) | | |
+| One Pi worker (`--limit 8`, ×38.9) | | |
 | Cluster, 4 workers | | |
 
-Fill in your own numbers. The cluster's time is about 75 rounds of "one model per worker", so expect roughly 75 × the median per model on one Pi. To beat 7 hours, a single model must train on one Pi in under about 5½ minutes (7 h ÷ 75).
+Fill in your own numbers. The cluster's time is about 78 rounds of "one model per worker" (311 ÷ 4 = 77¾), so expect roughly 78 × the median per model on one Pi. To beat 7 hours, a single model must train on one Pi in under about 5.4 minutes (25,200 s ÷ 78 ≈ 323 s). [Measuring success](About.md#measuring-success) walks through the math.
 
 A Raspberry Pi 5 core is still slower than a current laptop core (and a Pi 4 core much slower), so the cluster won't always win against a fast computer. Its advantage is that it runs on its own while your computer stays free, and it scales: each extra worker adds another model in parallel.
 
