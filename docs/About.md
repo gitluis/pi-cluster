@@ -66,7 +66,7 @@ The 2020 cluster: five Raspberry Pi 4 boards in a stacked acrylic case with a fa
 
 ## Measuring success
 
-**The baseline.** On my computer, each model took about **81 seconds** to train, including cross-validation and a random parameter search. For all 311 models:
+**The baseline.** On my computer, each model took about **81 seconds** to train, including cross-validation and a randomized grid search. For all 311 models:
 
 > 311 models × 81 s ≈ 25,200 s ≈ **7 hours**
 
